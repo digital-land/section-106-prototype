@@ -1,0 +1,24 @@
+{
+  "name": "section-106-prototype",
+  "version": "1.0.0",
+  "description": "Prototype for creating Section 106 Executive Summaries",
+  "main": "index.js",
+  "scripts": {
+    "scss": "gulp scss"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/colmjude/section-106-prototype.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/colmjude/section-106-prototype/issues"
+  },
+  "homepage": "https://github.com/colmjude/section-106-prototype#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.4.0",
+    "gulp-sass": "^4.0.1"
+  }
+}

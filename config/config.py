@@ -1,0 +1,14 @@
+# -*- coding: utf-8 -*-
+import json
+import os
+
+class Config(object):
+  APP_ROOT = os.path.abspath(os.path.dirname(__file__))
+  PROJECT_ROOT = os.path.abspath(os.path.join(APP_ROOT, os.pardir))
+
+class DevelopmentConfig(Config):
+  DEBUG = True
+  WTF_CSRF_ENABLED = False
+
+class TestConfig(Config):
+  TESTING = True

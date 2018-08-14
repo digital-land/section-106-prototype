@@ -1,0 +1,14 @@
+$govuk-fonts-path: '/static/govuk-frontend/assets/fonts/';
+$govuk-images-path: '/static/govuk-frontend/assets/images/';
+
+@import "settings/all";
+@import "tools/all";
+@import "helpers/all";
+
+@import "core/all";
+@import "objects/all";
+
+@import "components/all";
+
+@import "utilities/all";
+@import "overrides/all";
