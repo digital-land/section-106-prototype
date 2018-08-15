@@ -31,12 +31,22 @@ def local_authority():
   if request.method == 'POST':
     section106['la_name'] = request.form['local-authority-selector']
     session['section106'] = section106
-    return redirect(url_for('frontend.summary'))
+    return redirect(url_for('frontend.s106_ref'))
   datafile = "application/data/localauthorities.json"
   if os.path.isfile( datafile ):
     with open( datafile ) as data_file:
       localauthorities = json.load(data_file) 
   return render_template('local-authority.html', localauthorities=localauthorities['authorities'])
+
+@frontend.route('/section-106-reference', methods=['GET', 'POST'])
+def s106_ref():
+  if 'section106' in session:
+    section106 = session['section106']
+  if request.method == 'POST':
+    section106['agreement_reference'] = request.form['agreement-reference']
+    session['section106'] = section106
+    return redirect(url_for('frontend.summary'))
+  return render_template('section106-details.html')
 
 @frontend.route('/summary')
 def summary():

@@ -1,0 +1,35 @@
+{% extends "default.html" %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="{{ url_for('frontend.s106_ref' )}}" class="form" method="POST">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+          <h1 class="govuk-fieldset__heading">
+            What Section 106 Agreement does this refer to?
+          </h1>
+        </legend>
+      </fieldset>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="agreement-reference">
+          Section 106 agreement reference
+        </label>
+        <span id="agreement-reference-hint" class="govuk-hint">
+          This should be....
+        </span>
+        <input class="govuk-input govuk-input--width-10" id="agreement-reference" name="agreement-reference" type="text" aria-describedby="agreement-reference-hint">
+      </div>
+
+      <div class="govuk-form-group">
+        <button type="submit" class="govuk-button">Continue</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}
