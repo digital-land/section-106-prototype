@@ -1,0 +1,4 @@
+{% macro govukInput(id, name, label) %}
+  {% if kwargs %}<!-- {{ kwargs }} -->{% endif %}
+  {%- include "jinja-components/input/template.html" -%}
+{% endmacro %}

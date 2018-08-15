@@ -1,5 +1,5 @@
 {% extends "default.html" %}
-
+{% from "jinja-components/input/macro.html" import govukInput %}
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -14,15 +14,13 @@
         </legend>
       </fieldset>
 
-      <div class="govuk-form-group">
-        <label class="govuk-label" for="agreement-reference">
-          Section 106 agreement reference
-        </label>
-        <span id="agreement-reference-hint" class="govuk-hint">
-          This should be....
-        </span>
-        <input class="govuk-input govuk-input--width-10" id="agreement-reference" name="agreement-reference" type="text" aria-describedby="agreement-reference-hint">
-      </div>
+      {{ govukInput(
+          id="agreement-reference",
+          name="agreement-reference",
+          label="Section 106 agreement reference",
+          classes="govuk-input--width-10",
+          hint="This should be....",
+          hintid="agreement-reference-hint") }}
 
       <div class="govuk-form-group">
         <button type="submit" class="govuk-button">Continue</button>
