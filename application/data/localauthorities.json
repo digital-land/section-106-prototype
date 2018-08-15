@@ -1,0 +1,11 @@
+{
+  "authorities": [
+    {
+      "name": "Lambeth",
+      "id": "local-authority-eng:LBH"
+    },{
+      "name": "Southwark",
+      "id": "local-authority-eng:SWK"
+    }
+  ]
+}
