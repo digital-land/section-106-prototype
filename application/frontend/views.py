@@ -1,7 +1,10 @@
 from flask import (
   Blueprint,
   render_template,
-  request
+  redirect,
+  request,
+  session,
+  url_for
 )
 
 import requests
@@ -17,16 +20,28 @@ def index():
 
 @frontend.route('/start')
 def start():
+  session['section106'] = {}
   return render_template('start-page.html')
 
 
-@frontend.route('/local-authority')
+@frontend.route('/local-authority', methods=['GET', 'POST'])
 def local_authority():
+  if 'section106' in session:
+    section106 = session['section106']
+  if request.method == 'POST':
+    section106['la_name'] = request.form['local-authority-selector']
+    session['section106'] = section106
+    return redirect(url_for('frontend.summary'))
   datafile = "application/data/localauthorities.json"
   if os.path.isfile( datafile ):
     with open( datafile ) as data_file:
       localauthorities = json.load(data_file) 
   return render_template('local-authority.html', localauthorities=localauthorities['authorities'])
+
+@frontend.route('/summary')
+def summary():
+  section106 = session['section106']
+  return render_template('summary.html', s106=section106)
 
 @frontend.context_processor
 def asset_path_context_processor():

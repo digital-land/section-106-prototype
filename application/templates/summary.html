@@ -1,0 +1,31 @@
+{% extends "default.html" %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Check the details you provided</h1>
+
+    <p class="govuk-body">Check the information below carefully.</p>
+
+    <p class="govuk-body">This will form a summary of the Section 106 agreement. It will also be stored as a public record that will be available online.</p>
+
+    <h3 class="govuk-heading-m">Section 106 agreement details</h3>
+    <table class="govuk-table check-your-answers">
+      <tbody>
+        <tr>
+          <td colspan="2">
+            <div class="govuk-grid-row">
+              <div class="govuk-grid-column-one-half">Local Authority</div>
+              <div class="govuk-grid-column-one-half">{{ s106.la_name }}</div>
+            </div>
+          </td>
+          <td class="change-answer"><a href="">Change</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+{% endblock %}
