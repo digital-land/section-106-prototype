@@ -45,8 +45,22 @@ def s106_ref():
   if request.method == 'POST':
     section106['agreement_reference'] = request.form['agreement-reference']
     session['section106'] = section106
-    return redirect(url_for('frontend.summary'))
+    return redirect(url_for('frontend.pla_ref'))
   return render_template('section106-details.html')
+
+@frontend.route('/planning-application-reference', methods=['GET', 'POST'])
+def pla_ref():
+  if 'section106' in session:
+    section106 = session['section106']
+  if request.method == 'POST':
+    pla_ref = {
+      'reference': request.form['planning-application-reference'],
+      'url': request.form['planning-application-url']
+    }
+    section106['planning_application_reference'] = pla_ref
+    session['section106'] = section106
+    return redirect(url_for('frontend.summary'))
+  return render_template('planning-application-details.html')
 
 @frontend.route('/summary')
 def summary():
