@@ -59,8 +59,21 @@ def pla_ref():
     }
     section106['planning_application_reference'] = pla_ref
     session['section106'] = section106
-    return redirect(url_for('frontend.summary'))
+    return redirect(url_for('frontend.developer_contributions'))
   return render_template('planning-application-details.html')
+
+@frontend.route('/developer_contributions', methods=['GET', 'POST'])
+def developer_contributions():
+  if 'section106' in session:
+    section106 = session['section106']
+  if request.method == 'POST':
+    return redirect(url_for('frontend.summary'))
+
+  datafile = "application/data/parameters.json"
+  if os.path.isfile( datafile ):
+    with open( datafile ) as data_file:
+      parameters = json.load(data_file) 
+  return render_template('developer-contributions.html', parameters=parameters)
 
 @frontend.route('/summary')
 def summary():

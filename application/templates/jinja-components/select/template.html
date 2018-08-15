@@ -5,7 +5,11 @@
   <select class="govuk-select" id="{{ id }}" name="{{ name }}">
     {% if items %}
     {% for item in items %}
-    <option value="{{ item.id }}">{{ item.name }}</option>
+      {%- if item.id %}
+      <option value="{{ item.id }}">{{ item.name }}</option>
+      {% else %}
+      <option value="{{ item }}">{{ item }}</option>
+      {% endif -%}
     {% endfor %}
     {% endif %}
   </select>

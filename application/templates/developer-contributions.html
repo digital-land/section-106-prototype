@@ -1,0 +1,32 @@
+{% extends "default.html" %}
+{% from "jinja-components/select/macro.html" import govukSelect %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="{{ url_for('frontend.developer_contributions' )}}" class="form" method="POST">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+          <h1 class="govuk-fieldset__heading">
+            What are the developer contributions?
+          </h1>
+        </legend>
+
+        {{ govukSelect(
+            id="contribution-type-selector",
+            items=parameters.types,
+            label="Type",
+            name="contribution-type-selector") }}
+
+      </fieldset>
+
+      <div class="govuk-form-group">
+        <button type="submit" class="govuk-button">Continue</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}
