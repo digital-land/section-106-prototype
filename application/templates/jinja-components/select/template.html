@@ -2,7 +2,7 @@
   <label class="govuk-label" for="{{ id }}">
     {{ label }}
   </label>
-  <select class="govuk-select" id="{{ id }}" name="{{ name }}">
+  <select class="govuk-select {% if kwargs['classes'] %}{{ kwargs['classes'] }}{% endif %}" id="{{ id }}" name="{{ name }}">
     {% if items %}
     {% for item in items %}
       {%- if item.id %}
