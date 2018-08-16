@@ -1,5 +1,5 @@
 {% from "./components/skip-link/macro.njk" import govukSkipLink -%}
-{% from "./components/header/macro.njk" import govukHeader -%}
+{% from "./jinja-components/header/macro.html" import govukHeader -%}
 {% from "./components/footer/macro.njk" import govukFooter -%}
 {# specify absolute url for the static assets folder e.g. http://wwww.domain.com/assets #}
 {%- set assetUrl = assetUrl | default(assetPath) -%}
@@ -37,7 +37,7 @@
     {% endblock %}
 
     {% block header %}
-      {{ govukHeader({}) }}
+      {{ govukHeader(serviceName="Create a Section 106 summary") }}
     {% endblock %}
 
     {% block main %}
