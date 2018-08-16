@@ -1,0 +1,4 @@
+{% macro govukTextarea(id, name, label) %}
+  {% if kwargs %}<!-- {{ kwargs }} -->{% endif %}
+  {%- include "jinja-components/textarea/template.html" -%}
+{% endmacro %}

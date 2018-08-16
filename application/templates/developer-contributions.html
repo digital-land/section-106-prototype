@@ -1,5 +1,6 @@
 {% extends "default.html" %}
 {% from "jinja-components/select/macro.html" import govukSelect %}
+{% from "jinja-components/textarea/macro.html" import govukTextarea %}
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -27,6 +28,10 @@
             classes="govuk-input--width-20",
             name="contribution-category-selector") }}
 
+        {{ govukTextarea(
+            id="obligation-textarea",
+            label="Obligation",
+            name="obligation-textarea") }}
       </fieldset>
 
       <div class="govuk-form-group">
