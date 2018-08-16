@@ -43,6 +43,27 @@
     </table>
 
     <h3 class="govuk-heading-m">Contributions</h3>
+    <h4 class="govuk-heading-s">Contribution 1</h4>
+    <table class="govuk-table check-your-answers">
+      <tbody>
+        {{ checkAnswerRow(
+            key="Type",
+            value=s106.contributions[0].type,
+            url="#") }}
+        {{ checkAnswerRow(
+            key="Category",
+            value=s106.contributions[0].category,
+            url="#") }}
+        {{ checkAnswerRow(
+            key="Obligation",
+            value=s106.contributions[0].obligation,
+            url="#") }}
+        {{ checkAnswerRow(
+            key="Value",
+            value=s106.contributions[0].value,
+            url="#") }}
+      </tbody>
+    </table>
   </div>
 </div>
 {% endblock %}

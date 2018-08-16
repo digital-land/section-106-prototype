@@ -66,7 +66,18 @@ def pla_ref():
 def developer_contributions():
   if 'section106' in session:
     section106 = session['section106']
+    if 'contribution' not in section106:
+      section106['contributions'] = []
   if request.method == 'POST':
+    contribution = {
+      'type': request.form['contribution-type-selector-1'],
+      'category': request.form['contribution-category-selector-1'],
+      'obligation': request.form['obligation-textarea-1'],
+      'value': request.form['contribution-amount-input-1']
+    }
+    section106['contributions'].append(contribution)
+    session['section106'] = section106
+    print( section106 )
     return redirect(url_for('frontend.summary'))
 
   datafile = "application/data/parameters.json"

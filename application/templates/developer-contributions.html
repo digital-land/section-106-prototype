@@ -12,36 +12,40 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
+    <h1 class="govuk-heading-xl">
+      What are the developer contributions?
+    </h1>
+
     <form action="{{ url_for('frontend.developer_contributions' )}}" class="form" method="POST">
       <fieldset class="govuk-fieldset">
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
           <h1 class="govuk-fieldset__heading">
-            What are the developer contributions?
+            Contribution 1
           </h1>
         </legend>
 
         {{ govukSelect(
-            id="contribution-type-selector",
+            id="contribution-type-selector-1",
             items=parameters.types,
             label="Type",
             classes="govuk-input--width-20",
-            name="contribution-type-selector") }}
+            name="contribution-type-selector-1") }}
 
         {{ govukSelect(
-            id="contribution-category-selector",
+            id="contribution-category-selector-1",
             items=parameters.categories,
             label="Category",
             classes="govuk-input--width-20",
-            name="contribution-category-selector") }}
+            name="contribution-category-selector-1") }}
 
         {{ govukTextarea(
-            id="obligation-textarea",
+            id="obligation-textarea-1",
             label="Obligation",
-            name="obligation-textarea") }}
+            name="obligation-textarea-1") }}
 
         {{ govukInput(
-            id="contribution-amount-input",
-            name="contribution-amount-input",
+            id="contribution-amount-input-1",
+            name="contribution-amount-input-1",
             label="Amount",
             classes="govuk-input--width-10",
             hint="The monetary cost or value equivalent of the agreed contribution",
