@@ -19,6 +19,12 @@
             label="Type",
             name="contribution-type-selector") }}
 
+        {{ govukSelect(
+            id="contribution-category-selector",
+            items=parameters.categories,
+            label="Category",
+            name="contribution-category-selector") }}
+
       </fieldset>
 
       <div class="govuk-form-group">

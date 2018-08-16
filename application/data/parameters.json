@@ -3,5 +3,16 @@
     "Financial Contribution",
     "Commuted Sum",
     "In-Kind Delivery"
+  ],
+  "categories": [
+    "Affordable Housing",
+    "Education",
+    "Health",
+    "Highways",
+    "Transport",
+    "Open Space",
+    "Community Facilities",
+    "Green Infrastructure",
+    "Other"
   ]
 }
