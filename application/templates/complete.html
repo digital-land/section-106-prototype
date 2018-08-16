@@ -1,0 +1,25 @@
+{% extends "default.html" %}
+{% from "jinja-components/panel/macro.html" import govukPanel %}
+
+{% block content %}
+
+{{ govukPanel(text="Executive summary created") }}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+  <p class="govuk-body">We have emailed a pdf copy to you.</p>
+
+  <h3 class="govuk-heading-m">What happens next</h3>
+
+  <p class="govuk-body">
+    A record of this Section 106 has been created. This is now available for members of the public to find and view.
+  </p>
+  <p class="govuk-body">We recommend that you upload the pdf version to your Planning register.</p>
+  <p class="govuk-body">
+    You will be able to provide progress updates <a href="#">here</a>.
+  </p>
+  <div class="govuk-body"><a href="{{ url_for('frontend.start') }}">Create another executive summary</a></div>
+  </div>
+</div>
+
+{% endblock %}

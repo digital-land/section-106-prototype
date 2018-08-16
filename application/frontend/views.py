@@ -91,6 +91,10 @@ def summary():
   section106 = session['section106']
   return render_template('summary.html', s106=section106)
 
+@frontend.route('/complete')
+def complete():
+  return render_template('complete.html')
+
 @frontend.context_processor
 def asset_path_context_processor():
   return {'assetPath': '/static/govuk-frontend/assets'}

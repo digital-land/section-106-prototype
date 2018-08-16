@@ -1,0 +1,4 @@
+{% macro govukPanel(text, reference) %}
+  {% if kwargs %}<!-- {{ kwargs }} -->{% endif %}
+  {%- include "jinja-components/panel/template.html" -%}
+{% endmacro %}

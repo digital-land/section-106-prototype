@@ -1,0 +1,12 @@
+<div class="govuk-panel govuk-panel--confirmation
+{%- if kwargs['classes'] %} {{ kwargs['classes'] }}{% endif %}">
+  <h2 class="govuk-panel__title">
+    {{ text }}
+  </h2>
+  <div class="govuk-panel__body">
+    {% if reference %}
+    Your reference number
+    <br><strong>{{ reference }}</strong>
+    {% endif %}
+  </div>
+</div>
