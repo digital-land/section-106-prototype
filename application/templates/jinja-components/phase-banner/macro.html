@@ -1,0 +1,7 @@
+{% macro govukPhaseBanner(tag) %}
+  {% if kwargs %}<!-- {{ kwargs }} -->{% endif %}
+  {% if caller %}
+    {% set content=caller() %}
+  {% endif %}
+  {%- include "jinja-components/phase-banner/template.html" -%}
+{% endmacro %}

@@ -1,8 +1,17 @@
 {% extends "base.html" %}
+{% from "jinja-components/phase-banner/macro.html" import govukPhaseBanner %}
 
 {% block head %}
   <!--[if !IE 8]><!-->
     <link href="/static/stylesheets/all.css" rel="stylesheet" />
   <!--<![endif]-->
   <link href="/static/stylesheets/section106.css" rel="stylesheet" />
+{% endblock %}
+
+{% block beforeContent %}
+
+{% call govukPhaseBanner(tag="prototype") %}
+This is a prototype – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+{% endcall %}
+
 {% endblock %}
