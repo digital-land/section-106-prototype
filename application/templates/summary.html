@@ -1,5 +1,9 @@
 {% extends "default.html" %}
 
+{% block beforeContent %}
+ {{ super() }}
+ <a href="{{ url_for('frontend.developer_contributions') }}" class="govuk-back-link">Back</a>
+{% endblock %}
 
 {% block content %}
 
@@ -53,6 +57,7 @@
       </tbody>
     </table>
 
+    <h3 class="govuk-heading-m">Contributions</h3>
   </div>
 </div>
 {% endblock %}

@@ -3,6 +3,11 @@
 {% from "jinja-components/textarea/macro.html" import govukTextarea %}
 {% from "jinja-components/input/macro.html" import govukInput %}
 
+{% block beforeContent %}
+ {{ super() }}
+ <a href="{{ url_for('frontend.pla_ref') }}" class="govuk-back-link">Back</a>
+{% endblock %}
+
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
