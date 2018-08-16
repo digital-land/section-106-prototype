@@ -1,0 +1,4 @@
+{% macro checkAnswerRow(key, value, url) %}
+  {% if kwargs %}<!-- {{ kwargs }} -->{% endif %}
+  {%- include "jinja-components/check-answer-row/template.html" -%}
+{% endmacro %}
