@@ -1,6 +1,7 @@
 {% extends "default.html" %}
 {% from "jinja-components/select/macro.html" import govukSelect %}
 {% from "jinja-components/textarea/macro.html" import govukTextarea %}
+{% from "jinja-components/input/macro.html" import govukInput %}
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -32,6 +33,15 @@
             id="obligation-textarea",
             label="Obligation",
             name="obligation-textarea") }}
+
+        {{ govukInput(
+            id="contribution-amount-input",
+            name="contribution-amount-input",
+            label="Amount",
+            classes="govuk-input--width-10",
+            hint="The monetary cost or value equivalent of the agreed contribution",
+            hintid="contribution-amount-hint") }}
+
       </fieldset>
 
       <div class="govuk-form-group">

@@ -1,12 +1,12 @@
 <div class="govuk-form-group">
   <label class="govuk-label" for="{{ id }}">
     {{ label }}
-    {% if kwargs['hint'] %}
-    <span {% if kwargs['hintid'] %}id="{{ kwargs['hintid'] }}"{% endif %} class="govuk-hint">
-      {{ kwargs['hint'] }}
-    </span>
-    {% endif %}
   </label>
+  {% if kwargs['hint'] %}
+  <span {% if kwargs['hintid'] %}id="{{ kwargs['hintid'] }}"{% endif %} class="govuk-hint">
+    {{ kwargs['hint'] }}
+  </span>
+  {% endif %}
   <input class="govuk-input {% if kwargs['classes'] %}{{ kwargs['classes'] }}{% endif %}"
   id="{{ id }}" name="{{ name }}" type="text" 
   {%- if kwargs['hintid'] %} aria-describedby="{{ kwargs['hintid'] }}"{% endif %} >
