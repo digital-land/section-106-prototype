@@ -16,7 +16,7 @@
       What are the developer contributions?
     </h1>
 
-    <form action="{{ url_for('frontend.developer_contributions' )}}" class="form" method="POST">
+    <form action="{{ url_for('frontend.developer_contributions' )}}" class="form developer-contributions-form" method="POST">
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
           <h1 class="govuk-fieldset__heading">
@@ -67,4 +67,45 @@
 
   </div>
 </div>
+{% endblock %}
+
+{% block bodyEnd %}
+<script>
+  const fieldset = document.querySelector('.govuk-fieldset');
+  const form = document.querySelector('.developer-contributions-form');
+  const additionBtnContainer = document.querySelector('.additional-item-container');
+  const additionBtn = document.querySelector('.govuk-button-add');
+  const separator = document.querySelector('.govuk-section-break');
+  let fieldsetCount = 2;
+
+  function updateAttributes(fieldset, selector) {
+    // find label and change
+    fieldset.querySelector(`[for^=${selector}]`).setAttribute('for', `${selector}-${fieldsetCount}`);
+    // find field and change
+    const field = fieldset.querySelector(`[id^=${selector}]`);
+    field.setAttribute('id', `${selector}-${fieldsetCount}`);
+    field.setAttribute('name', `${selector}-${fieldsetCount}`);
+  }
+
+  function updateFieldsetCount(fieldset) {
+    fieldset.querySelector('.govuk-fieldset__heading').textContent = `Contribution ${fieldsetCount}`;
+    updateAttributes(fieldset, 'contribution-type-selector');
+    updateAttributes(fieldset, 'contribution-category-selector');
+    updateAttributes(fieldset, 'obligation-textarea');
+    updateAttributes(fieldset, 'contribution-amount-input');
+    return fieldset;
+  }
+
+  function handleAdditionBtnClick(e) {
+    e.preventDefault();
+    let newFieldset = fieldset.cloneNode(true);
+    const newSeparator = separator.cloneNode(true);
+    newFieldset = updateFieldsetCount(newFieldset);
+    const insertedSeparator = form.insertBefore(newSeparator, additionBtnContainer);
+    const insertedEl = form.insertBefore(newFieldset, additionBtnContainer);
+    fieldsetCount += 1;
+  }
+
+  additionBtn.addEventListener('click', handleAdditionBtnClick);
+</script>
 {% endblock %}
