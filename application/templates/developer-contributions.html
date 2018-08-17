@@ -25,27 +25,27 @@
         </legend>
 
         {{ govukSelect(
-            id="contribution-type-selector-1",
+            id="contribution-type-selector--1",
             items=parameters.types,
             label="Type",
             classes="govuk-input--width-20",
-            name="contribution-type-selector-1") }}
+            name="contribution-type-selector--1") }}
 
         {{ govukSelect(
-            id="contribution-category-selector-1",
+            id="contribution-category-selector--1",
             items=parameters.categories,
             label="Category",
             classes="govuk-input--width-20",
-            name="contribution-category-selector-1") }}
+            name="contribution-category-selector--1") }}
 
         {{ govukTextarea(
-            id="obligation-textarea-1",
+            id="obligation-textarea--1",
             label="Obligation",
-            name="obligation-textarea-1") }}
+            name="obligation-textarea--1") }}
 
         {{ govukInput(
-            id="contribution-amount-input-1",
-            name="contribution-amount-input-1",
+            id="contribution-amount-input--1",
+            name="contribution-amount-input--1",
             label="Amount",
             classes="govuk-input--width-10",
             hint="The monetary cost or value equivalent of the agreed contribution",
@@ -80,11 +80,11 @@
 
   function updateAttributes(fieldset, selector) {
     // find label and change
-    fieldset.querySelector(`[for^=${selector}]`).setAttribute('for', `${selector}-${fieldsetCount}`);
+    fieldset.querySelector(`[for^=${selector}]`).setAttribute('for', `${selector}--${fieldsetCount}`);
     // find field and change
     const field = fieldset.querySelector(`[id^=${selector}]`);
-    field.setAttribute('id', `${selector}-${fieldsetCount}`);
-    field.setAttribute('name', `${selector}-${fieldsetCount}`);
+    field.setAttribute('id', `${selector}--${fieldsetCount}`);
+    field.setAttribute('name', `${selector}--${fieldsetCount}`);
   }
 
   function updateFieldsetCount(fieldset) {

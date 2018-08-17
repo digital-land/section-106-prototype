@@ -62,6 +62,23 @@ def pla_ref():
     return redirect(url_for('frontend.developer_contributions'))
   return render_template('planning-application-details.html')
 
+def getContribution(form, n):
+  contribution = {
+    'type': form['contribution-type-selector--{}'.format(n)],
+    'category': form['contribution-category-selector--{}'.format(n)],
+    'obligation': form['obligation-textarea--{}'.format(n)],
+    'value': form['contribution-amount-input--{}'.format(n)]
+  }
+  return contribution
+
+def extractAllContributions(form):
+  contributions = []
+  ids = [key for key, value in form.items() if 'contribution-type' in key.lower()]
+  numbers = [item.split('--')[1] for item in ids]
+  for n in numbers:
+    contributions.append( getContribution(form, n) )
+  return contributions
+
 @frontend.route('/developer_contributions', methods=['GET', 'POST'])
 def developer_contributions():
   if 'section106' in session:
@@ -69,13 +86,7 @@ def developer_contributions():
     if 'contribution' not in section106:
       section106['contributions'] = []
   if request.method == 'POST':
-    contribution = {
-      'type': request.form['contribution-type-selector-1'],
-      'category': request.form['contribution-category-selector-1'],
-      'obligation': request.form['obligation-textarea-1'],
-      'value': request.form['contribution-amount-input-1']
-    }
-    section106['contributions'].append(contribution)
+    section106['contributions'] = extractAllContributions(request.form)
     session['section106'] = section106
     print( section106 )
     return redirect(url_for('frontend.summary'))
