@@ -43,27 +43,29 @@
     </table>
 
     <h3 class="govuk-heading-m">Contributions</h3>
-    <h4 class="govuk-heading-s">Contribution 1</h4>
+    {% for contribution in s106.contributions %}
+    <h4 class="govuk-heading-s">Contribution {{ loop.index }}</h4>
     <table class="govuk-table check-your-answers">
       <tbody>
         {{ checkAnswerRow(
             key="Type",
-            value=s106.contributions[0].type,
+            value=contribution.type,
             url="#") }}
         {{ checkAnswerRow(
             key="Category",
-            value=s106.contributions[0].category,
+            value=contribution.category,
             url="#") }}
         {{ checkAnswerRow(
             key="Obligation",
-            value=s106.contributions[0].obligation,
+            value=contribution.obligation,
             url="#") }}
         {{ checkAnswerRow(
             key="Value",
-            value=s106.contributions[0].value,
+            value=contribution.value,
             url="#") }}
       </tbody>
     </table>
+    {% endfor %}
 
     <div class="govuk-form-group">
       <a href="{{ url_for('frontend.complete' )}}" class="govuk-button">Continue</a>
