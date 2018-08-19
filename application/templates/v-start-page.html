@@ -1,10 +1,6 @@
-{% extends "default.html" %}
+{% extends "viability-base.html" %}
 {% from "components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 {% from "components/button/macro.njk" import govukButton %}
-
-{% block header %}
-  {{ govukHeader(serviceName="Create a viability assessment summary") }}
-{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
