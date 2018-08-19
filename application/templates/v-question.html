@@ -1,6 +1,6 @@
 {% extends "viability-base.html" %}
 
-{% from "jinja-components/select/macro.html" import govukSelect %}
+{% from "jinja-components/input/macro.html" import govukInput %}
 
 {% block beforeContent %}
  {{ super() }}
@@ -11,24 +11,23 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <form action="{{ url_for('frontend.local_authority' )}}" class="form" method="POST">
+    <form action="}" class="form" method="POST">
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
           <h1 class="govuk-fieldset__heading">
-            Which Local Authority?
+            Question 1
           </h1>
         </legend>
 
-        {{ govukSelect(
-            id="test",
-            items=localauthorities,
-            label="Local Authority",
-            name="local-authority-selector") }}
+        {{ govukInput(
+            id="question-1-input",
+            label="Question 1",
+            name="question-1-input") }}
 
       </fieldset>
 
       <div class="govuk-form-group">
-        <a href="{{ url_for('viability.question' )}}" class="govuk-button">Continue</a>
+        <a href="#" class="govuk-button">Continue</a>
       </div>
 
     </form>

@@ -25,3 +25,7 @@ def local_authority():
     with open( datafile ) as data_file:
       localauthorities = json.load(data_file) 
   return render_template('v-local-authority.html', localauthorities=localauthorities['authorities'])
+
+@viability.route('/question')
+def question():
+  return render_template('v-question.html')
