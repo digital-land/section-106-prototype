@@ -1,0 +1,38 @@
+{% extends "default.html" %}
+
+{% from "jinja-components/select/macro.html" import govukSelect %}
+
+{% block beforeContent %}
+ {{ super() }}
+ <a href="{{ url_for('viability.start') }}" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="{{ url_for('frontend.local_authority' )}}" class="form" method="POST">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+          <h1 class="govuk-fieldset__heading">
+            Which Local Authority?
+          </h1>
+        </legend>
+
+        {{ govukSelect(
+            id="test",
+            items=localauthorities,
+            label="Local Authority",
+            name="local-authority-selector") }}
+
+      </fieldset>
+
+      <div class="govuk-form-group">
+        <a href="#" class="govuk-button">Continue</a>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}
