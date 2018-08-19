@@ -33,3 +33,7 @@ def question():
 @viability.route('/check-your-answers')
 def check():
   return render_template('v-check-your-answers.html')
+
+@viability.route('/complete')
+def complete():
+  return render_template('v-complete.html')
