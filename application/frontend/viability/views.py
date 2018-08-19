@@ -29,3 +29,7 @@ def local_authority():
 @viability.route('/question')
 def question():
   return render_template('v-question.html')
+
+@viability.route('/check-your-answers')
+def check():
+  return render_template('v-check-your-answers.html')
