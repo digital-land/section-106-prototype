@@ -42,29 +42,30 @@
       </tbody>
     </table>
 
+    {% macro contributionSummary(key, value) %}
+    <div class="govuk-grid-row contribution-summary-row">
+      <div class="govuk-grid-column-one-half govuk-!-font-weight-bold">{{ key }}</div>
+      <div class="govuk-grid-column-one-half">{{ value }}</div>
+    </div>
+    {% endmacro %}
+
     <h3 class="govuk-heading-m">Contributions</h3>
     {% for contribution in s106.contributions %}
-    <h4 class="govuk-heading-s">Contribution {{ loop.index }}</h4>
-    <table class="govuk-table check-your-answers">
-      <tbody>
-        {{ checkAnswerRow(
-            key="Type",
-            value=contribution.type,
-            url="#") }}
-        {{ checkAnswerRow(
-            key="Category",
-            value=contribution.category,
-            url="#") }}
-        {{ checkAnswerRow(
-            key="Obligation",
-            value=contribution.obligation,
-            url="#") }}
-        {{ checkAnswerRow(
-            key="Value",
-            value=contribution.value,
-            url="#") }}
-      </tbody>
-    </table>
+    <div class="contribution-summary">
+      <h4 class="govuk-heading-s contribution-entry-heading">Contribution {{ loop.index }}<a class="contribution-summary-change" href="{{ url }}">Change <span class="govuk-visually-hidden">{{ key }}</span></a></h4>
+      {{ contributionSummary(
+          key="Type",
+          value=contribution.type) }}
+      {{ contributionSummary(
+          key="Category",
+          value=contribution.category) }}
+      {{ contributionSummary(
+          key="Obligation",
+          value=contribution.obligation) }}
+      {{ contributionSummary(
+          key="Value",
+          value=contribution.value) }}
+    </div>
     {% endfor %}
 
     <div class="govuk-form-group">

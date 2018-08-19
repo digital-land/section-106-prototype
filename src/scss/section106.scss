@@ -45,3 +45,29 @@ table td {
   text-align: left;
   padding: 0.63158em 1.05263em 0.47368em 0;
 }
+
+.contribution-summary {
+  @include govuk-font($size: 19);
+  @include govuk-text-colour;
+  width: 100%;
+  @include govuk-responsive-margin(6, "bottom");
+}
+
+.contribution-summary-change {
+  float: right;
+  font-weight: normal;
+}
+
+.contribution-summary-row {
+  padding-bottom: govuk-em(8, 19);
+}
+
+.contribution-entry-heading {
+  border-bottom: 1px solid #bfc1c3;
+  border-top: 1px solid #bfc1c3;
+  padding: 8px 0 5px;
+  @include govuk-responsive-margin(2, "bottom");
+  @include govuk-media-query($from: tablet) {
+    @include govuk-responsive-margin(3, "bottom");
+  }
+}
