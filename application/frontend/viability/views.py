@@ -16,4 +16,4 @@ viability = Blueprint('viability', __name__, template_folder='templates', url_pr
 
 @viability.route('/')
 def index():
-  return render_template('index.html')
+  return render_template('v-start-page.html')
