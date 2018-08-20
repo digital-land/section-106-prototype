@@ -1,0 +1,4 @@
+{% macro govukDateInput(id, label, isPageHeading=True) %}
+  {% if kwargs %}<!-- {{ kwargs }} -->{% endif %}
+  {%- include "jinja-components/date-input/template.html" -%}
+{% endmacro %}
