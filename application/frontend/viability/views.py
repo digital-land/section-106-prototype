@@ -26,6 +26,10 @@ def local_authority():
       localauthorities = json.load(data_file) 
   return render_template('v-local-authority.html', localauthorities=localauthorities['authorities'])
 
+@viability.route('/report-details')
+def report_details():
+  return render_template('v-report-details.html')
+
 @viability.route('/question')
 def question():
   return render_template('v-question.html')
