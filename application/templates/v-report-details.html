@@ -1,0 +1,45 @@
+{% extends "viability-base.html" %}
+{% from "jinja-components/input/macro.html" import govukInput %}
+{% from "jinja-components/date-input/macro.html" import govukDateInput %}
+
+{% block beforeContent %}
+ {{ super() }}
+ <a href="{{ url_for('viability.local_authority') }}" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="" class="form" method="POST">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+          <h1 class="govuk-fieldset__heading">
+            What Viability assessment does this refer to?
+          </h1>
+        </legend>
+
+      {{ govukInput(
+          id="viability-report-reference",
+          name="viability-report-reference",
+          label="Viability assessment reference",
+          classes="govuk-input--width-10",
+          hintid="viability-report-reference-hint") }}
+
+      </fieldset>
+
+      {{ govukDateInput(
+        id="viability-report",
+        label="Viability assessment date",
+        hint="For example, 31 3 2012",
+        isPageHeading=False) }}
+
+      <div class="govuk-form-group">
+        <a href="{{ url_for('viability.question') }}" class="govuk-button">Continue</a>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,10 +1,11 @@
 {% extends "viability-base.html" %}
 
 {% from "jinja-components/input/macro.html" import govukInput %}
+{% from "jinja-components/date-input/macro.html" import govukDateInput %}
 
 {% block beforeContent %}
  {{ super() }}
- <a href="{{ url_for('viability.start') }}" class="govuk-back-link">Back</a>
+ <a href="{{ url_for('viability.report_details') }}" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
