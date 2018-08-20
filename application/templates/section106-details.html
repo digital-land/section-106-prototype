@@ -1,5 +1,6 @@
 {% extends "default.html" %}
 {% from "jinja-components/input/macro.html" import govukInput %}
+{% from "jinja-components/date-input/macro.html" import govukDateInput %}
 
 {% block beforeContent %}
  {{ super() }}
@@ -17,7 +18,6 @@
             What Section 106 Agreement does this refer to?
           </h1>
         </legend>
-      </fieldset>
 
       {{ govukInput(
           id="agreement-reference",
@@ -26,6 +26,14 @@
           classes="govuk-input--width-10",
           hint="This should be....",
           hintid="agreement-reference-hint") }}
+
+      </fieldset>
+
+      {{ govukDateInput(
+        id="section106-signed",
+        label="When was the agreement signed?",
+        hint="For example, 31 3 2012",
+        isPageHeading=False) }}
 
       <div class="govuk-form-group">
         <button type="submit" class="govuk-button">Continue</button>

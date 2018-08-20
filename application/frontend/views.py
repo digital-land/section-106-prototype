@@ -38,12 +38,16 @@ def local_authority():
       localauthorities = json.load(data_file) 
   return render_template('local-authority.html', localauthorities=localauthorities['authorities'])
 
+def getDateFromForm(form):
+  return '{}-{}-{}'.format(form['section106-signed-day'],form['section106-signed-month'],form['section106-signed-year'])
+
 @frontend.route('/section-106-reference', methods=['GET', 'POST'])
 def s106_ref():
   if 'section106' in session:
     section106 = session['section106']
   if request.method == 'POST':
     section106['agreement_reference'] = request.form['agreement-reference']
+    section106['signed_date'] = getDateFromForm(request.form)
     session['section106'] = section106
     return redirect(url_for('frontend.pla_ref'))
   return render_template('section106-details.html')
