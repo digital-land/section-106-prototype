@@ -11,7 +11,7 @@ import json
 import os.path
 
 from application.extensions import db
-from application.models import LocalAuthority, Section106Agreement
+from application.models import LocalAuthority, Section106Agreement, Contribution
 
 frontend = Blueprint('frontend', __name__, template_folder='templates')
 
@@ -49,7 +49,9 @@ def s106_ref(local_authority):
                                 local_authority=local_authority.id,
                                 section106_agreement=section106_agreement.reference))
 
-    return render_template('section106-details.html', local_authority=local_authority)
+    other_agreements = Section106Agreement.query.filter_by(local_authority_id=local_authority).all()
+
+    return render_template('section106-details.html', local_authority=local_authority, other_agreements=other_agreements)
 
 
 @frontend.route('/local-authority/<local_authority>/section-106-agreement/<section106_agreement>/planning-application-reference', methods=['GET', 'POST'])
@@ -94,11 +96,23 @@ def extractAllContributions(form):
 
 @frontend.route('/local-authority/<local_authority>/section-106-agreement/<section106_agreement>/developer-contributions', methods=['GET', 'POST'])
 def developer_contributions(local_authority, section106_agreement):
+
     if request.method == 'POST':
-        # section106['contributions'] = extractAllContributions(request.form)
-        # session['section106'] = section106
-        # print(section106)
-        return redirect(url_for('frontend.summary'))
+        contributions = extractAllContributions(request.form)
+        agreement = Section106Agreement.query.filter_by(reference=section106_agreement,
+                                                        local_authority_id=local_authority).one()
+        for contribution in contributions:
+            c = Contribution()
+            c.contribution_type = contribution['type']
+            c.category = contribution['category']
+            c.obligation = contribution['obligation']
+            c.value = contribution['value']
+            agreement.contributions.append(c)
+
+        db.session.add(agreement)
+        db.session.commit()
+
+        return redirect(url_for('frontend.summary', local_authority=local_authority, section106_agreement=section106_agreement))
 
     datafile = "application/data/parameters.json"
     if os.path.isfile(datafile):
@@ -111,10 +125,13 @@ def developer_contributions(local_authority, section106_agreement):
                            section106_agreement=section106_agreement)
 
 
-@frontend.route('/summary')
-def summary():
-    section106 = session['section106']
-    return render_template('summary.html', s106=section106)
+@frontend.route('/local-authority/<local_authority>/section-106-agreement/<section106_agreement>/summary')
+def summary(local_authority, section106_agreement):
+
+    agreement = Section106Agreement.query.filter_by(reference=section106_agreement,
+                                                    local_authority_id=local_authority).one()
+
+    return render_template('summary.html', s106=agreement)
 
 
 @frontend.route('/complete')

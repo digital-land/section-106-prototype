@@ -43,6 +43,9 @@ class Contribution(db.Model):
 
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=_generate_uuid)
     contribution_type = db.Column(db.String)
+    category = db.Column(db.String)
+    obligation = db.Column(db.String)
+    value = db.Column(db.String)
 
     section106_reference = db.Column(db.String(64), nullable=False)
     local_authority_id = db.Column(db.String(64), nullable=False)

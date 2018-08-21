@@ -3,7 +3,7 @@
 
 {% block beforeContent %}
  {{ super() }}
- <a href="{{ url_for('frontend.developer_contributions') }}" class="govuk-back-link">Back</a>
+ <a href="{{ url_for('frontend.developer_contributions', local_authority=s106.local_authority.id, section106_agreement=s106.reference) }}" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
@@ -21,12 +21,12 @@
       <tbody>
         {{ checkAnswerRow(
             key="Local Authority",
-            value=s106.la_name,
+            value=s106.local_authority.name,
             url="#") }}
 
         {{ checkAnswerRow(
             key="Agreement ref",
-            value=s106.agreement_reference,
+            value=s106.reference,
             url="#") }}
 
         {{ checkAnswerRow(
@@ -36,12 +36,12 @@
 
         {{ checkAnswerRow(
             key="Planning application ref",
-            value=s106.planning_application_reference.reference,
+            value=s106.planning_application_reference,
             url="#") }}
 
         {{ checkAnswerRow(
             key="Planning application URL",
-            value=s106.planning_application_reference.url,
+            value=s106.planning_application_url,
             url="#") }}
 
       </tbody>
