@@ -10,7 +10,8 @@ from flask import (
 import json
 import os.path
 
-from application.models import LocalAuthority
+from application.extensions import db
+from application.models import LocalAuthority, Section106Agreement
 
 frontend = Blueprint('frontend', __name__, template_folder='templates')
 
@@ -23,12 +24,9 @@ def start():
 
 @frontend.route('/local-authority', methods=['GET', 'POST'])
 def local_authority():
-    if 'section106' in session:
-        section106 = session['section106']
+
     if request.method == 'POST':
-        section106['la_name'] = request.form['local-authority-selector']
-        session['section106'] = section106
-        return redirect(url_for('frontend.s106_ref'))
+        return redirect(url_for('frontend.s106_ref', local_authority=request.form['local-authority-selector']))
     return render_template('local-authority.html', localauthorities=LocalAuthority.query.all())
 
 
@@ -37,31 +35,42 @@ def getDateFromForm(form):
                              form['section106-signed-year'])
 
 
-@frontend.route('/section-106-reference', methods=['GET', 'POST'])
-def s106_ref():
-    if 'section106' in session:
-        section106 = session['section106']
+@frontend.route('/local-authority/<local_authority>/section-106-reference', methods=['GET', 'POST'])
+def s106_ref(local_authority):
+
     if request.method == 'POST':
-        section106['agreement_reference'] = request.form['agreement-reference']
-        section106['signed_date'] = getDateFromForm(request.form)
-        session['section106'] = section106
-        return redirect(url_for('frontend.pla_ref'))
-    return render_template('section106-details.html')
+        reference = request.form['agreement-reference']
+        signed_date = getDateFromForm(request.form)
+        local_authority = LocalAuthority.query.get(local_authority)
+        section106_agreement = Section106Agreement(reference=reference, signed_date=signed_date, local_authority=local_authority)
+        db.session.add(section106_agreement)
+        db.session.commit()
+        return redirect(url_for('frontend.pla_ref',
+                                local_authority=local_authority.id,
+                                section106_agreement=section106_agreement.reference))
+
+    return render_template('section106-details.html', local_authority=local_authority)
 
 
-@frontend.route('/planning-application-reference', methods=['GET', 'POST'])
-def pla_ref():
-    if 'section106' in session:
-        section106 = session['section106']
+@frontend.route('/local-authority/<local_authority>/section-106-agreement/<section106_agreement>/planning-application-reference', methods=['GET', 'POST'])
+def pla_ref(local_authority, section106_agreement):
+
     if request.method == 'POST':
-        pla_ref = {
-            'reference': request.form['planning-application-reference'],
-            'url': request.form['planning-application-url']
-        }
-        section106['planning_application_reference'] = pla_ref
-        session['section106'] = section106
-        return redirect(url_for('frontend.developer_contributions'))
-    return render_template('planning-application-details.html')
+        agreement = Section106Agreement.query.filter_by(reference=section106_agreement,
+                                                        local_authority_id=local_authority).one()
+        agreement.planning_application_reference = request.form['planning-application-reference']
+        agreement.planning_application_url = request.form['planning-application-url']
+
+        db.session.add(agreement)
+        db.session.commit()
+
+        return redirect(url_for('frontend.developer_contributions',
+                                local_authority=local_authority,
+                                section106_agreement=section106_agreement))
+
+    return render_template('planning-application-details.html',
+                           local_authority=local_authority,
+                           section106_agreement=section106_agreement)
 
 
 def getContribution(form, n):
@@ -83,23 +92,23 @@ def extractAllContributions(form):
     return contributions
 
 
-@frontend.route('/developer_contributions', methods=['GET', 'POST'])
-def developer_contributions():
-    if 'section106' in session:
-        section106 = session['section106']
-        if 'contribution' not in section106:
-            section106['contributions'] = []
+@frontend.route('/local-authority/<local_authority>/section-106-agreement/<section106_agreement>/developer-contributions', methods=['GET', 'POST'])
+def developer_contributions(local_authority, section106_agreement):
     if request.method == 'POST':
-        section106['contributions'] = extractAllContributions(request.form)
-        session['section106'] = section106
-        print(section106)
+        # section106['contributions'] = extractAllContributions(request.form)
+        # session['section106'] = section106
+        # print(section106)
         return redirect(url_for('frontend.summary'))
 
     datafile = "application/data/parameters.json"
     if os.path.isfile(datafile):
         with open(datafile) as data_file:
             parameters = json.load(data_file)
-    return render_template('developer-contributions.html', parameters=parameters)
+
+    return render_template('developer-contributions.html',
+                           parameters=parameters,
+                           local_authority=local_authority,
+                           section106_agreement=section106_agreement)
 
 
 @frontend.route('/summary')

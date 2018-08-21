@@ -5,7 +5,7 @@
 
 {% block beforeContent %}
  {{ super() }}
- <a href="{{ url_for('frontend.pla_ref') }}" class="govuk-back-link">Back</a>
+ <a href="{{ url_for('frontend.pla_ref', local_authority=local_authority, section106_agreement=section106_agreement) }}" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
@@ -16,7 +16,7 @@
       What are the developer contributions?
     </h1>
 
-    <form action="{{ url_for('frontend.developer_contributions' )}}" class="form developer-contributions-form" method="POST">
+    <form action="{{ url_for('frontend.developer_contributions', local_authority=local_authority, section106_agreement=section106_agreement)}}" class="form developer-contributions-form" method="POST">
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
           <h1 class="govuk-fieldset__heading">
