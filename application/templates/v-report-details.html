@@ -1,6 +1,7 @@
 {% extends "viability-base.html" %}
 {% from "jinja-components/input/macro.html" import govukInput %}
 {% from "jinja-components/date-input/macro.html" import govukDateInput %}
+{% from "jinja-components/button/macro.html" import govukButton %}
 
 {% block beforeContent %}
  {{ super() }}
@@ -34,9 +35,10 @@
         hint="For example, 31 3 2012",
         isPageHeading=False) }}
 
-      <div class="govuk-form-group">
-        <a href="{{ url_for('viability.question') }}" class="govuk-button">Continue</a>
-      </div>
+      {{ govukButton({
+        'text': "Save and continue",
+        'href': url_for( 'viability.planning_application' )
+      }) }}
 
     </form>
 

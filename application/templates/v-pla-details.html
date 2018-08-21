@@ -1,0 +1,47 @@
+{% extends "viability-base.html" %}
+{% from "jinja-components/input/macro.html" import govukInput %}
+{% from "jinja-components/button/macro.html" import govukButton %}
+
+{% block beforeContent %}
+ {{ super() }}
+ <a href="{{ url_for('viability.report_details') }}" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="" class="form" method="POST">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+          <h1 class="govuk-fieldset__heading">
+            What planning application does this relate to?
+          </h1>
+        </legend>
+      </fieldset>
+
+      {{ govukInput(
+          id="planning-application-reference",
+          name="planning-application-reference",
+          label="Planning application reference",
+          classes="govuk-input--width-10",
+          hint="Add the planning application reference that is associated with the Viability assessment",
+          hintid="planning-application-reference-hint") }}
+
+      {{ govukInput(
+          id="planning-application-url",
+          name="planning-application-url",
+          label="Planning application url",
+          hint="Add the URL for where the planning application can be viewed online",
+          hintid="planning-application-url-hint") }}
+
+      {{ govukButton({
+        'text': "Save and continue",
+        'href': url_for( 'viability.question' )
+      }) }}
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}

@@ -30,6 +30,10 @@ def local_authority():
 def report_details():
   return render_template('v-report-details.html')
 
+@viability.route('/planning-application')
+def planning_application():
+  return render_template('v-pla-details.html')
+
 @viability.route('/question')
 def question():
   return render_template('v-question.html')
