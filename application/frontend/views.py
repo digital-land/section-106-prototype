@@ -163,6 +163,10 @@ def remove_contribution(contribution_id):
     
     return jsonify(success=True, contribution_id=contribution_id)
 
+@frontend.route('/local-authorities/all')
+def local_authorities_all():
+    return render_template('local-authorities-all.html', local_authorities=LocalAuthority.query.all())
+
 @frontend.context_processor
 def asset_path_context_processor():
     return {'assetPath': '/static/govuk-frontend/assets'}

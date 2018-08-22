@@ -1,0 +1,41 @@
+{% extends "default.html" %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-xl">View Section 106 contributions</h1>
+
+  {% for authority in local_authorities %}
+    {% if authority.planning_applications|length > 0 %}
+    <h3 class="govuk-heading-m">{{ authority.name }}</h3>
+    <ul>
+      {% for application in authority.planning_applications %}
+      <li>
+        <h4 class="govuk-heading-s">Planning application: {{ application.reference }}</h4>
+        {% if application.section106_contributions|length > 0 %}
+        <p class="govuk-body">{{ application.section106_contributions|length }} Contributions recorded</p>
+        <table class="govuk-table">
+          <tbody>
+            {% for contribution in application.section106_contributions %}
+            <tr>
+              <td>{{ contribution.contribution_type }}</td>
+              <td>{{ contribution.category }}</td>
+              <td class="govuk-table__cell">£{{ contribution.value }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p class="govuk-body">0 Contributions recorded</p>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  {% endfor %}
+
+  </div>
+</div>
+{% endblock %}
