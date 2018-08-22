@@ -9,6 +9,7 @@ from flask import (
 
 import json
 import os.path
+import uuid
 
 from application.extensions import db
 from application.models import LocalAuthority, PlanningApplication, Contribution
@@ -82,6 +83,7 @@ def s106_details(local_authority, planning_reference):
 
 def getContribution(form, n):
     contribution = {
+        'id': n,
         'type': form['contribution-type-selector--{}'.format(n)],
         'category': form['contribution-category-selector--{}'.format(n)],
         'obligation': form['obligation-textarea--{}'.format(n)],
@@ -102,19 +104,25 @@ def extractAllContributions(form):
 @frontend.route('/local-authority/<local_authority>/planning-application/<path:planning_reference>/developer-contributions', methods=['GET', 'POST'])
 def developer_contributions(local_authority, planning_reference):
 
+    application = PlanningApplication.query.filter_by(reference=planning_reference,
+                                                    local_authority_id=local_authority).one()
+
     if request.method == 'POST':
         contributions = extractAllContributions(request.form)
-        agreement = PlanningApplication.query.filter_by(reference=planning_reference,
-                                                        local_authority_id=local_authority).one()
+
         for contribution in contributions:
-            c = Contribution()
+            try:
+                id = uuid.UUID(contribution['id'])
+                c = Contribution.query.get(id)
+            except ValueError:
+                c = Contribution()                
             c.contribution_type = contribution['type']
             c.category = contribution['category']
             c.obligation = contribution['obligation']
             c.value = contribution['value']
-            agreement.section106_contributions.append(c)
+            application.section106_contributions.append(c)
 
-        db.session.add(agreement)
+        db.session.add(application)
         db.session.commit()
 
         return redirect(url_for('frontend.summary', local_authority=local_authority, planning_reference=planning_reference))
@@ -127,7 +135,8 @@ def developer_contributions(local_authority, planning_reference):
     return render_template('developer-contributions.html',
                            parameters=parameters,
                            local_authority=local_authority,
-                           planning_reference=planning_reference)
+                           planning_reference=planning_reference,
+                           application=application)
 
 
 @frontend.route('/local-authority/<local_authority>/planning-application/<path:planning_reference>/summary')

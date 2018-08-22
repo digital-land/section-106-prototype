@@ -3,6 +3,8 @@
 {% from "jinja-components/textarea/macro.html" import govukTextarea %}
 {% from "jinja-components/input/macro.html" import govukInput %}
 
+{% from "project-components/contribution-form/macro.html" import existingContributionForm %}
+
 {% block beforeContent %}
  {{ super() }}
  <a href="{{ url_for('frontend.s106_details', local_authority=local_authority, planning_reference=planning_reference) }}" class="govuk-back-link">Back</a>
@@ -17,6 +19,12 @@
     </h1>
 
     <form action="{{ url_for('frontend.developer_contributions', local_authority=local_authority, planning_reference=planning_reference)}}" class="form developer-contributions-form" method="POST">
+      {% if application.section106_contributions|length > 0 %}
+        {% for contribution in application.section106_contributions %}
+          {% set number = loop.index %}
+          {{ existingContributionForm(number, contribution, parameters) }}
+        {% endfor %}
+      {% else %}
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
           <h1 class="govuk-fieldset__heading">
@@ -29,7 +37,8 @@
             items=parameters.types,
             label="Type",
             classes="govuk-input--width-20",
-            name="contribution-type-selector--1") }}
+            name="contribution-type-selector--1",
+            selected=application.section106_contributions[0].contribution_type) }}
 
         {{ govukSelect(
             id="contribution-category-selector--1",
@@ -52,6 +61,7 @@
             hintid="contribution-amount-hint") }}
 
       </fieldset>
+      {% endif %}
 
       <div class="additional-item-container">
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
@@ -76,23 +86,26 @@
   const additionBtnContainer = document.querySelector('.additional-item-container');
   const additionBtn = document.querySelector('.govuk-button-add');
   const separator = document.querySelector('.govuk-section-break');
-  let fieldsetCount = 2;
+  let fieldsetCount = 1;
 
-  function updateAttributes(fieldset, selector) {
+  function updateAttributes(fieldset, selector, reset) {
     // find label and change
     fieldset.querySelector(`[for^=${selector}]`).setAttribute('for', `${selector}--${fieldsetCount}`);
     // find field and change
     const field = fieldset.querySelector(`[id^=${selector}]`);
     field.setAttribute('id', `${selector}--${fieldsetCount}`);
     field.setAttribute('name', `${selector}--${fieldsetCount}`);
+    if( reset ) {
+      field.value = "";
+    }
   }
 
   function updateFieldsetCount(fieldset) {
-    fieldset.querySelector('.govuk-fieldset__heading').textContent = `Contribution ${fieldsetCount}`;
+    fieldset.querySelector('.govuk-fieldset__heading').textContent = `New contribution`;
     updateAttributes(fieldset, 'contribution-type-selector');
     updateAttributes(fieldset, 'contribution-category-selector');
-    updateAttributes(fieldset, 'obligation-textarea');
-    updateAttributes(fieldset, 'contribution-amount-input');
+    updateAttributes(fieldset, 'obligation-textarea', true);
+    updateAttributes(fieldset, 'contribution-amount-input', true);
     return fieldset;
   }
 

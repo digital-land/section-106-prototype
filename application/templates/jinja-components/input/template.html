@@ -9,5 +9,6 @@
   {% endif %}
   <input class="govuk-input {% if kwargs['classes'] %}{{ kwargs['classes'] }}{% endif %}"
   id="{{ id }}" name="{{ name }}" type="text" 
+  {%- if kwargs['value'] %} value="{{ kwargs['value'] }}"{% endif %}
   {%- if kwargs['hintid'] %} aria-describedby="{{ kwargs['hintid'] }}"{% endif %} >
 </div>

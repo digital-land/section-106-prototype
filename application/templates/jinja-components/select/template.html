@@ -4,11 +4,14 @@
   </label>
   <select class="govuk-select {% if kwargs['classes'] %}{{ kwargs['classes'] }}{% endif %}" id="{{ id }}" name="{{ name }}">
     {% if items %}
+    {% if kwargs['selected'] %}
+      {% set selected = kwargs['selected'] %}
+    {% endif %}
     {% for item in items %}
       {%- if item.id %}
       <option value="{{ item.id }}">{{ item.name }}</option>
       {% else %}
-      <option value="{{ item }}">{{ item }}</option>
+      <option value="{{ item }}"{% if item==selected %} selected {% endif %} >{{ item }}</option>
       {% endif -%}
     {% endfor %}
     {% endif %}
