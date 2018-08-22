@@ -20,6 +20,7 @@ Werkzeug = "==0.14.1"
 WTForms = "==2.2.1"
 flask-migrate = "*"
 "psycopg2" = "*"
+gunicorn = "*"
 
 [dev-packages]
 
