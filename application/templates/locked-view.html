@@ -1,0 +1,83 @@
+{% extends "default.html" %}
+{% from "jinja-components/check-answer-row/macro.html" import checkAnswerRow %}
+
+{% block beforeContent %}
+ {{ super() }}
+ <a href="{{ url_for('frontend.local_authorities_all') }}" class="govuk-back-link">See all planning applications</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">View planning application contributions</h1>
+
+    <p class="govuk-body">Below is a list of all the developer contributions agreed to make this planning application acceptable.</p>
+
+    <h3 class="govuk-heading-m">Planning application details</h3>
+    <table class="govuk-table check-your-answers">
+      <tbody>
+        <tr>
+          <td>Local Authority</td>
+          <td>{{ application.local_authority.name }}</td>
+        </tr>
+        <tr>
+          <td>Planning application ref</td>
+          <td>{{ application.reference }}</td>
+        </tr>
+        <tr>
+          <td>Planning application url</td>
+          <td class="display-url">{{ application.url }}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Agreement url</td>
+          <td class="display-url">{{ application.section106_url }}</td>
+        </tr>
+        <tr>
+          <td>Date signed</td>
+          <td>{{ application.section106_signed_date }}</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    {% macro contributionSummary(key, value) %}
+    <div class="govuk-grid-row contribution-summary-row">
+      <div class="govuk-grid-column-one-half govuk-!-font-weight-bold">{{ key }}</div>
+      <div class="govuk-grid-column-one-half">{{ value }}</div>
+    </div>
+    {% endmacro %}
+
+    <h3 class="govuk-heading-m">Contributions</h3>
+    {% if application.section106_contributions|length > 0 %}
+      {%- for contribution in application.section106_contributions %}
+      <div class="contribution-summary" data-contribution-id="{{ contribution.id }}">
+        <h4 class="govuk-heading-s contribution-entry-heading">Contribution {{ loop.index }}</h4>
+        {{ contributionSummary(
+            key="Type",
+            value=contribution.contribution_type) }}
+        {{ contributionSummary(
+            key="Category",
+            value=contribution.category) }}
+        {{ contributionSummary(
+            key="Obligation",
+            value=contribution.obligation) }}
+        {{ contributionSummary(
+            key="Value",
+            value=contribution.value) }}
+      </div>
+      {% endfor %}
+    {% else %}
+    <p class="govuk-inset-text">
+      0 contributions recorded
+    </p>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}
+

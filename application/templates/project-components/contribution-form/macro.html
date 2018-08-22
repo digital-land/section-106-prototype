@@ -1,0 +1,45 @@
+{% from "jinja-components/select/macro.html" import govukSelect %}
+{% from "jinja-components/textarea/macro.html" import govukTextarea %}
+{% from "jinja-components/input/macro.html" import govukInput %}
+
+{% macro existingContributionForm(number, contribution, parameters) %}
+  <fieldset class="govuk-fieldset">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+      <h1 class="govuk-fieldset__heading">
+        Contribution {{ number }}
+      </h1>
+    </legend>
+
+    {{ govukSelect(
+        id="contribution-type-selector--" + contribution.id|string,
+        items=parameters.types,
+        label="Type",
+        classes="govuk-input--width-20",
+        name="contribution-type-selector--" + contribution.id|string,
+        selected=contribution.contribution_type) }}
+
+    {{ govukSelect(
+        id="contribution-category-selector--" + contribution.id|string,
+        items=parameters.categories,
+        label="Category",
+        classes="govuk-input--width-20",
+        name="contribution-category-selector--" + contribution.id|string,
+        selected=contribution.category) }}
+
+    {{ govukTextarea(
+        id="obligation-textarea--" + contribution.id|string,
+        label="Obligation",
+        name="obligation-textarea--" + contribution.id|string,
+        value=contribution.obligation) }}
+
+    {{ govukInput(
+        id="contribution-amount-input--" + contribution.id|string,
+        name="contribution-amount-input--" + contribution.id|string,
+        label="Amount",
+        classes="govuk-input--width-10",
+        hint="The monetary cost or value equivalent of the agreed contribution",
+        hintid="contribution-amount-hint",
+        value=contribution.value) }}
+
+  </fieldset>
+{% endmacro %}
