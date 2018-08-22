@@ -11,7 +11,7 @@ import json
 import os.path
 
 from application.extensions import db
-from application.models import LocalAuthority, Section106Agreement, Contribution
+from application.models import LocalAuthority, PlanningApplication, Contribution
 
 frontend = Blueprint('frontend', __name__, template_folder='templates')
 
@@ -26,53 +26,55 @@ def start():
 def local_authority():
 
     if request.method == 'POST':
-        return redirect(url_for('frontend.s106_ref', local_authority=request.form['local-authority-selector']))
+        return redirect(url_for('frontend.pla_ref', local_authority=request.form['local-authority-selector']))
     return render_template('local-authority.html', localauthorities=LocalAuthority.query.all())
-
 
 def getDateFromForm(form):
     return '{}-{}-{}'.format(form['section106-signed-day'], form['section106-signed-month'],
                              form['section106-signed-year'])
 
 
-@frontend.route('/local-authority/<local_authority>/section-106-reference', methods=['GET', 'POST'])
-def s106_ref(local_authority):
+@frontend.route('/local-authority/<local_authority>/planning-application', methods=['GET', 'POST'])
+def pla_ref(local_authority):
+
+    if request.method == 'POST':
+
+        planning_reference = request.form['planning-application-reference']
+        url = request.form['planning-application-url']
+        local_authority = LocalAuthority.query.get(local_authority)
+        application = PlanningApplication(reference=planning_reference, url=url, local_authority=local_authority)
+
+        db.session.add(application)
+        db.session.commit()
+
+        return redirect(url_for('frontend.s106_details',
+                                local_authority=local_authority.id,
+                                planning_reference=planning_reference))
+
+    return render_template('planning-application-details.html',
+                           local_authority=local_authority)
+
+
+@frontend.route('/local-authority/<local_authority>/planning-application/<planning_reference>', methods=['GET', 'POST'])
+def s106_details(local_authority, planning_reference):
 
     if request.method == 'POST':
         reference = request.form['agreement-reference']
         signed_date = getDateFromForm(request.form)
-        local_authority = LocalAuthority.query.get(local_authority)
-        section106_agreement = Section106Agreement(reference=reference, signed_date=signed_date, local_authority=local_authority)
-        db.session.add(section106_agreement)
-        db.session.commit()
-        return redirect(url_for('frontend.pla_ref',
-                                local_authority=local_authority.id,
-                                section106_agreement=section106_agreement.reference))
-
-    other_agreements = Section106Agreement.query.filter_by(local_authority_id=local_authority).all()
-
-    return render_template('section106-details.html', local_authority=local_authority, other_agreements=other_agreements)
-
-
-@frontend.route('/local-authority/<local_authority>/section-106-agreement/<section106_agreement>/planning-application-reference', methods=['GET', 'POST'])
-def pla_ref(local_authority, section106_agreement):
-
-    if request.method == 'POST':
-        agreement = Section106Agreement.query.filter_by(reference=section106_agreement,
-                                                        local_authority_id=local_authority).one()
-        agreement.planning_application_reference = request.form['planning-application-reference']
-        agreement.planning_application_url = request.form['planning-application-url']
-
-        db.session.add(agreement)
+        planning_application = PlanningApplication.query.filter_by(local_authority_id=local_authority, reference=planning_reference).one()
+        planning_application.section106_signed_date = signed_date
+        planning_application.section106_url = reference
+        db.session.add(planning_application)
         db.session.commit()
 
         return redirect(url_for('frontend.developer_contributions',
                                 local_authority=local_authority,
-                                section106_agreement=section106_agreement))
+                                planning_reference=planning_application.reference))
 
-    return render_template('planning-application-details.html',
+    return render_template('section106-details.html',
                            local_authority=local_authority,
-                           section106_agreement=section106_agreement)
+                           planning_reference=planning_reference,
+                           other_agreements=[])
 
 
 def getContribution(form, n):
@@ -94,12 +96,12 @@ def extractAllContributions(form):
     return contributions
 
 
-@frontend.route('/local-authority/<local_authority>/section-106-agreement/<section106_agreement>/developer-contributions', methods=['GET', 'POST'])
-def developer_contributions(local_authority, section106_agreement):
+@frontend.route('/local-authority/<local_authority>/planning-application/<planning_reference>/developer-contributions', methods=['GET', 'POST'])
+def developer_contributions(local_authority, planning_reference):
 
     if request.method == 'POST':
         contributions = extractAllContributions(request.form)
-        agreement = Section106Agreement.query.filter_by(reference=section106_agreement,
+        agreement = PlanningApplication.query.filter_by(reference=planning_reference,
                                                         local_authority_id=local_authority).one()
         for contribution in contributions:
             c = Contribution()
@@ -107,12 +109,12 @@ def developer_contributions(local_authority, section106_agreement):
             c.category = contribution['category']
             c.obligation = contribution['obligation']
             c.value = contribution['value']
-            agreement.contributions.append(c)
+            agreement.section106_contributions.append(c)
 
         db.session.add(agreement)
         db.session.commit()
 
-        return redirect(url_for('frontend.summary', local_authority=local_authority, section106_agreement=section106_agreement))
+        return redirect(url_for('frontend.summary', local_authority=local_authority, planning_reference=planning_reference))
 
     datafile = "application/data/parameters.json"
     if os.path.isfile(datafile):
@@ -122,16 +124,16 @@ def developer_contributions(local_authority, section106_agreement):
     return render_template('developer-contributions.html',
                            parameters=parameters,
                            local_authority=local_authority,
-                           section106_agreement=section106_agreement)
+                           planning_reference=planning_reference)
 
 
-@frontend.route('/local-authority/<local_authority>/section-106-agreement/<section106_agreement>/summary')
-def summary(local_authority, section106_agreement):
+@frontend.route('/local-authority/<local_authority>/planning-application/<planning_reference>/summary')
+def summary(local_authority, planning_reference):
 
-    agreement = Section106Agreement.query.filter_by(reference=section106_agreement,
+    planning_application = PlanningApplication.query.filter_by(reference=planning_reference,
                                                     local_authority_id=local_authority).one()
 
-    return render_template('summary.html', s106=agreement)
+    return render_template('summary.html', application=planning_application)
 
 
 @frontend.route('/complete')

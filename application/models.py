@@ -14,30 +14,28 @@ class LocalAuthority(db.Model):
     id = db.Column(db.String(64), primary_key=True)
     name = db.Column(db.String(256))
 
-    section106_agreements = db.relationship('Section106Agreement', back_populates='local_authority', lazy=True)
+    planning_applications = db.relationship('PlanningApplication', back_populates='local_authority', lazy=True)
 
 
-class Section106Agreement(db.Model):
+class PlanningApplication(db.Model):
+
+    reference = db.Column(db.String(64), primary_key=True)
+    url = db.Column(db.String)
 
     local_authority_id = db.Column(db.String(64), db.ForeignKey('local_authority.id'), nullable=False, primary_key=True)
-    reference = db.Column(db.String(64), primary_key=True)
+    local_authority = db.relationship('LocalAuthority', back_populates='planning_applications')
 
-    signed_date = db.Column(db.Date)
-
-    planning_application_reference = db.Column(db.String(64))
-    planning_application_url= db.Column(db.String)
-
-    local_authority = db.relationship('LocalAuthority', back_populates='section106_agreements')
-
-    contributions = db.relationship('Contribution', lazy=True)
+    section106_contributions = db.relationship('Contribution', lazy=True)
+    section106_signed_date = db.Column(db.Date)
+    section106_url = db.Column(db.String)
 
 
 class Contribution(db.Model):
 
     __table_args__ = (
         db.ForeignKeyConstraint(
-            ['section106_reference', 'local_authority_id'],
-            ['section106_agreement.reference', 'section106_agreement.local_authority_id'],
+            ['planning_application', 'local_authority_id'],
+            ['planning_application.reference', 'planning_application.local_authority_id'],
         ),
     )
 
@@ -47,5 +45,5 @@ class Contribution(db.Model):
     obligation = db.Column(db.String)
     value = db.Column(db.String)
 
-    section106_reference = db.Column(db.String(64), nullable=False)
+    planning_application = db.Column(db.String(64), nullable=False)
     local_authority_id = db.Column(db.String(64), nullable=False)

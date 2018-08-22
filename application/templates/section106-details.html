@@ -11,7 +11,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <form action="{{ url_for('frontend.s106_ref', local_authority=local_authority )}}" class="form" method="POST">
+    <form action="{{ url_for('frontend.s106_details', local_authority=local_authority, planning_reference=planning_reference)}}" class="form" method="POST">
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
           <h1 class="govuk-fieldset__heading">
