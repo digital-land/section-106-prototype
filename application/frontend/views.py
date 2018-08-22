@@ -59,11 +59,11 @@ def pla_ref(local_authority):
 def s106_details(local_authority, planning_reference):
 
     if request.method == 'POST':
-        reference = request.form['agreement-reference']
+        url = request.form['section106-url']
         signed_date = getDateFromForm(request.form)
         planning_application = PlanningApplication.query.filter_by(local_authority_id=local_authority, reference=planning_reference).one()
         planning_application.section106_signed_date = signed_date
-        planning_application.section106_url = reference
+        planning_application.section106_url = url
         db.session.add(planning_application)
         db.session.commit()
 

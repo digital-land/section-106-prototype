@@ -60,7 +60,7 @@
       <h4 class="govuk-heading-s contribution-entry-heading">Contribution {{ loop.index }}<a class="contribution-summary-change" href="{{ url }}">Change <span class="govuk-visually-hidden">{{ key }}</span></a></h4>
       {{ contributionSummary(
           key="Type",
-          value=contribution.type) }}
+          value=contribution.contribution_type) }}
       {{ contributionSummary(
           key="Category",
           value=contribution.category) }}
