@@ -37,25 +37,28 @@ def getDateFromForm(form):
 @frontend.route('/local-authority/<local_authority>/planning-application', methods=['GET', 'POST'])
 def pla_ref(local_authority):
 
+    local_authority = LocalAuthority.query.get(local_authority)
+
     if request.method == 'POST':
-
         planning_reference = request.form['planning-application-reference']
-        url = request.form['planning-application-url']
-        local_authority = LocalAuthority.query.get(local_authority)
-        application = PlanningApplication(reference=planning_reference, url=url, local_authority=local_authority)
+        if not PlanningApplication.query.filter_by(local_authority=local_authority, reference=planning_reference).first():
+            url = request.form['planning-application-url']
+            application = PlanningApplication(reference=planning_reference, url=url, local_authority=local_authority)
 
-        db.session.add(application)
-        db.session.commit()
+            db.session.add(application)
+            db.session.commit()
 
-        return redirect(url_for('frontend.s106_details',
-                                local_authority=local_authority.id,
-                                planning_reference=planning_reference))
+            return redirect(url_for('frontend.s106_details',
+                                    local_authority=local_authority.id,
+                                    planning_reference=planning_reference))
+        else:
+            return redirect(url_for('frontend.summary', local_authority=local_authority.id, planning_reference=planning_reference))
 
     return render_template('planning-application-details.html',
-                           local_authority=local_authority)
+                           local_authority=local_authority.id)
 
 
-@frontend.route('/local-authority/<local_authority>/planning-application/<planning_reference>', methods=['GET', 'POST'])
+@frontend.route('/local-authority/<local_authority>/planning-application/<path:planning_reference>', methods=['GET', 'POST'])
 def s106_details(local_authority, planning_reference):
 
     if request.method == 'POST':
@@ -96,7 +99,7 @@ def extractAllContributions(form):
     return contributions
 
 
-@frontend.route('/local-authority/<local_authority>/planning-application/<planning_reference>/developer-contributions', methods=['GET', 'POST'])
+@frontend.route('/local-authority/<local_authority>/planning-application/<path:planning_reference>/developer-contributions', methods=['GET', 'POST'])
 def developer_contributions(local_authority, planning_reference):
 
     if request.method == 'POST':
@@ -127,11 +130,11 @@ def developer_contributions(local_authority, planning_reference):
                            planning_reference=planning_reference)
 
 
-@frontend.route('/local-authority/<local_authority>/planning-application/<planning_reference>/summary')
+@frontend.route('/local-authority/<local_authority>/planning-application/<path:planning_reference>/summary')
 def summary(local_authority, planning_reference):
 
     planning_application = PlanningApplication.query.filter_by(reference=planning_reference,
-                                                    local_authority_id=local_authority).one()
+                                                               local_authority_id=local_authority).one()
 
     return render_template('summary.html', application=planning_application)
 
