@@ -148,6 +148,14 @@ def summary(local_authority, planning_reference):
 
     return render_template('summary.html', application=planning_application)
 
+@frontend.route('/local-authority/<local_authority>/planning-application/<path:planning_reference>/view')
+def pla_view(local_authority, planning_reference):
+
+    planning_application = PlanningApplication.query.filter_by(reference=planning_reference,
+                                                               local_authority_id=local_authority).one()
+
+    return render_template('locked-view.html', application=planning_application)
+
 
 @frontend.route('/complete')
 def complete():

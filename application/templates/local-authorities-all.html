@@ -13,7 +13,7 @@
     <ul>
       {% for application in authority.planning_applications %}
       <li>
-        <h4 class="govuk-heading-s">Planning application: {{ application.reference }}</h4>
+        <h4 class="govuk-heading-s">Planning application: <a href="{{ url_for('frontend.pla_view', local_authority=authority.id, planning_reference=application.reference) }}">{{ application.reference }}</a></h4>
         {% if application.section106_contributions|length > 0 %}
         <p class="govuk-body">{{ application.section106_contributions|length }} Contributions recorded</p>
         <table class="govuk-table">
