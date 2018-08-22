@@ -13,7 +13,8 @@ def create_app(config_filename):
   app.config.from_object(config_filename)
   register_errorhandlers(app)
   register_blueprints(app)
-  #register_extensions(app)
+  register_extensions(app)
+  register_commands(app)
   return app
 
 
@@ -34,3 +35,17 @@ def register_blueprints(app):
   from application.frontend.viability.views import viability
   app.register_blueprint(viability)
 
+
+def register_extensions(app):
+
+    from application.extensions import db
+    db.init_app(app)
+
+    from application.models import LocalAuthority
+    from application.extensions import migrate
+    migrate.init_app(app=app)
+
+
+def register_commands(app):
+    from application.commands import load
+    app.cli.add_command(load, name='load')

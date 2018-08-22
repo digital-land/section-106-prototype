@@ -1,0 +1,12 @@
+---
+applications:
+- name: section-106-prototype
+  memory: 1G
+  buildpack: python_buildpack
+  env:
+    FLASK_APP: application.wsgi:app
+    FLASK_CONFIG: config.Config
+    FLASK_ENV: production
+  services:
+   - pg-section-106-prototype
+   - user-provided-config-service

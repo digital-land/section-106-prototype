@@ -11,7 +11,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    <form action="{{ url_for('frontend.s106_ref' )}}" class="form" method="POST">
+    <form action="{{ url_for('frontend.s106_details', local_authority=local_authority, planning_reference=planning_reference)}}" class="form" method="POST">
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
           <h1 class="govuk-fieldset__heading">
@@ -20,11 +20,10 @@
         </legend>
 
       {{ govukInput(
-          id="agreement-reference",
-          name="agreement-reference",
-          label="Section 106 agreement reference",
-          classes="govuk-input--width-10",
-          hint="This should be....",
+          id="section106-url",
+          name="section106-url",
+          label="Section 106 agreement url",
+          hint="The url where the section 106 agreement can be accessed online",
           hintid="agreement-reference-hint") }}
 
       </fieldset>
@@ -42,5 +41,23 @@
     </form>
 
   </div>
+
+    <aside class="app-related-items" role="complementary">
+        <h2 class="govuk-heading-m" id="subsection-title">
+          Other agreements
+        </h2>
+        <nav role="navigation" aria-labelledby="subsection-title">
+          <ul class="govuk-list govuk-!-font-size-16">
+           {% for other_agreement in other_agreements %}
+                <li><a href="{{ url_for('frontend.summary', local_authority=other_agreement.local_authority.id, section106_agreement=other_agreement.reference)}}">
+                    Reference: {{ other_agreement.reference }}
+                </a></li>
+           {% endfor %}
+
+          </ul>
+        </nav>
+      </aside>
+
+    </div>
 </div>
 {% endblock %}

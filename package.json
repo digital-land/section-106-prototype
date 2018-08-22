@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/colmjude/section-106-prototype.git"
+    "url": "git+https://github.com/communitiesuk/section-106-prototype.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/colmjude/section-106-prototype/issues"
+    "url": "https://github.com/communitiesuk/section-106-prototype/issues"
   },
-  "homepage": "https://github.com/colmjude/section-106-prototype#readme",
+  "homepage": "https://github.com/communitiesuk/section-106-prototype#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-clean": "^0.4.0",
