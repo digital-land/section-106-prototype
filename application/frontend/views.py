@@ -4,7 +4,8 @@ from flask import (
     redirect,
     request,
     session,
-    url_for
+    url_for,
+    jsonify
 )
 
 import json
@@ -152,6 +153,15 @@ def summary(local_authority, planning_reference):
 def complete():
     return render_template('complete.html')
 
+@frontend.route('/contribution/<contribution_id>/delete')
+def remove_contribution(contribution_id):
+    c = Contribution.query.get(contribution_id)
+    if c is None:
+        return jsonify(success=False, contribution_id=contribution_id)
+    db.session.delete(c)
+    db.session.commit()
+    
+    return jsonify(success=True, contribution_id=contribution_id)
 
 @frontend.context_processor
 def asset_path_context_processor():

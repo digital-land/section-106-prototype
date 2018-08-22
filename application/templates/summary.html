@@ -58,8 +58,8 @@
 
     <h3 class="govuk-heading-m">Contributions</h3>
     {% for contribution in application.section106_contributions %}
-    <div class="contribution-summary">
-      <h4 class="govuk-heading-s contribution-entry-heading">Contribution {{ loop.index }}<a class="contribution-summary-change" href="{{ url }}">Change <span class="govuk-visually-hidden">{{ key }}</span></a></h4>
+    <div class="contribution-summary" data-contribution-id="{{ contribution.id }}">
+      <h4 class="govuk-heading-s contribution-entry-heading">Contribution {{ loop.index }}<a class="contribution-summary-change contribution-remove-btn" href="{{ url_for('frontend.remove_contribution', contribution_id=contribution.id)}}">Remove <span class="govuk-visually-hidden">{{ key }}</span></a></h4>
       {{ contributionSummary(
           key="Type",
           value=contribution.contribution_type) }}
@@ -80,4 +80,32 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block bodyEnd %}
+<script>
+  const removeBtns = document.querySelectorAll('.contribution-remove-btn');
+
+  Element.prototype.remove = function() {
+      this.parentElement.removeChild(this);
+  };
+
+  function handleRemoveContribution(e) {
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute('href');
+    fetch( href )
+      .then((response) => {
+        response.json().then(function(data) {
+          if( data.success ) {
+            const contributionElement = document.querySelector(`[data-contribution-id='${data.contribution_id}']`);
+            contributionElement.remove();
+          }
+        });
+      });
+  }
+
+  removeBtns.forEach((button) => {
+    button.addEventListener('click', handleRemoveContribution);
+  });
+</script>
 {% endblock %}
