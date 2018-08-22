@@ -2,7 +2,7 @@
   <td colspan="2">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half govuk-!-font-weight-bold">{{ key }}</div>
-      <div class="govuk-grid-column-one-half">{{ value }}</div>
+      <div class="govuk-grid-column-one-half {% if kwargs['isURL'] %}display-url{% endif %}">{{ value }}</div>
     </div>
   </td>
   <td class="change-answer"><a href="{{ url }}">Change <span class="govuk-visually-hidden">{{ key }}</span></a></td>

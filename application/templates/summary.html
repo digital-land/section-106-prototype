@@ -25,9 +25,10 @@
             url="#") }}
 
         {{ checkAnswerRow(
-            key="Agreement ref",
+            key="Agreement url",
             value=application.section106_url,
-            url="#") }}
+            url="#",
+            isURL=True) }}
 
         {{ checkAnswerRow(
             key="Date signed",
@@ -42,7 +43,8 @@
         {{ checkAnswerRow(
             key="Planning application URL",
             value=application.url,
-            url="#") }}
+            url="#",
+            isURL=True) }}
 
       </tbody>
     </table>

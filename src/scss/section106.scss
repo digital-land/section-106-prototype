@@ -71,3 +71,7 @@ table td {
     @include govuk-responsive-margin(3, "bottom");
   }
 }
+
+.display-url {
+    word-break: break-all;
+}
