@@ -31,6 +31,7 @@ def local_authority():
         return redirect(url_for('frontend.pla_ref', local_authority=request.form['local-authority-selector']))
     return render_template('local-authority.html', localauthorities=LocalAuthority.query.all())
 
+
 def getDateFromForm(form):
     return '{}-{}-{}'.format(form['section106-signed-day'], form['section106-signed-month'],
                              form['section106-signed-year'])
@@ -148,6 +149,7 @@ def summary(local_authority, planning_reference):
 
     return render_template('summary.html', application=planning_application)
 
+
 @frontend.route('/local-authority/<local_authority>/planning-application/<path:planning_reference>/view')
 def pla_view(local_authority, planning_reference):
 
@@ -161,6 +163,7 @@ def pla_view(local_authority, planning_reference):
 def complete():
     return render_template('complete.html')
 
+
 @frontend.route('/contribution/<contribution_id>/delete')
 def remove_contribution(contribution_id):
     c = Contribution.query.get(contribution_id)
@@ -171,9 +174,10 @@ def remove_contribution(contribution_id):
     
     return jsonify(success=True, contribution_id=contribution_id)
 
-@frontend.route('/section-106-agreements')
-def section_106_agreements():
-    return render_template('section-106-agreements.html', local_authorities=LocalAuthority.query.all())
+
+@frontend.route('/section-106-contributions')
+def section_106_contributions():
+    return render_template('section-106-contributions.html', local_authorities=LocalAuthority.query.all())
 
 @frontend.context_processor
 def asset_path_context_processor():
