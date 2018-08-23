@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import (
     Blueprint,
     render_template,
@@ -68,7 +70,7 @@ def s106_details(local_authority, planning_reference):
         url = request.form['section106-url']
         signed_date = getDateFromForm(request.form)
         planning_application = PlanningApplication.query.filter_by(local_authority_id=local_authority, reference=planning_reference).one()
-        planning_application.section106_signed_date = signed_date
+        planning_application.section106_signed_date = datetime.strptime(signed_date, '%d-%m-%Y').date()
         planning_application.section106_url = url
         db.session.add(planning_application)
         db.session.commit()
