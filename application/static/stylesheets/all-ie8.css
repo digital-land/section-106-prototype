@@ -3126,3 +3126,18 @@
   cursor: help;
   text-decoration: none;
 }
+
+.list-filter {
+  border-top: 1px solid #bfc1c3;
+  border-bottom: 1px solid #bfc1c3;
+  margin-top: 15px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  margin-bottom: 30px;
+  padding-top: 15px;
+  padding-top: 20px;
+}
+
+.button-filter-table {
+  background: #005ea5;
+}

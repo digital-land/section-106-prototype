@@ -1,6 +1,9 @@
 from flask import (
     Blueprint,
-    render_template
+    redirect,
+    render_template,
+    request,
+    url_for
 )
 
 import json
@@ -12,8 +15,12 @@ from application.models import LocalAuthority
 viability = Blueprint('viability', __name__, template_folder='templates', url_prefix='/viability')
 
 
-@viability.route('/')
+@viability.route('/', methods=['GET', 'POST'])
 def index():
+
+    if request.method == 'POST':
+        return redirect(url_for('viability.local_authorities', local_authority=request.form['local-authority-select']))
+
     return render_template('/viability-index.html', localauthorities=LocalAuthority.query.all())
 
 @viability.route('/local-authority/<local_authority>')
