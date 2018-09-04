@@ -16,6 +16,11 @@ viability = Blueprint('viability', __name__, template_folder='templates', url_pr
 def index():
     return render_template('/viability-index.html', localauthorities=LocalAuthority.query.all())
 
+@viability.route('/local-authority/<local_authority>')
+def local_authorities(local_authority):
+    la = LocalAuthority.query.get(local_authority)
+    return render_template('/la-viability-assessments.html', localauthority=la)
+
 
 # =====================================================
 # Routes for the (incomplete) viability summary journey

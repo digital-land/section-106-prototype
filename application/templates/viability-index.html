@@ -13,7 +13,11 @@
 
       <ul class="govuk-list">
         {% for la in localauthorities %}
-        <li><h3 class="govuk-heading-m">{{ la.name }}</h3></li>
+        <li>
+          <h3 class="govuk-heading-m">
+            <a href="{{ url_for('viability.local_authorities', local_authority=la.id) }}">{{ la.name }}</a>
+          </h3>
+        </li>
         {% endfor %}
       </ul>
     </div>

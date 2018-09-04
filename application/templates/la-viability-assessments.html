@@ -1,0 +1,19 @@
+{% extends "default.html" %}
+
+{% block header %}
+  {{ govukHeader(serviceName="Viability Assessments") }}
+{% endblock %}
+
+{% block beforeContent %}
+ {{ super() }}
+ <a href="{{ url_for('viability.index') }}" class="govuk-back-link">Back to list of local authorities</a>
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <span class="govuk-caption-xl">Viability Assessments</span>
+      <h1 class="govuk-heading-xl">{{ localauthority.name }}</h1>
+    </div>
+  </div>
+{% endblock %}
