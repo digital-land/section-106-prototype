@@ -8,7 +8,14 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">Viability Assessments</h1>
+      <span class="govuk-caption-xl">Viability Assessments</span>
+      <h1 class="govuk-heading-xl">Local Authorities</h1>
+
+      <ul class="govuk-list">
+        {% for la in localauthorities %}
+        <li><h3 class="govuk-heading-m">{{ la.name }}</h3></li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
 {% endblock %}

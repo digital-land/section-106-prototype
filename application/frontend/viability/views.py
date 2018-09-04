@@ -6,13 +6,20 @@ from flask import (
 import json
 import os.path
 
+from application.extensions import db
+from application.models import LocalAuthority
+
 viability = Blueprint('viability', __name__, template_folder='templates', url_prefix='/viability')
 
 
 @viability.route('/')
 def index():
-    return render_template('/viability-index.html')
+    return render_template('/viability-index.html', localauthorities=LocalAuthority.query.all())
 
+
+# =====================================================
+# Routes for the (incomplete) viability summary journey
+# =====================================================
 
 @viability.route('/create-summary')
 def start():
