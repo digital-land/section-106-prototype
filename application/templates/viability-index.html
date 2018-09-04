@@ -1,0 +1,67 @@
+{% extends "default.html" %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/static/stylesheets/govuk/accessible-autocomplete.min.css" />
+{% endblock %}
+
+{% block header %}
+  {{ govukHeader(serviceName="Viability Assessments") }}
+{% endblock %}
+
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <span class="govuk-caption-xl">Viability Assessments</span>
+      <h1 class="govuk-heading-xl">Local Authorities</h1>
+    </div>
+  </div>
+
+  <div class="list-filter">
+    <h3 class="govuk-heading-s govuk-visually-hidden">Search for local authority</h3>
+    <div class="govuk-grid-row">
+      <form class="govuk-form pub-search-form govuk-grid-column-one-half" action="{{ url_for('viability.index') }}" method="post">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-!-font-weight-bold" for="local-authority-select">Search for local authority</label>
+          <span class="govuk-hint">E.g. East Riding of Yorkshire Council</span>
+          <select class="govuk-select" name="local-authority-select" id="local-authority-select">
+            <option value="">Select local authority</option>
+            {% for la in localauthorities %}
+            <option value="{{ la.id }}">{{ la.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <input type="submit" class="govuk-button button-filter-table" value="View viability assessments" />
+      </form>
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <ul class="govuk-list">
+        {% for la in localauthorities %}
+        <li>
+          <h3 class="govuk-heading-m">
+            <a href="{{ url_for('viability.local_authorities', local_authority=la.id) }}">{{ la.name }}</a>
+          </h3>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}
+
+{% block bodyEnd %}
+<script src="/static/javascripts/accessible-autocomplete.min.js"></script>
+<script type="text/javascript">
+  ;(function($, window) {
+    $(function() {
+      accessibleAutocomplete.enhanceSelectElement({
+        defaultValue: '',
+        selectElement: document.querySelector('#local-authority-select')
+      })
+    });
+  }).call(this, jQuery, window);
+</script>
+{% endblock %}
