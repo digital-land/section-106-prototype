@@ -1,5 +1,10 @@
 {% extends "default.html" %}
 
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/static/stylesheets/govuk/accessible-autocomplete.min.css" />
+{% endblock %}
+
 {% block header %}
   {{ govukHeader(serviceName="Viability Assessments") }}
 {% endblock %}
@@ -45,4 +50,18 @@
       </ul>
     </div>
   </div>
+{% endblock %}
+
+{% block bodyEnd %}
+<script src="/static/javascripts/accessible-autocomplete.min.js"></script>
+<script type="text/javascript">
+  ;(function($, window) {
+    $(function() {
+      accessibleAutocomplete.enhanceSelectElement({
+        defaultValue: '',
+        selectElement: document.querySelector('#local-authority-select')
+      })
+    });
+  }).call(this, jQuery, window);
+</script>
 {% endblock %}
