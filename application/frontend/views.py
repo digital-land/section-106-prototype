@@ -21,6 +21,10 @@ frontend = Blueprint('frontend', __name__, template_folder='templates')
 
 
 @frontend.route('/')
+def index():
+    return render_template('index.html')
+
+@frontend.route('/create-section106')
 def start():
     session['section106'] = {}
     return render_template('start-page.html')
