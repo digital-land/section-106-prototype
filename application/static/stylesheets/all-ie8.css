@@ -3044,3 +3044,85 @@
   width: 100% !important;
   width: 25% !important;
 }
+
+/* dl */
+.definition-inline:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.definition-inline dt {
+  float: left;
+  margin-right: 5px;
+  clear: left;
+  font-weight: bold;
+}
+
+.definition-inline dt:after {
+  content: ':';
+}
+
+.definition-inline dd {
+  float: left;
+  margin-left: 15px;
+  margin-left: 15px;
+}
+
+.definition-list-spread dt {
+  margin-right: 20px;
+  margin-right: 30px;
+}
+
+.definition-inline-close dd {
+  margin-left: 5px;
+  margin-left: 5px;
+}
+
+.attachment {
+  position: relative;
+  margin: 30px 0;
+  padding: 15px 0 0 129px;
+}
+
+.attachment:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.attachment .attachment-thumb {
+  position: relative;
+  float: left;
+  margin-top: 5px;
+  margin-left: -124px;
+  padding-bottom: 15px;
+}
+
+.attachment .attachment-thumb img {
+  display: block;
+  width: 99px;
+  height: 140px;
+  background: #fff;
+  outline: 5px solid rgba(11, 12, 12, 0.1);
+  -webkit-box-shadow: 0 2px 2px rgba(11, 12, 12, 0.4);
+  -moz-box-shadow: 0 2px 2px rgba(11, 12, 12, 0.4);
+  box-shadow: 0 2px 2px rgba(11, 12, 12, 0.4);
+}
+
+.attachment .attachment-details .title {
+  margin: 0;
+}
+
+.attachment .attachment-details .document-metadata {
+  margin: 10px 0;
+}
+
+.attachment .attachment-details .content-metadata {
+  float: left;
+}
+
+.attachment abbr {
+  cursor: help;
+  text-decoration: none;
+}
