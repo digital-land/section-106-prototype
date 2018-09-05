@@ -1,3 +1,6 @@
+import json
+import os.path
+
 from flask import (
     Blueprint,
     redirect,
@@ -6,42 +9,29 @@ from flask import (
     url_for
 )
 
-import json
-import os.path
-
-from application.extensions import db
 from application.models import LocalAuthority
 
 viability = Blueprint('viability', __name__, template_folder='templates', url_prefix='/viability')
 
 
-@viability.route('/', methods=['GET', 'POST'])
+@viability.route('/')
 def index():
-
-    if request.method == 'POST':
-        return redirect(url_for('viability.local_authorities', local_authority=request.form['local-authority-select']))
-
     return render_template('/viability-index.html', localauthorities=LocalAuthority.query.all())
 
+
+@viability.route('/local-authority', methods=['GET', 'POST'])
+def local_authority():
+
+    if request.method == 'POST':
+        return redirect(url_for('viability.local_authority_assessments', local_authority=request.form['local-authority-select']))
+
+    return render_template('/viability-local-authority.html', localauthorities=LocalAuthority.query.all())
+
+
 @viability.route('/local-authority/<local_authority>')
-def local_authorities(local_authority):
+def local_authority_assessments(local_authority):
     la = LocalAuthority.query.get(local_authority)
-
-    if local_authority == 'local-authority-eng:HNS':
-        viability = 'https://planning.hounslow.gov.uk/planning_summary.aspx?strWeekListType=SRCH&strAltNo=00297/R/P15&strLimit=50'
-
-        viability = {
-            'date': '10/08/2018',
-            'id': 'P/2018/2168',
-            'planning_application': '00297/R/P15',
-            'planning_application_url': 'https://planning.hounslow.gov.uk/planning_summary.aspx?strWeekListType=SRCH&strAltNo=00297/R/P15&strLimit=50',
-            'img_src': '/static/images/hounslow-viability.png',
-            'document_url': 'https://planning2.hounslow.gov.uk/NPSPublicDocs/00607735.pdf'
-        }
-
-    else:
-        viability = None
-    return render_template('/la-viability-assessments.html', localauthority=la, viability=viability)
+    return render_template('/la-viability-assessments.html', localauthority=la)
 
 
 # =====================================================
@@ -54,7 +44,7 @@ def start():
 
 
 @viability.route('/create-summary/select-local-authority', methods=['GET', 'POST'])
-def local_authority():
+def create_summary():
     datafile = "application/data/localauthorities.json"
     if os.path.isfile(datafile):
         with open(datafile) as data_file:

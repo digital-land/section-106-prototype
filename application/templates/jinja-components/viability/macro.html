@@ -1,0 +1,27 @@
+{% macro renderLinkToViabilityDoc(va, show_la=False) %}
+  <li>
+    {% if show_la %}
+        <h2>{{ va.planning_application.local_authority.name }}</h2>
+    {% endif %}
+    <section class="attachment embedded" id="{{ va.id }}">
+      <div class="attachment-thumb">
+          <a aria-hidden="true" class="thumbnail" href="{{ va.url }}"><img alt="" src="/static/images/viability-pdf.png"></a>
+      </div>
+      <div class="attachment-details">
+        <h2 class="title govuk-heading-m"><a href="{{ va.url }}">Viability Assessment {{ va.id }} - {{ va.date }}</a></h2>
+        <p class="govuk-body-s document-metadata">
+            <span class="type"><abbr title="Portable Document Format">PDF</abbr></span>, <span class="file-size">185KB</span>, <span class="page-length">6 pages</span>
+        </p>
+
+        <div class="content-metadata">
+          <dl class="definition-inline definition-inline-close">
+            <dt>Planning application ref</dt>
+            <dd><a href="{{ va.planning_application.url }}">{{ va.planning_application.reference }}</a></dd>
+            <dt>Report date</dt>
+            <dd>{{ va.date }}</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </li>
+{% endmacro %}

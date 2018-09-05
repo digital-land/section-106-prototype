@@ -1,12 +1,14 @@
 {% extends "default.html" %}
 
+{% from "jinja-components/viability/macro.html" import renderLinkToViabilityDoc %}
+
 {% block header %}
   {{ govukHeader(serviceName="Viability Assessments") }}
 {% endblock %}
 
 {% block beforeContent %}
  {{ super() }}
- <a href="{{ url_for('viability.index') }}" class="govuk-back-link">Back to list of local authorities</a>
+ <a href="{{ url_for('viability.local_authority') }}" class="govuk-back-link">Back to list of local authorities</a>
 {% endblock %}
 
 {% block content %}
@@ -25,37 +27,18 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-  
-      {% macro renderLinkToViabilityDoc(va) %}
-      <li>
-        <section class="attachment embedded" id="{{ va.id }}">
-          <div class="attachment-thumb">
-              <a aria-hidden="true" class="thumbnail" href="{% if localauthority.id == 'local-authority-eng:HNS' %}{{ va.document_url }}{%  else %}#{% endif %}"><img alt="" src="{{ va.img_src }}"></a>
-          </div>
-          <div class="attachment-details">
-            <h2 class="title govuk-heading-m"><a href="{% if localauthority.id == 'local-authority-eng:HNS' %}{{ va.document_url }}{%  else %}#{% endif %}">Viability Assessment {{ va.id }} - {{ va.date }}</a></h2>
-            <p class="govuk-body-s document-metadata">
-                <span class="type"><abbr title="Portable Document Format">PDF</abbr></span>, <span class="file-size">185KB</span>, <span class="page-length">6 pages</span>
-            </p>
-
-            <div class="content-metadata">
-              <dl class="definition-inline definition-inline-close">
-                <dt>Planning application ref</dt>
-                <dd><a href="{% if localauthority.id == 'local-authority-eng:HNS' %}{{ va.planning_application_url }}{%  else %}#{% endif %}">{{ va.planning_application }}</a></dd>
-                <dt>Report date</dt>
-                <dd>{{ va.date }}</dd>
-              </dl>
-            </div>
-          </div>
-        </section>
-      </li>
-      {% endmacro %}
 
       <h2 class="govuk-heading-m govuk-!-font-size-27 govuk-!-font-weight-bold govuk-!-margin-top-6">Documents</h2>
       <ul class="govuk-list">
 
-      {% if viability %}
-          {{ renderLinkToViabilityDoc(viability) }}
+      {% if localauthority.planning_applications %}
+          {% for pa in localauthority.planning_applications %}
+              {% if pa.viability_assessments %}
+                  {% for va in pa.viability_assessments %}
+                    {{ renderLinkToViabilityDoc(va, show_la=True) }}
+                  {% endfor %}
+              {% endif %}
+          {% endfor %}
       {% else %}
           {%- set va1 = {
                   'date' : '20-09-2017',
@@ -66,17 +49,15 @@
            -%}
 
           {%- set va2 = {
-                              'date' : '03-07-2015',
-                              'id' : 'ABC',
-                              'planning_application': '1538/REF/623',
-                              'img_src': 'https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/736136/thumbnail_DSU-Aug-18.pdf.png'
-                           }-%}
+                  'date' : '03-07-2015',
+                  'id' : 'ABC',
+                  'planning_application': '1538/REF/623',
+                  'img_src': 'https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/736136/thumbnail_DSU-Aug-18.pdf.png'
+          }-%}
 
-        {{ renderLinkToViabilityDoc(va1) }}
-        {{ renderLinkToViabilityDoc(va2) }}
+          {{ renderLinkToViabilityDoc(va1) }}
+          {{ renderLinkToViabilityDoc(va2) }}
       {% endif %}
-
-
 
       </ul>
     </div>

@@ -29,7 +29,7 @@ class PlanningApplication(db.Model):
     section106_signed_date = db.Column(db.Date)
     section106_url = db.Column(db.String)
 
-    viability_assessment = db.relationship('ViabilityAssessment', lazy=True)
+    viability_assessments = db.relationship('ViabilityAssessment', lazy=True, back_populates='planning_application')
 
 
 class Contribution(db.Model):
@@ -55,7 +55,7 @@ class ViabilityAssessment(db.Model):
 
     __table_args__ = (
         db.ForeignKeyConstraint(
-            ['planning_application', 'local_authority_id'],
+            ['planning_application_id', 'local_authority_id'],
             ['planning_application.reference', 'planning_application.local_authority_id'],
         ),
     )
@@ -64,5 +64,6 @@ class ViabilityAssessment(db.Model):
     url = db.Column(db.String)
     date = db.Column(db.Date)
 
-    planning_application = db.Column(db.String(64), nullable=False)
+    planning_application_id = db.Column(db.String(64), nullable=False)
+    planning_application = db.relationship('PlanningApplication')
     local_authority_id = db.Column(db.String(64), nullable=False)
