@@ -63,3 +63,13 @@ def load_viability():
                 db.session.commit()
             else:
                 print('Viability assessment', row['id'], 'already loaded')
+
+
+@click.command()
+@with_appcontext
+def clear_viability():
+    from application.extensions import db
+    from application.models import PlanningApplication, ViabilityAssessment
+    db.session.query(ViabilityAssessment).delete()
+    db.session.query(PlanningApplication).delete()
+    db.session.commit()

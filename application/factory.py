@@ -47,6 +47,7 @@ def register_extensions(app):
 
 
 def register_commands(app):
-    from application.commands import load, load_viability
+    from application.commands import load, load_viability, clear_viability
     app.cli.add_command(load, name='load')
     app.cli.add_command(load_viability, name='load-viability')
+    app.cli.add_command(clear_viability, name='clear-viability')
