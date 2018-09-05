@@ -73,5 +73,8 @@ def clear_viability():
     from application.extensions import db
     from application.models import PlanningApplication, ViabilityAssessment
     db.session.query(ViabilityAssessment).delete()
-    db.session.query(PlanningApplication).delete()
+    planning_applications = PlanningApplication.query.all()
+    for pa in planning_applications:
+        if not pa.section106_contributions:
+            db.session.delete(pa)
     db.session.commit()
