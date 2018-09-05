@@ -47,6 +47,7 @@ def load_viability():
                 pa = PlanningApplication(**planning_row)
                 db.session.add(pa)
                 db.session.commit()
+                print('Loaded planning', pa.reference, 'for', pa.local_authority_id)
             else:
                 print('Planning application', row['reference'], 'already loaded')
 
@@ -61,6 +62,7 @@ def load_viability():
                 va = ViabilityAssessment(**viability_row)
                 db.session.add(va)
                 db.session.commit()
+                print('Loaded viability', va.id, 'for', va.local_authority_id)
             else:
                 print('Viability assessment', row['id'], 'already loaded')
 
