@@ -40,6 +40,8 @@ class PlanningApplication(db.Model):
 
     viability_assessments = db.relationship('ViabilityAssessment', lazy=True, back_populates='planning_application')
 
+    address = db.Column(db.String)
+
 
 class Contribution(db.Model):
 
