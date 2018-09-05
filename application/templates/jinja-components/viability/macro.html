@@ -1,8 +1,5 @@
-{% macro renderLinkToViabilityDoc(va, show_la=False) %}
+{% macro renderLinkToViabilityDoc(va) %}
   <li>
-    {% if show_la %}
-        <h2>{{ va.planning_application.local_authority.name }}</h2>
-    {% endif %}
     <section class="attachment embedded" id="{{ va.id }}">
       <div class="attachment-thumb">
           <a aria-hidden="true" class="thumbnail" href="{{ va.url }}"><img alt="" src="/static/images/viability-pdf.png"></a>

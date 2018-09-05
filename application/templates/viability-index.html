@@ -23,9 +23,12 @@
     <div class="govuk-grid-column-two-thirds">
       <ul class="govuk-list">
         {% for la in localauthorities %}
+            {% if la.planning_applications %}
+                <h2>{{ la.name }}</h2>
+            {% endif %}
             {% for pa in la.planning_applications %}
                  {% for va in pa.viability_assessments %}
-                    {{ renderLinkToViabilityDoc(va, show_la=True) }}
+                    {{ renderLinkToViabilityDoc(va) }}
                  {% endfor %}
             {% endfor %}
         {% endfor %}
