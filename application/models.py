@@ -16,6 +16,15 @@ class LocalAuthority(db.Model):
 
     planning_applications = db.relationship('PlanningApplication', back_populates='local_authority', lazy=True)
 
+    def has_viability_assessments(self):
+        if self.planning_applications:
+            for p in self.planning_applications:
+                if p.viability_assessments:
+                    return True
+            else:
+                return False
+        else:
+            return False
 
 class PlanningApplication(db.Model):
 
