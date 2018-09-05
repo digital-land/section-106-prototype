@@ -35,7 +35,7 @@
           {% for pa in localauthority.planning_applications %}
               {% if pa.viability_assessments %}
                   {% for va in pa.viability_assessments %}
-                    {{ renderLinkToViabilityDoc(va, show_la=True) }}
+                    {{ renderLinkToViabilityDoc(va) }}
                   {% endfor %}
               {% endif %}
           {% endfor %}
