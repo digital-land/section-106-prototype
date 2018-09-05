@@ -78,3 +78,7 @@ class ViabilityAssessment(db.Model):
     planning_application_id = db.Column(db.String(64), nullable=False)
     planning_application = db.relationship('PlanningApplication')
     local_authority_id = db.Column(db.String(64), nullable=False)
+
+    gross_development_value = db.Column(db.Integer)
+    benchmark_land_value = db.Column(db.Integer)
+    total_contribution = db.Column(db.Integer)
