@@ -1,3 +1,15 @@
+.data-item {
+  display: block;
+  line-height: 1;
+  font-family: "nta", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.data-item a {
+  color: govuk-colour(black);
+}
+
 .missing-data {
   color: govuk-colour(grey-2);
 }

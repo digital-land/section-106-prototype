@@ -5402,6 +5402,18 @@
   background: #005ea5;
 }
 
+.data-item {
+  display: block;
+  line-height: 1;
+  font-family: "nta", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.data-item a {
+  color: #0b0c0c;
+}
+
 .missing-data {
   color: #bfc1c3;
 }

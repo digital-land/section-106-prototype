@@ -1,6 +1,7 @@
 {% extends "default.html" %}
 
 {% from "jinja-components/viability/macro.html" import renderLinkToViabilityDoc %}
+{% from "jinja-components/data-element/macro.html" import govukDataItem %}
 
 {% block head %}
 {{ super() }}
@@ -20,19 +21,41 @@
   </div>
 
   <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-quarter">
+      {{ govukDataItem("5", "Public Viability Assessments") }}
+    </div>
+    <div class="govuk-grid-column-one-quarter">
+      <!-- counting how many las have published VAs
+          Had to follow https://stackoverflow.com/questions/18755046/jinja2-nested-loop-counter
+          to bypass variable scoping in jinja loops -->
+      {% set cnt = [0] -%}
+      {% for la in localauthorities %}
+        {% if la.has_viability_assessments() %}
+          {% if cnt.append(cnt.pop() + 1) %}{% endif %}
+        {% endif %}
+      {% endfor %}
+      {{ govukDataItem(cnt[0], "Local Authorities") }}
+    </div>
+  </div>
+
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+  <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <ul class="govuk-list">
-        {% for la in localauthorities %}
-            {% if la.has_viability_assessments() %}
-                <h2>{{ la.name }}</h2>
-            {% endif %}
-            {% for pa in la.planning_applications %}
-                 {% for va in pa.viability_assessments %}
-                    {{ renderLinkToViabilityDoc(va) }}
-                 {% endfor %}
-            {% endfor %}
+      <p class="govuk-body">All published viability assessments</p>
+
+      {% for la in localauthorities %}
+      {% if la.has_viability_assessments() %}
+      <h2 class="govuk-heading-l">{{ la.name }}</h2>
+      {% endif %}
+      <ul class="govuk-list">   
+        {% for pa in la.planning_applications %}
+             {% for va in pa.viability_assessments %}
+                {{ renderLinkToViabilityDoc(va) }}
+             {% endfor %}
         {% endfor %}
       </ul>
+      {% endfor %}
     </div>
   </div>
 {% endblock %}
