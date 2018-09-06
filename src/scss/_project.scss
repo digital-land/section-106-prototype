@@ -1,0 +1,47 @@
+.missing-data {
+  color: govuk-colour(grey-2);
+}
+
+// required for the Autocomplete if using
+// Govuk design system
+// --------------------------------------
+.autocomplete__menu {
+  font-family: "nta", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+}
+
+$button-text-colour: #fff;
+$button-colour:  govuk-colour(blue);
+$button-hover-colour: darken($button-colour, 5%);
+$button-shadow-colour: darken($button-colour, 15%);
+$button-shadow-size: $govuk-border-width-form-element;
+.button-filter-table {
+  color: $button-text-colour;
+  background-color: $button-colour;
+  box-shadow: 0 $button-shadow-size 0 $button-shadow-colour;
+
+  &:link,
+  &:visited,
+  &:active,
+  &:hover {
+    color: $button-text-colour;
+    text-decoration: none;
+  }
+  &:hover,
+  &:focus {
+    background-color: $button-hover-colour;
+  }
+}
+
+.js-enabled {
+  .button-autocomplete-action {
+    display: none;
+  }
+  .autocomplete-used {
+    .button-autocomplete-action {
+      display: inline-block;
+    }
+  }
+}
