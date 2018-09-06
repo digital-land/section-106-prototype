@@ -9,14 +9,17 @@ from flask import (
     url_for
 )
 
-from application.models import LocalAuthority
+from application.models import LocalAuthority, ViabilityAssessment
 
 viability = Blueprint('viability', __name__, template_folder='templates', url_prefix='/viability')
 
 
 @viability.route('/')
 def index():
-    return render_template('/viability-index.html', localauthorities=LocalAuthority.query.all())
+    no_of_viability_assessments = len(ViabilityAssessment.query.all())
+    return render_template('/viability-index.html',
+                           no_of_viability_assessments=no_of_viability_assessments,
+                           localauthorities=LocalAuthority.query.all())
 
 
 @viability.route('/local-authority', methods=['GET', 'POST'])
