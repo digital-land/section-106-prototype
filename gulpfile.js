@@ -34,6 +34,8 @@ gulp.task("watch", ["scss"], function () {
 gulp.task('copy', function() {
   gulp.src('src/govuk-frontend/assets/**/*')
     .pipe(gulp.dest(config.assetPath));
+  gulp.src('src/govuk/stylesheets/*.css')
+    .pipe(gulp.dest(config.destPath + "/govuk"));
 });
 
 // Set watch as default task
