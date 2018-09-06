@@ -5406,6 +5406,13 @@
   color: #bfc1c3;
 }
 
+.autocomplete__menu {
+  font-family: "nta", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+}
+
 .check-your-answers .change-answer {
   text-align: right;
   padding-right: 0;

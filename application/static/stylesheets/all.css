@@ -5405,3 +5405,10 @@
 .missing-data {
   color: #bfc1c3;
 }
+
+.autocomplete__menu {
+  font-family: "nta", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+}
