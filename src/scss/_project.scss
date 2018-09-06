@@ -1,3 +1,9 @@
+.govuk-typography {
+  font-family: "nta", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .data-item {
   display: block;
   line-height: 1;
@@ -22,6 +28,25 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+}
+
+.list-item--dashed {
+  margin-left: 25px;
+  padding-right: 25px;
+  &:before {
+    content: "— ";
+    margin-left: -25px;
+    padding-right: 5px;
+  }
+}
+
+.related-content-section {
+  border-top: 2px solid govuk-colour(blue);
+  @include govuk-responsive-padding(3, "top");
+}
+
+.guidance-content {
+  @include govuk-responsive-margin(9, "top");
 }
 
 $button-text-colour: #fff;

@@ -33,6 +33,9 @@ def local_authority_assessments(local_authority):
     la = LocalAuthority.query.get(local_authority)
     return render_template('/la-viability-assessments.html', localauthority=la)
 
+@viability.route('/guidance')
+def guidance():
+    return render_template('/viability-guidance.html')
 
 # =====================================================
 # Routes for the (incomplete) viability summary journey
