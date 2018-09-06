@@ -15,33 +15,33 @@
             <dt>Planning application ref</dt>
             <dd><a href="{{ va.planning_application.url }}">{{ va.planning_application.reference }}</a></dd>
             <dt>Report date</dt>
-            <dd>{{ va.date }}</dd>
+            <dd><time datetime="{{ va.date }}" pubdate>{{ va.date }}</time></dd>
             <dt>Gross development value</dt>
             <dd>
-                {% if va.gross_development_value or va.gross_development_value == 0%}
+                {%- if va.gross_development_value or va.gross_development_value == 0 -%}
                     {{ "£{:,}".format(va.gross_development_value) }}
-                {% else %}
+                {%- else -%}
                     Unknown
-                {% endif %}
+                {%- endif -%}
             </dd>
             <dt>Benchmark land value</dt>
             <dd>
-                {% if va.benchmark_land_value or va.benchmark_land_value == 0%}
+                {%- if va.benchmark_land_value or va.benchmark_land_value == 0 -%}
                     {{ "£{:,}".format(va.benchmark_land_value) }}
-                {% else %}
+                {%- else -%}
                     Unknown
-                {% endif %}
+                {%- endif -%}
             </dd>
             <dt>Total contribution</dt>
             <dd>
-                {% if va.total_contribution or va.total_contribution == 0 %}
+                {%- if va.total_contribution or va.total_contribution == 0 -%}
                     {{ "£{:,}".format(va.total_contribution) }}
-                {% else %}
+                {%- else -%}
                     Unknown
-                {% endif %}
+                {%- endif -%}
             </dd>
-            <dt>Address</dt>
-            <dd>{{ va.planning_application.address }}</dd>
+            <dt>Site</dt>
+            <dd class="address"><p translate="no">{{ va.planning_application.address }}</p></dd>
           </dl>
         </div>
       </div>

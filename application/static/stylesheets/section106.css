@@ -5364,6 +5364,14 @@
   text-decoration: none;
 }
 
+.attachment .address {
+  margin-left: 0;
+}
+
+.attachment .address p {
+  margin: 0;
+}
+
 .list-filter {
   border-top: 1px solid #bfc1c3;
   border-bottom: 1px solid #bfc1c3;
