@@ -17,9 +17,10 @@ viability = Blueprint('viability', __name__, template_folder='templates', url_pr
 @viability.route('/')
 def index():
     no_of_viability_assessments = len(ViabilityAssessment.query.all())
+    local_authorities = [la for la in LocalAuthority.query.all() if la.has_viability_assessments()]
     return render_template('/viability-index.html',
                            no_of_viability_assessments=no_of_viability_assessments,
-                           localauthorities=LocalAuthority.query.all())
+                           local_authorities=local_authorities)
 
 
 @viability.route('/local-authority', methods=['GET', 'POST'])

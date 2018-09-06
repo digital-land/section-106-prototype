@@ -25,16 +25,7 @@
       {{ govukDataItem(no_of_viability_assessments, "Public Viability Assessments") }}
     </div>
     <div class="govuk-grid-column-one-quarter">
-      <!-- counting how many las have published VAs
-          Had to follow https://stackoverflow.com/questions/18755046/jinja2-nested-loop-counter
-          to bypass variable scoping in jinja loops -->
-      {% set cnt = [0] -%}
-      {% for la in localauthorities %}
-        {% if la.has_viability_assessments() %}
-          {% if cnt.append(cnt.pop() + 1) %}{% endif %}
-        {% endif %}
-      {% endfor %}
-      {{ govukDataItem(cnt[0], "Local Authorities") }}
+      {{ govukDataItem(local_authorities|count, "Local Authorities") }}
     </div>
   </div>
 
