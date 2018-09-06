@@ -5364,6 +5364,14 @@
   text-decoration: none;
 }
 
+.attachment .address {
+  margin-left: 0;
+}
+
+.attachment .address p {
+  margin: 0;
+}
+
 .list-filter {
   border-top: 1px solid #bfc1c3;
   border-bottom: 1px solid #bfc1c3;
@@ -5392,4 +5400,38 @@
 
 .button-filter-table {
   background: #005ea5;
+}
+
+.missing-data {
+  color: #bfc1c3;
+}
+
+.autocomplete__menu {
+  font-family: "nta", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+}
+
+.button-filter-table {
+  color: #fff;
+  background-color: #005ea5;
+  box-shadow: 0 2px 0 #003259;
+}
+
+.button-filter-table:link, .button-filter-table:visited, .button-filter-table:active, .button-filter-table:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.button-filter-table:hover, .button-filter-table:focus {
+  background-color: #004f8c;
+}
+
+.js-enabled .button-autocomplete-action {
+  display: none;
+}
+
+.js-enabled .autocomplete-used .button-autocomplete-action {
+  display: inline-block;
 }

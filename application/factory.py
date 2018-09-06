@@ -15,6 +15,7 @@ def create_app(config_filename):
   register_blueprints(app)
   register_extensions(app)
   register_commands(app)
+  register_filters(app)
   return app
 
 
@@ -51,3 +52,11 @@ def register_commands(app):
     app.cli.add_command(load, name='load')
     app.cli.add_command(load_viability, name='load-viability')
     app.cli.add_command(clear_viability, name='clear-viability')
+
+def register_filters(app):
+    from application.filters import readable_number_filter
+    app.jinja_env.filters['readable_number'] = readable_number_filter
+
+    from application.filters import monetary_filter
+    app.jinja_env.filters['monetary'] = monetary_filter
+    

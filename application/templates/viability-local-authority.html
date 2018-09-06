@@ -9,6 +9,20 @@
   {{ govukHeader(serviceName="Viability Assessments") }}
 {% endblock %}
 
+{% block beforeContent %}
+{{ super() }}
+{{ govukBreadcrumbs({
+  "items": [
+    {
+      "text": "Home",
+      "href": url_for('viability.index')
+    },
+    {
+      "text": "Local Authorities"
+    }
+  ]
+}) }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
@@ -21,7 +35,7 @@
   <div class="list-filter">
     <h3 class="govuk-heading-s govuk-visually-hidden">Search for local authority</h3>
     <div class="govuk-grid-row">
-      <form class="govuk-form pub-search-form govuk-grid-column-one-half" action="{{ url_for('viability.local_authority') }}" method="post">
+      <form class="govuk-form la-search-form govuk-grid-column-one-half" action="{{ url_for('viability.local_authority') }}" method="post">
         <div class="govuk-form-group">
           <label class="govuk-label govuk-!-font-weight-bold" for="local-authority-select">Search for local authority</label>
           <span class="govuk-hint">E.g. East Riding of Yorkshire Council</span>
@@ -32,7 +46,7 @@
             {% endfor %}
           </select>
         </div>
-        <input type="submit" class="govuk-button button-filter-table" value="View viability assessments" />
+        <input type="submit" class="govuk-button button-autocomplete-action button-filter-table" value="View viability assessments" />
       </form>
     </div>
   </div>
@@ -57,9 +71,18 @@
 <script type="text/javascript">
   ;(function($, window) {
     $(function() {
+      const form = document.querySelector('.la-search-form');
+      const laSelect = document.querySelector('#local-authority-select');
       accessibleAutocomplete.enhanceSelectElement({
         defaultValue: '',
-        selectElement: document.querySelector('#local-authority-select')
+        selectElement: document.querySelector('#local-authority-select'),
+        onConfirm: (val) => {
+          // replicates plugin onConfirm function
+          const requestedOption = [].filter.call(laSelect.options, option => (option.textContent || option.innerText) === val) [0];
+          if (requestedOption) { requestedOption.selected = true }
+          // the new bit
+          form.classList.add("autocomplete-used");
+        }
       })
     });
   }).call(this, jQuery, window);
