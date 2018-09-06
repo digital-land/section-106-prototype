@@ -66,6 +66,27 @@ def load_viability():
             else:
                 print('Viability assessment', row['id'], 'already loaded')
 
+@click.command()
+@with_appcontext
+def load_contributions():
+    from application.extensions import db
+    from application.models import Contribution
+
+    path = os.path.dirname(os.path.realpath(__file__))
+    contribution_csv = os.path.join(path, 'data', 'section106_contributions.csv')
+
+    with open(contribution_csv) as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            # not sure what to do about duplicates
+            contribution_row = {}
+            for k, v in row.items():
+                if v:
+                    contribution_row[k] = v
+            ctrb = Contribution(**contribution_row)
+            db.session.add(ctrb)
+            db.session.commit()
+            print('Loaded contribution', ctrb.id, 'for', ctrb.local_authority_id, ctrb.planning_application)
 
 @click.command()
 @with_appcontext

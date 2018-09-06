@@ -48,10 +48,11 @@ def register_extensions(app):
 
 
 def register_commands(app):
-    from application.commands import load, load_viability, clear_viability
+    from application.commands import load, load_viability, clear_viability, load_contributions
     app.cli.add_command(load, name='load')
     app.cli.add_command(load_viability, name='load-viability')
     app.cli.add_command(clear_viability, name='clear-viability')
+    app.cli.add_command(load_contributions, name='load-contribution')
 
 def register_filters(app):
     from application.filters import readable_number_filter
