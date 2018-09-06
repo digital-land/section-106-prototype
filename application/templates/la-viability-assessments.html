@@ -7,8 +7,22 @@
 {% endblock %}
 
 {% block beforeContent %}
- {{ super() }}
- <a href="{{ url_for('viability.local_authority') }}" class="govuk-back-link">Back to list of local authorities</a>
+  {{ super() }}
+  {{ govukBreadcrumbs({
+    "items": [
+      {
+        "text": "Home",
+        "href": url_for('viability.index')
+      },
+      {
+        "text": "Local Authorities",
+        "href": url_for('viability.local_authority')
+      },
+      {
+        "text": localauthority.name
+      }
+    ]
+  }) }}
 {% endblock %}
 
 {% block content %}

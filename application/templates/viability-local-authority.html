@@ -9,6 +9,20 @@
   {{ govukHeader(serviceName="Viability Assessments") }}
 {% endblock %}
 
+{% block beforeContent %}
+{{ super() }}
+{{ govukBreadcrumbs({
+  "items": [
+    {
+      "text": "Home",
+      "href": url_for('viability.index')
+    },
+    {
+      "text": "Local Authorities"
+    }
+  ]
+}) }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
