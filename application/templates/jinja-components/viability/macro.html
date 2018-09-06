@@ -19,7 +19,7 @@
             <dt>Gross development value</dt>
             <dd>
                 {%- if va.gross_development_value or va.gross_development_value == 0 -%}
-                    {{ "£{:,}".format(va.gross_development_value) }}
+                    {{ va.gross_development_value|monetary }}
                 {%- else -%}
                     Unknown
                 {%- endif -%}
@@ -27,7 +27,7 @@
             <dt>Benchmark land value</dt>
             <dd>
                 {%- if va.benchmark_land_value or va.benchmark_land_value == 0 -%}
-                    {{ "£{:,}".format(va.benchmark_land_value) }}
+                    {{ va.benchmark_land_value|monetary }}
                 {%- else -%}
                     Unknown
                 {%- endif -%}
@@ -35,7 +35,7 @@
             <dt>Total contribution</dt>
             <dd>
                 {%- if va.total_contribution or va.total_contribution == 0 -%}
-                    {{ "£{:,}".format(va.total_contribution) }}
+                    {{ va.total_contribution|monetary }}
                 {%- else -%}
                     Unknown
                 {%- endif -%}
