@@ -21,7 +21,7 @@
                 {%- if va.gross_development_value or va.gross_development_value == 0 -%}
                     {{ va.gross_development_value|monetary }}
                 {%- else -%}
-                    Unknown
+                    <span class="missing-data">-- unavailable --</span>
                 {%- endif -%}
             </dd>
             <dt>Benchmark land value</dt>
@@ -29,7 +29,7 @@
                 {%- if va.benchmark_land_value or va.benchmark_land_value == 0 -%}
                     {{ va.benchmark_land_value|monetary }}
                 {%- else -%}
-                    Unknown
+                    <span class="missing-data">-- unavailable --</span>
                 {%- endif -%}
             </dd>
             <dt>Total contribution</dt>
@@ -37,7 +37,7 @@
                 {%- if va.total_contribution or va.total_contribution == 0 -%}
                     {{ va.total_contribution|monetary }}
                 {%- else -%}
-                    Unknown
+                    <span class="missing-data">-- unavailable --</span>
                 {%- endif -%}
             </dd>
             <dt>Site</dt>

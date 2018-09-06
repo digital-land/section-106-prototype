@@ -3149,3 +3149,7 @@
 .button-filter-table {
   background: #005ea5;
 }
+
+.missing-data {
+  color: #bfc1c3;
+}

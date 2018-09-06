@@ -5402,6 +5402,10 @@
   background: #005ea5;
 }
 
+.missing-data {
+  color: #bfc1c3;
+}
+
 .check-your-answers .change-answer {
   text-align: right;
   padding-right: 0;
