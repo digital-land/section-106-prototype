@@ -15,6 +15,7 @@ class Config:
     SECRET_KEY = os.getenv('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
+    JSON_SORT_KEYS = True
 
 
 class DevelopmentConfig(Config):
