@@ -35,7 +35,7 @@
     <div class="govuk-grid-column-two-thirds">
       <p class="govuk-body">All published viability assessments</p>
 
-      {% for la in localauthorities %}
+      {% for la in local_authorities     %}
       {% if la.has_viability_assessments() %}
       <h2 class="govuk-heading-l">{{ la.name }}</h2>
       {% endif %}
