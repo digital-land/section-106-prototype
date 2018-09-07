@@ -34,17 +34,17 @@ def index_json():
     all = []
     for la in local_authorities:
         vas = []
-        lav = {'local-authority-name': la.name, 'local-authority-id': la.id}
+        lav = {'local_authority_name': la.name, 'local_authority_id': la.id}
         for pa in la.planning_applications:
             for va in pa.viability_assessments:
                 vas.append(va.to_dict())
 
-        lav['viability-assessments'] = vas
+        lav['viability_assessments'] = vas
         all.append(lav)
 
-    return jsonify({'number-of-viablity-assessments': no_of_viability_assessments,
-                    'local-authorities': len(local_authorities),
-                    'viability-assessments': all})
+    return jsonify({'number_of_viability_assessments': no_of_viability_assessments,
+                    'local_authorities': len(local_authorities),
+                    'viability_assessments': all})
 
 
 @viability.route('/viability-assessments.csv')

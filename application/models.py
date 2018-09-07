@@ -86,6 +86,7 @@ class ViabilityAssessment(db.Model):
     def to_dict(self):
         return {'reference': self.id,
                 'url': self.url,
+                'publication_date': self.date.strftime('%Y-%m-%d'),
                 'planning_application_reference': self.planning_application_id,
                 'planning_application_url': self.planning_application.address,
                 'site': self.planning_application.address,
