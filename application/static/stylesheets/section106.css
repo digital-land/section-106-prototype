@@ -5464,6 +5464,20 @@
   font-weight: 400;
 }
 
+.contents-list {
+  margin-bottom: 30px;
+}
+
+@media (min-width: 40.0625em) {
+  .contents-list {
+    margin-bottom: 50px;
+  }
+}
+
+.contents-list a {
+  text-decoration: none;
+}
+
 .list-item--dashed {
   margin-left: 25px;
   padding-right: 25px;
@@ -5493,6 +5507,26 @@
 @media (min-width: 40.0625em) {
   .guidance-content {
     margin-top: 60px;
+  }
+}
+
+.guidance-content .govuk-heading-l {
+  margin-top: 15px;
+}
+
+@media (min-width: 40.0625em) {
+  .guidance-content .govuk-heading-l {
+    margin-top: 15px;
+  }
+}
+
+.guidance-content .govuk-heading-m {
+  margin-top: 10px;
+}
+
+@media (min-width: 40.0625em) {
+  .guidance-content .govuk-heading-m {
+    margin-top: 10px;
   }
 }
 

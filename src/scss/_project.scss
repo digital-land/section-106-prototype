@@ -50,6 +50,13 @@
   font-weight: 400;
 }
 
+.contents-list {
+  @include govuk-responsive-margin(8, "bottom");
+  a {
+    text-decoration: none;
+  }
+}
+
 .list-item--dashed {
   margin-left: 25px;
   padding-right: 25px;
@@ -67,6 +74,12 @@
 
 .guidance-content {
   @include govuk-responsive-margin(9, "top");
+  .govuk-heading-l {
+    @include govuk-responsive-margin(3, "top");
+  }
+  .govuk-heading-m {
+    @include govuk-responsive-margin(2, "top");
+  }
 }
 
 $button-text-colour: #fff;
