@@ -3156,6 +3156,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.top-content-row {
+  margin-top: 40px;
+  margin-top: 60px;
+}
+
 .data-item {
   display: block;
   line-height: 1;

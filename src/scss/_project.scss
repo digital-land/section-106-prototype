@@ -4,6 +4,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.top-content-row {
+  @include govuk-responsive-margin(9, 'top');
+}
+
 .data-item {
   display: block;
   line-height: 1;
