@@ -20,6 +20,18 @@
   color: govuk-colour(grey-2);
 }
 
+.download-panel {
+  background: govuk-colour(grey-3);
+  @include govuk-responsive-padding(3);
+
+  ul:last-child {
+    margin-bottom: 0;
+    li:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
 // required for the Autocomplete if using
 // Govuk design system
 // --------------------------------------

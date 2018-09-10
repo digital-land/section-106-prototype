@@ -5424,6 +5424,25 @@
   color: #bfc1c3;
 }
 
+.download-panel {
+  background: #dee0e2;
+  padding: 15px;
+}
+
+@media (min-width: 40.0625em) {
+  .download-panel {
+    padding: 15px;
+  }
+}
+
+.download-panel ul:last-child {
+  margin-bottom: 0;
+}
+
+.download-panel ul:last-child li:last-child {
+  margin-bottom: 0;
+}
+
 .autocomplete__menu {
   font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

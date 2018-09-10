@@ -21,11 +21,21 @@
   </div>
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-quarter">
+    <div class="govuk-grid-column-one-third">
       {{ govukDataItem(no_of_viability_assessments, "Public Viability Assessments") }}
     </div>
-    <div class="govuk-grid-column-one-quarter">
+    <div class="govuk-grid-column-one-third">
       {{ govukDataItem(local_authorities|count, "Local Authorities") }}
+    </div>
+    <div class="govuk-grid-column-one-third">
+      <div class="download-panel">
+        <h2 class="govuk-heading-s">Download the data</h2>
+        <p class="govuk-body-m">You can download the latest data as:</p>
+        <ul class="govuk-list">
+          <li><a href="{{ url_for('viability.index_csv') }}">CSV</a></li>
+          <li><a href="{{ url_for('viability.index_json') }}">JSON</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -52,14 +62,4 @@
 
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
-  <div class="govuk-grid-row">
-  <div class="govuk-grid-column-one-thirds">
-    <h2 class="govuk-heading-m">Download the data</h2>
-    <p class="govuk-body-m">You can download the latest data as:</p>
-    <ul class="govuk-list govuk-list--bullet">
-        <li><a href="{{ url_for('viability.index_csv') }}">CSV</a></li>
-        <li><a href="{{ url_for('viability.index_json') }}">JSON</a></li>
-    </ul>
-  </div>
-  </div>
 {% endblock %}
