@@ -3191,6 +3191,10 @@
   margin-bottom: 0;
 }
 
+.field-requirement-list li .govuk-body {
+  margin-bottom: 0;
+}
+
 .autocomplete__menu {
   font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

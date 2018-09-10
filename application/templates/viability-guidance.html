@@ -22,7 +22,7 @@
 {% block content %}
 <div class="govuk-width-container">
   <span class="govuk-caption-m govuk-!-font-size-24">Guidance</span>
-  <h1 class="govuk-heading-l">Publishing Viability Assessments</h1>
+  <h1 class="govuk-heading-l">Publishing viability assessments</h1>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -43,14 +43,101 @@
     <div class="govuk-grid-column-two-thirds">
       <h2 class="govuk-body govuk-!-font-size-16">Contents</h2>
       <ol class="govuk-list">
-        <li class="govuk-!-font-size-16 list-item--dashed"><a href="">Some random test content to link to a section</a></li>
+        <li class="govuk-!-font-size-16 list-item--dashed"><a href="#purpose-of-viability-assessments">The purpose of viability assessments</a></li>
+        <li class="govuk-!-font-size-16 list-item--dashed"><a href="#duty-to-publish">Local authorities’ duty to publish viability assessments</a></li>
+        <li class="govuk-!-font-size-16 list-item--dashed"><a href="#useable-and-findable">Making viability assessments useable and findable</a></li>
       </ol>
-      <h2 class="govuk-heading-m">The purpose of viability assessments</h2>
-      <h3 class="govuk-heading-s">What is the purpose?</h3>
-      <p class="govuk-body">
-        Some content about viability assessments, their purpose and how to publish them.
-      </p>
+
+      <h2 id="purpose-of-viability-assessments" class="govuk-heading-l">The purpose of viability assessments</h2>
+      <p class="govuk-body">Viability assessments are used by plan makers to help decide policy requirements on, among other things, affordable housing, infrastructure and public services for an area. They are intended to help ensure that:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>property developments in the area can be profitable when making Section 106 agreements</li>
+        <li>the local community is benefiting sufficiently from those agreement</li>
+      </ul>
+      <p class="govuk-body">For more information, read GOV.UK’s <a href="https://www.gov.uk/guidance/viability">detailed guidance on viability assessments</a>.</p>
+
+      <h2 id="duty-to-publish" class="govuk-heading-l">Local authorities’ duty to publish viability assessments</h2>
+      <p class="govuk-body">The July 2018 revision of the <a href="https://www.gov.uk/government/publications/national-planning-policy-framework--2">National Planning Policy Framework</a> stipulates that viability assessments must:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>be publicly available</li>
+        <li>reflect standardised inputs</li>
+      </ul>
+
+      <p class="govuk-body">This is in keeping with government commitments to open data, transparency and the use, where appropriate, of standards based on the needs of users.</p>
+
+      <p class="govuk-body">Local authorities must also maintain accessible lists of their viability assessments.</p>
+
+      <p class="govuk-body">The framework also suggests that plans should be accessible through the use of digital tools to assist public involvement and policy presentation. This aligns with the government’s digital-by-default approach to services and information in the public sector. Local authorities should therefore publish viability assessments on their website.</p>
+
+      <h2 id="useable-and-findable" class="govuk-heading-l">Making viability assessments useable and findable</h2>
+      <p class="govuk-body">For planners, policymakers and others to benefit from the insights viability assessments can offer, they must be able to easily find and use them.</p>
+
+      <p class="govuk-body">MHCLG is exploring different ways to make viability assessments more useable and more findable, working for example with Southwark council to develop specifications. The recommendations below are a work-in-progress. This guidance will be updated as necessary with new developments.</p>
+
+      <h3 class="govuk-heading-m">More findable viability assessments</h3>
+      <p class="govuk-body">Local authorities can make viability assessments easier for users to find by:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>maintaining a list of viability assessments in an agreed format</li>
+        <li>hosting this list and the individual assessments on their website, with each document hosted at a URL that isn’t used for something else and is redirected if changed</li>
+      </ul>
+
+      <h4 class="govuk-heading-s">Publishing a list of viability assessments</h4>
+      <p class="govuk-body">The lists of viability assessments local authorities must produce will be more effective in directing users to relevant assessments if they follow agreed specifications. MHCLG is looking to develop a standard for both viability assessments and the lists compiling high level information.</p>
+
+      <p class="govuk-body">A local authority’s list should be in .csv format and include the following headers and information:</p>
+      <ul class="govuk-list govuk-list--bullet field-requirement-list">
+        <li>
+          <span class="govuk-!-font-weight-bold">viability assessment URL</span>
+          <p class="govuk-body govuk-!-font-size-16">a weblink to the viability assessment that isn’t used for something else and is  redirected if changed</p>
+        </li>
+        <li>
+          <span class="govuk-!-font-weight-bold">reference number</span>
+          <p class="govuk-body govuk-!-font-size-16">of the planning application</p>
+        </li>
+        <li>
+          <span class="govuk-!-font-weight-bold">report date</span>
+        </li>
+        <li>
+          <span class="govuk-!-font-weight-bold">postal address</span>
+          <p class="govuk-body govuk-!-font-size-16">of the site being developed</p>
+        </li>
+        <li>
+          <span class="govuk-!-font-weight-bold">gross development value</span>
+        </li>
+        <li>
+          <span class="govuk-!-font-weight-bold">benchmark land value</span>
+        </li>
+        <li>
+          <span class="govuk-!-font-weight-bold">total contribution</span>
+          <p class="govuk-body govuk-!-font-size-16">in the Section 106 agreement</p>
+        </li>
+      </ul>
+      <p class="govuk-body">This list should be published on the local authority’s website and sent to MHCLG’s index of lists at…</p>
+      <p class="govuk-body">A new version of the list should be published at the same persistent URL, but older versions should be accessible.</p>
+
+      <h4 class="govuk-heading-s">Validating the list</h4>
+      <p class="govuk-body">You can easily check your list of viability assessments to make sure it meets the current specification by using <a href="">this validator</a>. It will ensure that:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>the list is a valid CSV</li>
+        <li>the list has the correct columns</li>
+        <li>common errors haven’t been made</li>
+        <li>each viability assessment referenced is available</li>
+      </ul>
+
+      <h3 class="govuk-heading-m">More useable viability assessments</h3>
+      <p class="govuk-body">Viability assessments can contain a considerable amount of information. To help users understand the most important content of individual viability assessments, these must contain <a href="https://www.gov.uk/guidance/viability#Should-a-viability-assessment-be-publicly-available">an executive summary</a>.</p>
+
+      <p class="govuk-body">If viability assessments aren’t formatted and labeled properly they can be difficult to use from a practical standpoint. For this reason they must be:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>in text format (but not a scan or image of text)</li>
+        <li>in an open format such as HTML, PDF-A or ODF (in line with government’s <a href="https://www.gov.uk/government/publications/open-standards-for-government/viewing-government-documents">open standards</a>)</li>
+        <li>marked with crown copyright and published under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence</a> version 3</li>
+      </ul>
+      <p class="govuk-body">A new version of the viability assessments should be published with a new number at a new URL.</p>
     </div>
+
+    <!-- Related content section -->
     <aside class="govuk-grid-column-one-third">
       <div class="related-content-section">
         <h3 class="govuk-heading-m">Related content</h3>
@@ -61,6 +148,7 @@
         </ul>
       </div>
     </aside>
+
   </div>
 
 </div>
