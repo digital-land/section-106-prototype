@@ -138,14 +138,6 @@
       </ul>
       <p class="govuk-body">A new version of the viability assessments should be published with a new number at a new URL.</p>
 
-      <p class="govuk-body contents-link govuk-!-font-size-16">
-        <a href="#contents">
-          <svg class="back-to-top__icon" xmlns="http://www.w3.org/2000/svg" width="13" height="17" viewBox="0 0 13 17">
-            <path fill="currentColor" d="M6.5 0L0 6.5 1.4 8l4-4v12.7h2V4l4.3 4L13 6.4z"></path>
-          </svg>
-          Contents
-        </a>
-      </p>
     </div>
 
     <!-- Related content section -->
@@ -163,4 +155,42 @@
   </div>
 
 </div>
+
+<div class="sticky-element">
+  <div class="govuk-width-container">
+    <p class="govuk-body contents-link govuk-!-font-size-16">
+      <a href="#contents">
+        <svg class="back-to-top__icon" xmlns="http://www.w3.org/2000/svg" width="13" height="17" viewBox="0 0 13 17">
+          <path fill="currentColor" d="M6.5 0L0 6.5 1.4 8l4-4v12.7h2V4l4.3 4L13 6.4z"></path>
+        </svg>
+        Contents
+      </a>
+    </p>
+  </div>
+</div>
+{% endblock %}
+
+{% block bodyEnd %}
+<script>
+  const guidanceWrapper = document.querySelector('.guidance-content');
+  const contents = document.getElementById('contents');
+  const stickyElement = document.querySelector('.sticky-element');
+  let windowTop;
+  let windowBottom;
+
+  function handleScroll(e) {
+    windowTop = window.scrollY;
+    windowBottom = windowTop + window.innerHeight;
+    contentsTop = contents.offsetTop;
+    guidanceBottom = guidanceWrapper.offsetTop + guidanceWrapper.offsetHeight;
+
+    if ( windowTop > contentsTop && windowBottom < guidanceBottom) {
+      stickyElement.classList.add('sticky-element--enabled');
+    } else {
+      stickyElement.classList.remove('sticky-element--enabled');
+    }
+  }
+
+  window.addEventListener('scroll', handleScroll);
+</script>
 {% endblock %}

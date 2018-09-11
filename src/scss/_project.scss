@@ -95,6 +95,24 @@
   }
 }
 
+.sticky-element--enabled {
+  background-color: #dee0e2;
+  bottom: -1px;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  padding-left: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+
+  .contents-link {
+    @include govuk-responsive-margin(0);
+    @include govuk-responsive-padding(3, 'top');
+    @include govuk-responsive-padding(3, 'bottom');
+  }
+}
+
 $button-text-colour: #fff;
 $button-colour:  govuk-colour(blue);
 $button-hover-colour: darken($button-colour, 5%);
