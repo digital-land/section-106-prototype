@@ -1,23 +1,5 @@
-.govuk-typography {
-  font-family: "nta", Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 .top-content-row {
   @include govuk-responsive-margin(9, 'top');
-}
-
-.data-item {
-  display: block;
-  line-height: 1;
-  font-family: "nta", Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.data-item a {
-  color: govuk-colour(black);
 }
 
 .missing-data {
@@ -40,77 +22,9 @@
   margin-bottom: 0;
 }
 
-// required for the Autocomplete if using
-// Govuk design system
-// --------------------------------------
-.autocomplete__menu {
-  font-family: "nta", Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-}
-
-.contents-list {
-  @include govuk-responsive-margin(8, "bottom");
-  a {
-    text-decoration: none;
-  }
-}
-
-.list-item--dashed {
-  margin-left: 25px;
-  padding-right: 25px;
-  &:before {
-    content: "— ";
-    margin-left: -25px;
-    padding-right: 5px;
-  }
-}
-
-
-.contents-link {
-  @include govuk-responsive-margin(9, "top");
-  @include govuk-responsive-margin(6, "bottom");
-}
-
-.back-to-top__icon {
-  float: left;
-  margin-right: .3em;
-  width: .8em;
-  height: .968em;
-}
-
 .related-content-section {
   border-top: 2px solid govuk-colour(blue);
   @include govuk-responsive-padding(3, "top");
-}
-
-.guidance-content {
-  @include govuk-responsive-margin(9, "top");
-  .govuk-heading-l {
-    @include govuk-responsive-margin(3, "top");
-  }
-  .govuk-heading-m {
-    @include govuk-responsive-margin(2, "top");
-  }
-}
-
-.sticky-element--enabled {
-  background-color: #dee0e2;
-  bottom: -1px;
-  left: 0;
-  margin: 0;
-  padding: 0;
-  padding-left: 0;
-  position: fixed;
-  width: 100%;
-  z-index: 1;
-
-  .contents-link {
-    @include govuk-responsive-margin(0);
-    @include govuk-responsive-padding(3, 'top');
-    @include govuk-responsive-padding(3, 'bottom');
-  }
 }
 
 // blue buttons used on filters
@@ -127,4 +41,25 @@
       display: inline-block;
     }
   }
+}
+
+// ===========================
+// Hacks & Fixes
+// ===========================
+
+// Make sure using right font
+.govuk-typography {
+  font-family: "nta", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// required for the Autocomplete if using
+// Govuk design system
+// --------------------------------------
+.autocomplete__menu {
+  font-family: "nta", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
 }
