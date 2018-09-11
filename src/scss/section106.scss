@@ -14,30 +14,8 @@
   }
 }
 
-// Should this be in a mixin?
-// Is there a reason why the GOVUK design system 
-// no longer has a button mixin?
-$button-text-colour: $govuk-text-colour;
-$button-colour:  govuk-colour("grey-3");
-$button-hover-colour: darken($button-colour, 5%);
-$button-shadow-colour: darken($button-colour, 15%);
-$button-shadow-size: $govuk-border-width-form-element;
 .govuk-button-add {
-  color: $button-text-colour;
-  background-color: $button-colour;
-  box-shadow: 0 $button-shadow-size 0 $button-shadow-colour;
-
-  &:link,
-  &:visited,
-  &:active,
-  &:hover {
-    color: $button-text-colour;
-    text-decoration: none;
-  }
-  &:hover,
-  &:focus {
-    background-color: $button-hover-colour;
-  }
+  @include govuk-style-button($button-text-colour: $govuk-text-colour, $button-colour:  govuk-colour("grey-3"));
 }
 
 table td {

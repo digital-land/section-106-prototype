@@ -13,6 +13,7 @@ $govuk-images-path: '/static/govuk-frontend/assets/images/';
 @import "utilities/all";
 @import "overrides/all";
 
+@import "project-components/buttons";
 @import "project-components/definition-list";
 @import "project-components/document-link";
 @import "project-components/list-filter";

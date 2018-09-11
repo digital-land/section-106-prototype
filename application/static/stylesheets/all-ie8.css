@@ -3045,6 +3045,15 @@
   width: 25% !important;
 }
 
+/*
+* Mixin for creating different coloured buttons in the style of the 
+* GOVUK ones
+*
+* Simple usage:
+*   .button-filter-table {
+*     @include govuk-style-button($button-colour:  govuk-colour(blue));
+*   }
+*/
 /* dl */
 .definition-inline:after {
   content: "";

@@ -113,27 +113,9 @@
   }
 }
 
-$button-text-colour: #fff;
-$button-colour:  govuk-colour(blue);
-$button-hover-colour: darken($button-colour, 5%);
-$button-shadow-colour: darken($button-colour, 15%);
-$button-shadow-size: $govuk-border-width-form-element;
+// blue buttons used on filters
 .button-filter-table {
-  color: $button-text-colour;
-  background-color: $button-colour;
-  box-shadow: 0 $button-shadow-size 0 $button-shadow-colour;
-
-  &:link,
-  &:visited,
-  &:active,
-  &:hover {
-    color: $button-text-colour;
-    text-decoration: none;
-  }
-  &:hover,
-  &:focus {
-    background-color: $button-hover-colour;
-  }
+  @include govuk-style-button($button-colour:  govuk-colour(blue));
 }
 
 .js-enabled {
