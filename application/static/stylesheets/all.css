@@ -5489,6 +5489,30 @@
   padding-right: 5px;
 }
 
+.contents-link {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 40.0625em) {
+  .contents-link {
+    margin-top: 60px;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .contents-link {
+    margin-bottom: 30px;
+  }
+}
+
+.back-to-top__icon {
+  float: left;
+  margin-right: .3em;
+  width: .8em;
+  height: .968em;
+}
+
 .related-content-section {
   border-top: 2px solid #005ea5;
   padding-top: 15px;

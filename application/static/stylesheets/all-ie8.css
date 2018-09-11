@@ -3222,6 +3222,20 @@
   padding-right: 5px;
 }
 
+.contents-link {
+  margin-top: 40px;
+  margin-top: 60px;
+  margin-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.back-to-top__icon {
+  float: left;
+  margin-right: .3em;
+  width: .8em;
+  height: .968em;
+}
+
 .related-content-section {
   border-top: 2px solid #005ea5;
   padding-top: 15px;

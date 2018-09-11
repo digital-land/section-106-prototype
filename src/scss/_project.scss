@@ -67,6 +67,19 @@
   }
 }
 
+
+.contents-link {
+  @include govuk-responsive-margin(9, "top");
+  @include govuk-responsive-margin(6, "bottom");
+}
+
+.back-to-top__icon {
+  float: left;
+  margin-right: .3em;
+  width: .8em;
+  height: .968em;
+}
+
 .related-content-section {
   border-top: 2px solid govuk-colour(blue);
   @include govuk-responsive-padding(3, "top");
