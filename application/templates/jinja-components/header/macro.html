@@ -1,4 +1,4 @@
-{% macro govukHeader(serviceName, serviceUrl="/", navigation=False) %}
+{% macro govukHeader(serviceName, serviceUrl="/", navigation=False, item={}) %}
   {% if kwargs %}<!-- {{ kwargs }} -->{% endif %}
   {% if caller %}
     {% set content=caller() %}

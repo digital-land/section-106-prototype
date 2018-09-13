@@ -65,11 +65,11 @@
     <button role="button" class="govuk-header__menu-button js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
     <nav>
       <ul id="navigation" class="govuk-header__navigation {% if kwargs['navigationClasses'] %}{{ kwargs['navigationClasses'] }}{% endif %}" aria-label="Top Level Navigation">
-            <!--<li class="govuk-header__navigation-item{{ ' govuk-header__navigation-item--active' if item.active }}">
+            <li class="govuk-header__navigation-item{{ ' govuk-header__navigation-item--active' if item.active }}">
               <a class="govuk-header__link" href="{{ item.href }}">
-                item text
+                {{ item.text }}
               </a>
-            </li>-->
+            </li>
         {{ content }}
       </ul>
     </nav>
