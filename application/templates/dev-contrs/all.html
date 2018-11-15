@@ -1,16 +1,101 @@
 {% extends "default.html" %}
 
+{% from "jinja-components/data-element/macro.html" import govukDataItem %}
+
 {% block header %}
   {{ govukHeader(serviceName="Developer contributions") }}
 {% endblock %}
 
+{% set mainClasses = "govuk-main-wrapper--l" %}
+
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">Developer contributions</h1>
-      <p class="govuk-body">
-      <a href="{{ url_for('frontend.section_106_register') }}">View Section 106 register</a></p>
+      <span class="govuk-caption-xl">Developer contributions</span>
+      <h1 class="govuk-heading-xl">Summary of all contributions</h1>
+      <p class="govuk-body-l">Developer contribution blurb. What are they? Why are they important?</p>
     </div>
+  </div>
 
+  <div class="govuk-grid-row report-data-row">
+    <div class="govuk-grid-column-full">
+      <h2 class="govuk-heading-m">Section 106</h2>
+    </div>
+    <div class="govuk-grid-column-one-third">
+      {{ govukDataItem(98, "Agreements") }}
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+      {{ govukDataItem("£36,559,359", "In commitments") }}
+    </div>
+  </div>
+
+  <div class="govuk-grid-row report-data-row">
+    <div class="govuk-grid-column-full">
+      <h2 class="govuk-heading-m">Community Infrastructure Levy</h2>
+    </div>
+    <div class="govuk-grid-column-one-third">
+      {{ govukDataItem(26, "Agreements") }}
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+      {{ govukDataItem("£15,176,112", "In commitments") }}
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-m">Breakdown of contributions</h2>
+      <p class="govuk-body">Agreements and levies come into effect at different times during the construction phrase. Meaning Local Authorities don't always receive the committed money immediately.</p>
+      <p class="govuk-body">The table below breaksdown what commitments have been received, what is still outstanding and what has been spent.</p>
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <div class="table-wrapper">
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header" scope="col">Type</th>
+              <th class="govuk-table__header govuk-table__header--numeric" scope="col">Total committed</th>
+              <th class="govuk-table__header govuk-table__header--numeric" scope="col">Received</th>
+              <th class="govuk-table__header govuk-table__header--numeric" scope="col">Spent</th>
+              <th class="govuk-table__header govuk-table__header--numeric" scope="col">Unspent</th>
+              <th class="govuk-table__header govuk-table__header--numeric" scope="col">Not yet secured</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header" scope="row"><a href="{{ url_for('frontend.section_106_register') }}">Section 106</a></th>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£36.559,359</td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£17,925,111.11</td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£9,068,123.46</td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£8,856,987.65</td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£18,634,247.89</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header" scope="row">CIL</th>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£15,176,112</td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£6,900,947.4</td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£3,318,131.4</td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£3,582,816</td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£8,275,164.6</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-l">Explore the data</h2>
+      <p class="govuk-body">Exlpore the data in more depth.</p>
+      <p class="govuk-body">What you'll be able to see:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>contributions for each Local Authority</li>
+        <li>the category of project the money will be spent on</li>
+      </ul>
+      <p class="govuk-body"><a href="">View more detailed data.</a></p>
+    </div>
   </div>
 {% endblock %}
