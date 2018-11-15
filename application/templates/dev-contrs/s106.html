@@ -2,6 +2,11 @@
 
 {% from "jinja-components/select/macro.html" import govukSelect %}
 
+{% block headEnd %}
+  {{ super() }}
+  <link rel="stylesheet" href="/static/stylesheets/govuk/accessible-autocomplete.min.css" />
+{% endblock %}
+
 {% block header %}
   {{ govukHeader(serviceName="Developer contributions") }}
 {% endblock %}
@@ -27,7 +32,7 @@
       <h3 class="govuk-heading-m">Filter contributions</h3>
       <form action="" class="govuk-form">
         {{ govukSelect(
-            id="test",
+            id="local-authorities",
             items=localauthorities,
             label="Local Authority",
             name="local-authority-selector") }}
@@ -136,6 +141,7 @@
 {% endblock %}
 
 {% block bodyEnd %}
+<script src="/static/javascripts/accessible-autocomplete.min.js"></script>
 <script src='/static/javascripts/vendor/tablesort.min.js'></script>
 
 <!-- Include sort types you need -->
@@ -147,6 +153,12 @@
   const sortingTable = new Tablesort( contTable );
   contTable.addEventListener('afterSort', function(e) {
     console.log(e);
+  });
+  // autocomplete for selecting local authority
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue: '',
+    confirmOnBlur: true,
+    selectElement: document.querySelector('#local-authorities')
   });
 </script>
 {% endblock %}
