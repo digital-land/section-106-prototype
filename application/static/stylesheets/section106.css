@@ -5745,3 +5745,71 @@ table td {
 .display-url {
   word-break: break-all;
 }
+
+.report-data-row {
+  margin-bottom: 60px;
+}
+
+.table-wrapper {
+  margin: 30px 0 60px;
+}
+
+th[aria-sort] {
+  border-top: 1px dashed #bfc1c3;
+}
+
+th[role=columnheader]:not(.no-sort) {
+  cursor: pointer;
+  position: relative;
+}
+
+th[role=columnheader]:not(.no-sort):hover {
+  text-decoration: underline;
+}
+
+th[role=columnheader]:not(.no-sort):after {
+  box-sizing: border-box;
+  content: ' ';
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  border-width: 0 6px 6px;
+  border-style: solid;
+  border-color: #005ea5 transparent;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
+th[role=columnheader]:not(.no-sort)[aria-sort]:after {
+  visibility: visible;
+  opacity: 0.5;
+}
+
+th[role=columnheader]:not(.no-sort):hover:after {
+  visibility: visible;
+  opacity: 1;
+}
+
+th[role=columnheader]:not(.no-sort)[aria-sort=ascending]:after {
+  border-width: 6px 6px 0;
+}
+
+th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
+  right: unset;
+  left: 20px;
+}
+
+.govuk-select-m {
+  width: 100%;
+}
+
+@media (min-width: 48.0625em) {
+  .govuk-select-m {
+    width: 50%;
+  }
+}

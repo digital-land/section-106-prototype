@@ -53,3 +53,68 @@ table td {
 .display-url {
     word-break: break-all;
 }
+
+.report-data-row {
+  margin-bottom: $govuk-gutter*2;
+}
+
+// to make the table easier to read when
+// in a body of text
+.table-wrapper {
+  margin: 30px 0 60px;
+}
+
+th[aria-sort] {
+  border-top: 1px dashed $govuk-border-colour;
+}
+
+th[role=columnheader]:not(.no-sort) {
+  cursor: pointer;
+  position: relative;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:after {
+    box-sizing: border-box;
+    content: ' ';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    border-width: 0 6px 6px;
+    border-style: solid;
+    border-color: govuk-colour(blue) transparent;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+
+    visibility: hidden;
+    opacity: 0;
+  }
+  &[aria-sort]:after {
+    visibility: visible;
+    opacity: 0.5;
+  }
+  &:hover:after {
+    visibility: visible;
+    opacity: 1;
+  }
+  &[aria-sort=ascending]:after {
+    border-width: 6px 6px 0;
+  }
+}
+
+th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
+  right: unset;
+  left: 20px;
+}
+
+.govuk-select-m {
+  width: 100%;
+  @include govuk-media-query($from: desktop) {
+    width: 50%
+  }
+}
