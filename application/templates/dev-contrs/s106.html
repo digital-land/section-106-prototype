@@ -1,5 +1,7 @@
 {% extends "default.html" %}
 
+{% from "jinja-components/select/macro.html" import govukSelect %}
+
 {% block header %}
   {{ govukHeader(serviceName="Developer contributions") }}
 {% endblock %}
@@ -18,6 +20,53 @@
     </div>
   </div>
 
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h3 class="govuk-heading-m">Filter contributions</h3>
+      <form action="" class="govuk-form">
+        {{ govukSelect(
+            id="test",
+            items=localauthorities,
+            label="Local Authority",
+            name="local-authority-selector") }}
+
+        {{ govukSelect(
+            id="categories-select",
+            items=categories,
+            label="Contribution category",
+            name="contribution-category-selector",
+            classes="govuk-select-m") }}
+
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+            <h1 class="govuk-fieldset__heading">
+              Contribution range
+            </h1>
+          </legend>
+
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="min-cont-1">
+              Min
+            </label>
+            <input class="govuk-input govuk-input--width-10" id="min-cont-1" name="min-cont-1" type="text">
+          </div>
+
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="max-cont-2">
+              Max
+            </label>
+            <input class="govuk-input govuk-input--width-10" id="max-cont-2" name="max-cont-2" type="text">
+          </div>
+        </fieldset>
+        <button type="submit" class="govuk-button button-filter-table">
+          Filter contributions
+        </button>
+      </form>
+    </div>
+  </div>
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
@@ -31,54 +80,56 @@
       </tr>
       {% endmacro %}
 
-      <table id="contributions-table" class="govuk-table">
-        <thead class="govuk-table__head">
-          <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col">Planning application ID</th>
-            <th class="govuk-table__header" scope="col">Planning authority</th>
-            <th class="govuk-table__header" scope="col">Contribution category</th>
-            <th class="govuk-table__header no-sort" scope="col" data-sort-method='none'>Link</th>
-            <th class="govuk-table__header govuk-table__header--numeric" scope="col">Contribution value</th>
-          </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-          <tr class="govuk-table__row">
-            <th class="govuk-table__cell" scope="row">YGOX0902</th>
-            <td class="govuk-table__cell">Ashford Borough Council</td>
-            <td class="govuk-table__cell">Transport</td>
-            <td class="govuk-table__cell"><a href="">See agreement</a></td>
-            <td class="govuk-table__cell govuk-table__cell--numeric">£119,458</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <th class="govuk-table__cell" scope="row">KOMA9489</th>
-            <td class="govuk-table__cell">Eastbourne Borough Council</td>
-            <td class="govuk-table__cell">Transport</td>
-            <td class="govuk-table__cell"><a href="">See agreement</a></td>
-            <td class="govuk-table__cell govuk-table__cell--numeric">£449,956</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <th class="govuk-table__cell" scope="row">RFFM2899</th>
-            <td class="govuk-table__cell">London Borough of Bromley</td>
-            <td class="govuk-table__cell">Open space</td>
-            <td class="govuk-table__cell"><a href="">See agreement</a></td>
-            <td class="govuk-table__cell govuk-table__cell--numeric">£550,958</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <th class="govuk-table__cell" scope="row">EOTL6247</th>
-            <td class="govuk-table__cell">Canterbury City Council</td>
-            <td class="govuk-table__cell">Health</td>
-            <td class="govuk-table__cell"><a href="">See agreement</a></td>
-            <td class="govuk-table__cell govuk-table__cell--numeric">£502,145</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <th class="govuk-table__cell" scope="row">GTZD3480</th>
-            <td class="govuk-table__cell">Ashford Borough Council</td>
-            <td class="govuk-table__cell">Health</td>
-            <td class="govuk-table__cell"><a href="">See agreement</a></td>
-            <td class="govuk-table__cell govuk-table__cell--numeric">£488,472</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-wrapper">
+        <table id="contributions-table" class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__header" scope="col">Planning application ID</th>
+              <th class="govuk-table__header" scope="col">Planning authority</th>
+              <th class="govuk-table__header" scope="col">Contribution category</th>
+              <th class="govuk-table__header no-sort" scope="col" data-sort-method='none'>Link</th>
+              <th class="govuk-table__header govuk-table__header--numeric" scope="col">Contribution value</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <th class="govuk-table__cell" scope="row">YGOX0902</th>
+              <td class="govuk-table__cell">Ashford Borough Council</td>
+              <td class="govuk-table__cell">Transport</td>
+              <td class="govuk-table__cell"><a href="">See agreement</a></td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£119,458</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <th class="govuk-table__cell" scope="row">KOMA9489</th>
+              <td class="govuk-table__cell">Eastbourne Borough Council</td>
+              <td class="govuk-table__cell">Transport</td>
+              <td class="govuk-table__cell"><a href="">See agreement</a></td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£449,956</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <th class="govuk-table__cell" scope="row">RFFM2899</th>
+              <td class="govuk-table__cell">London Borough of Bromley</td>
+              <td class="govuk-table__cell">Open space</td>
+              <td class="govuk-table__cell"><a href="">See agreement</a></td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£550,958</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <th class="govuk-table__cell" scope="row">EOTL6247</th>
+              <td class="govuk-table__cell">Canterbury City Council</td>
+              <td class="govuk-table__cell">Health</td>
+              <td class="govuk-table__cell"><a href="">See agreement</a></td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£502,145</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <th class="govuk-table__cell" scope="row">GTZD3480</th>
+              <td class="govuk-table__cell">Ashford Borough Council</td>
+              <td class="govuk-table__cell">Health</td>
+              <td class="govuk-table__cell"><a href="">See agreement</a></td>
+              <td class="govuk-table__cell govuk-table__cell--numeric">£488,472</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
 
     </div>
   </div>

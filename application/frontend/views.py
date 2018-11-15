@@ -14,6 +14,7 @@ import json
 import os.path
 import uuid
 
+from application.utils import section_106_contribution_categories
 from application.extensions import db
 from application.models import LocalAuthority, PlanningApplication, Contribution
 
@@ -191,7 +192,7 @@ def all_developer_contributions():
 
 @frontend.route('/developer-contributions/section106')
 def section_106_register():
-    return render_template('dev-contrs/s106.html')
+    return render_template('dev-contrs/s106.html', localauthorities=LocalAuthority.query.all(), categories=section_106_contribution_categories)
 
 @frontend.context_processor
 def asset_path_context_processor():

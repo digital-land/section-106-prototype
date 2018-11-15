@@ -5803,3 +5803,13 @@ th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
   right: unset;
   left: 20px;
 }
+
+.govuk-select-m {
+  width: 100%;
+}
+
+@media (min-width: 48.0625em) {
+  .govuk-select-m {
+    width: 50%;
+  }
+}
