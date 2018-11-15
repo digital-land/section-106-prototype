@@ -185,6 +185,14 @@ def remove_contribution(contribution_id):
 def section_106_contributions():
     return render_template('section-106-contributions.html', local_authorities=LocalAuthority.query.all())
 
+@frontend.route('/developer-contributions')
+def all_developer_contributions():
+    return render_template('dev-contrs/all.html')
+
+@frontend.route('/developer-contributions/section106')
+def section_106_register():
+    return render_template('dev-contrs/s106.html')
+
 @frontend.context_processor
 def asset_path_context_processor():
     return {'assetPath': '/static/govuk-frontend/assets'}

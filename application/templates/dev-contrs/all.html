@@ -1,0 +1,16 @@
+{% extends "default.html" %}
+
+{% block header %}
+  {{ govukHeader(serviceName="Developer contributions") }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">Developer contributions</h1>
+      <p class="govuk-body">
+      <a href="{{ url_for('frontend.section_106_register') }}">View Section 106 register</a></p>
+    </div>
+
+  </div>
+{% endblock %}
