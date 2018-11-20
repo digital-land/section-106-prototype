@@ -40,7 +40,7 @@
         {
             "name": "start-date",
             "title": "Start date",
-            "description": "The date at which the entry comes into effect",
+            "description": "The date on which the entry comes into effect",
             "type": "date",
             "constraints": {
                 "required": false
@@ -49,7 +49,7 @@
          {
             "name": "end-date",
             "title": "End date",
-            "description": "The date at which the effect of the entry ends",
+            "description": "The date on which the effect of the entry ends",
             "type": "date",
             "constraints": {
                 "required": false
