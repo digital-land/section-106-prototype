@@ -13,4 +13,4 @@ class UploadForm(FlaskForm):
     validation_type = SelectField(u'Type of section 106 data file you want to validate',
                                   choices=[('developer-agreement', 'Developer agreement'),
                                            ('developer-agreement-contribution', 'Developer agreement contribution'),
-                                           ('developer-agreement-transation', 'Developer agreement transaction')])
+                                           ('developer-agreement-transaction', 'Developer agreement transaction')])
