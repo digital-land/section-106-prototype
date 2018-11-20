@@ -1,9 +1,9 @@
 {
     "fields": [
          {
-            "name": "developer-contribution",
-            "title": "Developer contribution",
-            "description": "A unique identifier for the developer contribution",
+            "name": "developer-agreement-contribution",
+            "title": "Developer agreement contribution",
+            "description": "A unique identifier for the developer agreement contribution",
             "type": "string",
             "constraints": {
                 "required": true
@@ -58,7 +58,7 @@
          {
             "name": "end-date",
             "title": "End date",
-            "description": "The date on which the effect of the entry ends",
+            "description": "The date on which the entry is not longer in effect",
             "type": "date",
             "constraints": {
                 "required": false

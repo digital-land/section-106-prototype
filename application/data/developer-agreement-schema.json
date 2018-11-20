@@ -49,7 +49,7 @@
          {
             "name": "end-date",
             "title": "End date",
-            "description": "The date on which the effect of the entry ends",
+            "description": "The date on which the entry is not longer in effect",
             "type": "date",
             "constraints": {
                 "required": false
