@@ -21,6 +21,7 @@ WTForms = "==2.2.1"
 flask-migrate = "*"
 "psycopg2" = "*"
 gunicorn = "*"
+goodtables = "*"
 
 [dev-packages]
 pytest = "*"

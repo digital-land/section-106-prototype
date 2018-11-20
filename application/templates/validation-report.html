@@ -1,0 +1,23 @@
+{% extends "default.html" %}
+
+{% block content %}
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-l">
+          Validation result for {{ filename }}
+        </h1>
+
+      </div>
+    </div>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <pre>
+          {{ report | pretty_json | safe }}
+        </pre>
+      </div>
+    </div>
+
+{% endblock %}

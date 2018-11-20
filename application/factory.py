@@ -38,6 +38,9 @@ def register_blueprints(app):
     from application.frontend.viability.views import viability
     app.register_blueprint(viability)
 
+    from application.frontend.validate.views import validators
+    app.register_blueprint(validators)
+
 
 def register_extensions(app):
 
@@ -50,11 +53,12 @@ def register_extensions(app):
 
 
 def register_commands(app):
-    from application.commands import load, load_viability, clear_viability, load_contributions
+    from application.commands import load, load_viability, clear_viability, load_contributions, validate_developer_agreement
     app.cli.add_command(load, name='load')
     app.cli.add_command(load_viability, name='load-viability')
     app.cli.add_command(clear_viability, name='clear-viability')
     app.cli.add_command(load_contributions, name='load-contribution')
+    app.cli.add_command(validate_developer_agreement, name='validate-developer-agreement')
 
 
 def register_filters(app):
@@ -63,6 +67,9 @@ def register_filters(app):
 
     from application.filters import monetary_filter
     app.jinja_env.filters['monetary'] = monetary_filter
+
+    from application.filters import pretty_json
+    app.jinja_env.filters['pretty_json'] = pretty_json
 
 
 def register_context_processors(app):
