@@ -21,9 +21,9 @@ def validate():
         with tempfile.TemporaryDirectory() as temp_dir:
             developer_agreement_csv = os.path.join(temp_dir, filename)
             file.save(developer_agreement_csv)
-            data_directory = os.path.join(current_app.config['PROJECT_ROOT'], 'application', 'data')
+            schema_directory = os.path.join(current_app.config['PROJECT_ROOT'], 'application', 'schema')
             schema_name = '%s-schema.json' % form.validation_type.data
-            schema = os.path.join(data_directory, schema_name)
+            schema = os.path.join(schema_directory, schema_name)
             report = goodtables.validate(developer_agreement_csv, schema=schema)
             return render_template('validation-report.html', filename=filename, report=report)
 
