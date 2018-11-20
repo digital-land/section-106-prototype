@@ -1,3 +1,68 @@
 {
-    "fields": []
+    "fields": [
+         {
+            "name": "developer-contribution",
+            "title": "Developer contribution",
+            "description": "A unique identifier for the developer contribution",
+            "type": "string",
+            "constraints": {
+                "required": true
+            }
+        },
+       {
+            "name": "developer-agreement",
+            "title": "Developer agreement",
+            "description": "A unique identifier for the developer agreement",
+            "type": "string",
+            "constraints": {
+                "required": true
+            }
+        },
+        {
+            "name": "contribution-purpose",
+            "title": "Contribution purpose",
+            "description": "A unique ID for the contribution category, from list maintained by MHCLG",
+            "type": "string",
+            "constraints": {
+                "required": true,
+                "pattern": "(section-106\\.affordable-housing|section-106\\.education|section-106\\.health|section-106\\.highways|section-106\\.transport|section-106\\.open-space|section-106\\.community-facilities|section-106\\.green-infrastructure|section-106\\.other|community-infrastructure-levy\\.community-infrastructure-levy|community-infrastucture\\.affordable-housing|community-infrastucture\\.education|community-infrastucture\\.health|community-infrastucture\\.transport|community-infrastucture\\.open-space|community-infrastucture\\.community-facilities|community-infrastucture\\.green-infrastructure|community-infrastucture\\.other)"
+            }
+        },
+        {
+            "name": "amount",
+            "title": "Amount",
+            "description": "The agreed contribution amount",
+            "type": "number",
+            "constraints": {
+                "required": true
+            }
+        },
+        {
+            "name": "entry-date",
+            "title": "Entry date",
+            "description": "The date that the record was created",
+            "type": "date",
+            "constraints": {
+                "required": true
+            }
+        },
+        {
+            "name": "start-date",
+            "title": "Start date",
+            "description": "The date on which the entry comes into effect",
+            "type": "date",
+            "constraints": {
+                "required": false
+            }
+        },
+         {
+            "name": "end-date",
+            "title": "End date",
+            "description": "The date on which the effect of the entry ends",
+            "type": "date",
+            "constraints": {
+                "required": false
+            }
+        }
+    ]
 }
