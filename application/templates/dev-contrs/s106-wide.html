@@ -1,0 +1,274 @@
+{% set htmlClasses = "mhclg" %}
+{% set mainContainerClasses = "govuk-width-container-full" %}
+
+{% extends "default.html" %}
+
+{% from "jinja-components/select/macro.html" import govukSelect %}
+
+{% block headEnd %}
+  {{ super() }}
+  <link rel="stylesheet" href="/static/stylesheets/govuk/accessible-autocomplete.min.css" />
+{% endblock %}
+
+{% block header %}
+  {{ govukHeader(serviceName="Developer contributions", containerClasses="govuk-width-container-full") }}
+{% endblock %}
+
+{% block beforeContent %}
+{{ super() }}
+<a href="{{ url_for('frontend.all_developer_contributions')}}" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-quarter">
+      <h3 class="govuk-heading-m">Filter</h3>
+      <form action="" class="govuk-form">
+
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="sort">
+            Contribution type
+          </label>
+          <select class="govuk-select" id="sort" name="sort">
+            <option value="published" selected>All</option>
+            <option value="updated">CIL</option>
+            <option value="views">Section 106</option>
+          </select>
+        </div>
+
+        {{ govukSelect(
+            id="local-authorities",
+            items=localauthorities,
+            label="Local Authority",
+            name="local-authority-selector") }}
+
+        <button type="submit" class="govuk-button button-filter-table">
+          Apply filter
+        </button>
+      </form>
+    </div>
+    <div class="govuk-grid-column-three-quarters">
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <span class="govuk-caption-xl">Developer contributions</span>
+          <h1 class="govuk-heading-xl">Explore contributions</h1>
+          <div class="applied-filters-container">
+            <h4 class="govuk-heading-s af-heading">Applied filters</h4>
+            <p class="govuk-body af-item"><strong>Local Authorities:</strong>Dacroum</p>
+            <p class="govuk-body af-item"><strong>Contribution type:</strong>All</p>
+            <a href="#" class="govuk-link af-close">Remove</a>
+          </div>
+        </div>
+      </div>
+
+      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+
+          <form action="" class="form">
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="sort">
+                Time period
+              </label>
+              <select class="govuk-select govuk-select-m" id="sort" name="sort">
+                <option value="published" selected>Last year</option>
+                <option value="updated">Last 6 months</option>
+                <option value="views">Last 3 months</option>
+                <option value="views">Last month</option>
+                <option value="views">Last 7 days</option>
+              </select>
+            </div>
+          </form>
+
+          <div class="contribution-box">
+            <div class="data">
+              <span class="data-item govuk-!-font-size-80 govuk-!-font-weight-bold">£36,559,359</span>
+              <span class="data-item bold-xsmall govuk-!-font-size-16 govuk-!-font-weight-bold">
+              In commitments</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="govuk-grid-column-two-thirds contribution-box-container contribution-box-container-received">
+          <div class="contribution-box">
+            <div class="data">
+              <span class="data-item govuk-!-font-size-36 govuk-!-font-weight-bold">£25,225,958</span>
+              <span class="data-item bold-xsmall govuk-!-font-size-16 govuk-!-font-weight-bold">
+              Received</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="govuk-grid-column-two-thirds contribution-box-container contribution-box-container-not-received">
+          <div class="contribution-box">
+            <div class="data">
+              <span class="data-item govuk-!-font-size-36 govuk-!-font-weight-bold">£11,333,401</span>
+              <span class="data-item bold-xsmall govuk-!-font-size-16 govuk-!-font-weight-bold">
+              Not received</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+
+          <div class="expanding-line-break">
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+            <a href="#" class="govuk-link">See category breakdown</a>
+          </div>
+
+          {% for category in categories %}
+          <div class="govuk-grid-row contribution-category-row">
+            <div class="govuk-grid-column-one-third">
+              <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
+            </div>
+            <div class="govuk-grid-column-two-thirds">
+              <div class="contribution-box contribution-box--received" style="width: {{ category.width }};">
+                <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount }}</span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+          <div class="expanding-line-break">
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+            <span class="govuk-link elb-end">&hellip;</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+          <h2 class="govuk-heading-l">All contributions</h2>
+
+          {% macro contributionRow(contribution) %}
+          <tr class="govuk-table__row">
+            <th class="govuk-table__cell" scope="row">{{ contribution.plaid }}</th>
+            <td class="govuk-table__cell">{{ contribution.authority }}</td>
+            <td class="govuk-table__cell">{{ contribution.category }}</td>
+            <td class="govuk-table__cell"><a href="{{ contribution.agreement_link }}">See agreement</a></td>
+            <td class="govuk-table__cell govuk-table__cell--numeric">£{{ contribution.value }}</td>
+          </tr>
+          {% endmacro %}
+
+          <div class="table-wrapper">
+            <table id="contributions-table" class="govuk-table">
+              <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__header" scope="col">Planning application ID</th>
+                  <th class="govuk-table__header" scope="col">Planning authority</th>
+                  <th class="govuk-table__header" scope="col">Contribution category</th>
+                  <th class="govuk-table__header no-sort" scope="col" data-sort-method='none'>Link</th>
+                  <th class="govuk-table__header govuk-table__header--numeric" scope="col">Contribution value</th>
+                </tr>
+              </thead>
+              <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">YGOX0902</th>
+                  <td class="govuk-table__cell">Ashford Borough Council</td>
+                  <td class="govuk-table__cell">Transport</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£119,458</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">KOMA9489</th>
+                  <td class="govuk-table__cell">Eastbourne Borough Council</td>
+                  <td class="govuk-table__cell">Transport</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£449,956</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">RFFM2899</th>
+                  <td class="govuk-table__cell">London Borough of Bromley</td>
+                  <td class="govuk-table__cell">Open space</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£550,958</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">EOTL6247</th>
+                  <td class="govuk-table__cell">Canterbury City Council</td>
+                  <td class="govuk-table__cell">Health</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£502,145</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">GTZD3480</th>
+                  <td class="govuk-table__cell">Ashford Borough Council</td>
+                  <td class="govuk-table__cell">Health</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£488,472</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">YGOX0902</th>
+                  <td class="govuk-table__cell">Ashford Borough Council</td>
+                  <td class="govuk-table__cell">Transport</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£119,458</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">KOMA9489</th>
+                  <td class="govuk-table__cell">Eastbourne Borough Council</td>
+                  <td class="govuk-table__cell">Transport</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£449,956</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">RFFM2899</th>
+                  <td class="govuk-table__cell">London Borough of Bromley</td>
+                  <td class="govuk-table__cell">Open space</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£550,958</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">EOTL6247</th>
+                  <td class="govuk-table__cell">Canterbury City Council</td>
+                  <td class="govuk-table__cell">Health</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£502,145</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">GTZD3480</th>
+                  <td class="govuk-table__cell">Ashford Borough Council</td>
+                  <td class="govuk-table__cell">Health</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£488,472</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block bodyEnd %}
+<script src="/static/javascripts/accessible-autocomplete.min.js"></script>
+<script src='/static/javascripts/vendor/tablesort.min.js'></script>
+
+<!-- Include sort types you need -->
+<script src='/static/javascripts/vendor/tablesort.number.min.js'></script>
+<script src='/static/javascripts/vendor/tablesort.date.min.js'></script>
+
+<script>
+  const contTable = document.getElementById('contributions-table');
+  const sortingTable = new Tablesort( contTable );
+  contTable.addEventListener('afterSort', function(e) {
+    console.log(e);
+  });
+  // autocomplete for selecting local authority
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue: '',
+    confirmOnBlur: true,
+    selectElement: document.querySelector('#local-authorities')
+  });
+</script>
+{% endblock %}

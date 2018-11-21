@@ -5813,3 +5813,145 @@ th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
     width: 50%;
   }
 }
+
+.mhclg .govuk-header__container {
+  border-color: #37836e;
+}
+
+.govuk-width-container-full {
+  max-width: 1280px;
+  margin: 0 15px;
+}
+
+@media (min-width: 40.0625em) {
+  .govuk-width-container-full {
+    margin: 0 30px;
+  }
+}
+
+@media (min-width: 1340px) {
+  .govuk-width-container-full {
+    margin: 0 auto;
+  }
+}
+
+.govuk-header__container.govuk-width-container-full {
+  margin-bottom: -10px;
+}
+
+.applied-filters-container {
+  background: #d5e8f3;
+  border: 1px solid #005ea5;
+  padding: 15px;
+  position: relative;
+}
+
+.applied-filters-container .af-heading,
+.applied-filters-container .af-item {
+  font-size: 16px !important;
+}
+
+.af-heading {
+  margin-bottom: 10px;
+}
+
+.af-item {
+  margin: 0;
+}
+
+.af-item strong {
+  padding-right: 15px;
+}
+
+.contribution-box {
+  background: #bfc1c3;
+  box-sizing: border-box;
+  padding: 15px;
+  color: #fff;
+}
+
+.contribution-box.active, .contribution-box:hover {
+  background: #fff;
+  border: 5px solid #0b0c0c;
+  color: #0b0c0c;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.contribution-box--received {
+  background: #005ea5;
+}
+
+.contribution-box-container {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 15px;
+}
+
+@media (min-width: 48.0625em) {
+  .contribution-box-container {
+    float: left;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .contribution-box-container-received {
+    width: 69%;
+    padding: 0 2.5px 0 15px;
+  }
+}
+
+.contribution-box-container-received .contribution-box {
+  background: #005ea5;
+}
+
+.contribution-box-container-received .contribution-box:hover {
+  background: #fff;
+}
+
+@media (min-width: 48.0625em) {
+  .contribution-box-container-not-received {
+    width: 31%;
+    padding: 0 15px 0 2.5px;
+  }
+}
+
+.contribution-category-row {
+  margin-bottom: 15px;
+}
+
+.contribution-category-row .contribution-box {
+  padding: 11px 10px 7px;
+}
+
+.contribution-category-row .contribution-box:hover {
+  border: 2px solid #0b0c0c;
+  padding: 9px 8px 5px;
+}
+
+.contribution-category-row .contribution-box .data-item {
+  line-height: 1 !important;
+}
+
+.contribution-category-heading {
+  line-height: 42px;
+  margin-bottom: 0;
+}
+
+.expanding-line-break {
+  padding: 30px 0;
+  position: relative;
+}
+
+.expanding-line-break a, .expanding-line-break .elb-end {
+  background: #fff;
+  padding: 0 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.expanding-line-break .elb-end {
+  border: 1px solid #bfc1c3;
+}

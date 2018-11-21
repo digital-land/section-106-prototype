@@ -194,6 +194,11 @@ def all_developer_contributions():
 def section_106_register():
     return render_template('dev-contrs/s106.html', localauthorities=LocalAuthority.query.all(), categories=section_106_contribution_categories)
 
+@frontend.route('/developer-contributions/section106-wide')
+def section_106_register_wide():
+    return render_template('dev-contrs/s106-wide.html', localauthorities=LocalAuthority.query.all(), categories=section_106_contribution_categories)
+
+
 @frontend.context_processor
 def asset_path_context_processor():
     return {'assetPath': '/static/govuk-frontend/assets'}
