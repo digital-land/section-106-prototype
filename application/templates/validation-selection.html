@@ -1,0 +1,31 @@
+{% extends "default.html" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      What type of section 106 csv file do you want to validate?
+    </h1>
+
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="govuk-form" method="POST" action="{{ url_for('validators.validation_selection') }}">
+
+          <div class="govuk-form-group">
+              <label class="govuk-label govuk-label--s" for="validation_type">
+                {{ form.validation_type.label }}
+              </label>
+              {{ form.validation_type(class='govuk-select') }}
+          </div>
+
+          <button class="govuk-button" type="submit">Start</button>
+          {{ form.csrf_token }}
+      </form>
+    </div>
+</div>
+
+{% endblock %}
