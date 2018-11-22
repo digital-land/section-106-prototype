@@ -42,7 +42,7 @@
     {% endblock %}
 
     {% block main %}
-      <div class="govuk-width-container">
+      <div class="{{ mainContainerClasses | default('govuk-width-container') }}">
         {% block beforeContent %}{% endblock %}
         <main class="govuk-main-wrapper {{ mainClasses }}" id="main-content" role="main">
           {% block content %}{% endblock %}
