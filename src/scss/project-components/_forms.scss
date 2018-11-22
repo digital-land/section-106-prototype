@@ -1,0 +1,24 @@
+// ====================================
+// Tweaks and additions to .govuk forms
+// ====================================
+
+.govuk-select-m {
+  width: 100%;
+  @include govuk-media-query($from: desktop) {
+    width: 50%
+  }
+}
+
+.govuk-select-s {
+  width: 100%;
+  @include govuk-media-query($from: desktop) {
+    width: 33%
+  }
+}
+
+.govuk-form-group-inline {
+  .govuk-label {
+    display: inline;
+    margin-right: $govuk-gutter-half;
+  }
+}
