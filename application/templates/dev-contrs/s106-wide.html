@@ -82,7 +82,7 @@
             </div>
           </form>
 
-          <div class="contribution-box contribution-box--total contribution-box-with-inline active">
+          <div data-amount-type="all" class="contribution-box contribution-box--total contribution-box-with-inline active">
             <div class="data">
               <span class="data-item govuk-!-font-size-80 govuk-!-font-weight-bold">
                 £36,559,359
@@ -95,14 +95,14 @@
         </div>
 
         <div class="govuk-grid-column-two-thirds contribution-box-container contribution-box-container-received">
-          <div class="contribution-box contribution-box--received">
+          <div data-amount-type="received" class="contribution-box contribution-box--received">
             <div class="data">
               <span class="data-item govuk-!-font-size-36 govuk-!-font-weight-bold">£25,225,958</span>
               <span class="data-item bold-xsmall govuk-!-font-size-16 govuk-!-font-weight-bold">
               Received</span>
             </div>
           </div>
-          <div class="contribution-box contribution-box--spent contribution-box--inner">
+          <div data-amount-type="spent" class="contribution-box contribution-box--spent contribution-box--inner">
             <div class="data">
               <span class="data-item govuk-!-font-size-36 govuk-!-font-weight-bold">£13,225,958</span>
               <span class="data-item bold-xsmall govuk-!-font-size-16 govuk-!-font-weight-bold">
@@ -112,7 +112,7 @@
         </div>
 
         <div class="govuk-grid-column-two-thirds contribution-box-container contribution-box-container-not-received">
-          <div class="contribution-box contribution-box--not-received">
+          <div data-amount-type="not-received" class="contribution-box contribution-box--not-received">
             <div class="data">
               <span class="data-item govuk-!-font-size-36 govuk-!-font-weight-bold">£11,333,401</span>
               <span class="data-item bold-xsmall govuk-!-font-size-16 govuk-!-font-weight-bold">
@@ -123,46 +123,98 @@
 
       </div>
 
-      <div class="govuk-grid-row category-breakdown-section categories--received">
+      <div class="govuk-grid-row category-breakdown-section categories--all">
         <div class="govuk-grid-column-full">
 
           <div class="expanding-line-break">
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-            <a href="#" class="govuk-link">See category breakdown</a>
+            <a href="#" class="govuk-link categories-control">See category breakdown</a>
           </div>
+          
+          <div class="categories-container collapsed">
 
-          <div class="govuk-grid-row cil-explanation">
-            <div class="govuk-grid-column-two-thirds">
-              <div class="govuk-inset-text">
-                <h4 class="govuk-heading-s">CIL Contributions</h4>
-                <p class="govuk-body">CIL contributions are only categorised when the money has been spend by the Local Authority on a project.</p>
+            <div class="govuk-grid-row cil-explanation">
+              <div class="govuk-grid-column-two-thirds">
+                <div class="govuk-inset-text">
+                  <h4 class="govuk-heading-s">CIL Contributions</h4>
+                  <p class="govuk-body">CIL contributions are only categorised when the money has been spend by the Local Authority on a project.</p>
+                </div>
               </div>
             </div>
-          </div>
 
-          {% for category in categories %}
-          <div class="govuk-grid-row contribution-category-row">
-            <div class="govuk-grid-column-one-third">
-              <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
-            </div>
-            <div class="govuk-grid-column-two-thirds">
-              <div class="contribution-box" style="width: {{ category.width }};">
-                <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount }}</span>
+            <div class="categories-set--all">
+              {% for category in categories %}
+              <div class="govuk-grid-row contribution-category-row">
+                <div class="govuk-grid-column-one-third">
+                  <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
+                </div>
+                <div class="govuk-grid-column-two-thirds">
+                  <div class="contribution-box" style="width: {{ category.width }};">
+                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount }}</span>
+                  </div>
+                </div>
               </div>
+              {% endfor %}
             </div>
+
+            <div class="categories-set--received">
+              {% for category in categories %}
+              <div class="govuk-grid-row contribution-category-row">
+                <div class="govuk-grid-column-one-third">
+                  <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
+                </div>
+                <div class="govuk-grid-column-two-thirds">
+                  <div class="contribution-box" style="width: {{ category.width }};">
+                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount }}</span>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+
+            <div class="categories-set--spent">
+              {% for category in categories %}
+              <div class="govuk-grid-row contribution-category-row">
+                <div class="govuk-grid-column-one-third">
+                  <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
+                </div>
+                <div class="govuk-grid-column-two-thirds">
+                  <div class="contribution-box" style="width: {{ category.width }};">
+                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount }}</span>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+
+            <div class="categories-set--not-received">
+              {% for category in categories %}
+              <div class="govuk-grid-row contribution-category-row">
+                <div class="govuk-grid-column-one-third">
+                  <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
+                </div>
+                <div class="govuk-grid-column-two-thirds">
+                  <div class="contribution-box" style="width: {{ category.width }};">
+                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount }}</span>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+
           </div>
-          {% endfor %}
 
           <div class="expanding-line-break">
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-            <span class="govuk-link elb-end">&hellip;</span>
+            <span class="govuk-link categories-control categories-control-open elb-end">&veebar;</span>
+            <span class="govuk-link categories-control categories-control-close elb-end">&#8892;</span>
           </div>
         </div>
       </div>
 
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-full">
-          <h2 class="govuk-heading-l">All contributions</h2>
+          <h2 class="govuk-heading-l">Individual contributions</h2>
 
           <div class="download-as-container">
             <p class="govuk-body">Download as: <a class="govuk-link" href="#">json</a>, <a class="govuk-link" href="#">yaml</a>, <a class="govuk-link" href="#">csv</a> and <a class="govuk-link" href="#">tsv</a>.</p>
@@ -299,5 +351,46 @@
     confirmOnBlur: true,
     selectElement: document.querySelector('#local-authorities')
   });
+
+  const categoriesControls = document.querySelectorAll(".categories-control");
+  const categoriesContainer = document.querySelector('.categories-container');
+  let containerIsClosed = true;
+  categoriesControls.forEach((control) => {
+    control.addEventListener('click', function(e) {
+      if(containerIsClosed) {
+        categoriesContainer.classList.add("opening");
+      } else {
+        categoriesContainer.classList.add('closing');
+      }
+      containerIsClosed = !containerIsClosed;
+    });
+  });
+  categoriesContainer.addEventListener('animationend', function(e) {
+    console.log(e);
+    if(e.animationName === "opening-panel") {
+      categoriesContainer.classList.remove('opening');
+      categoriesContainer.classList.remove('collapsed');
+    } else if (e.animationName === "closing-panel") {
+      categoriesContainer.classList.remove('closing');
+      categoriesContainer.classList.add('collapsed');
+    }
+  });
+
+  const amountContainers = document.querySelectorAll("[data-amount-type]");
+  const categoryBreakdownSection = document.querySelector(".category-breakdown-section");
+  let currentChoice = "categories--all";
+  amountContainers.forEach((container) => {
+    container.addEventListener('click', selectedAmountType);
+  });
+
+  function selectedAmountType(e) {
+    const clickedEl = e.currentTarget;
+    const newClass = `categories--${clickedEl.dataset.amountType}`;
+    categoryBreakdownSection.classList.remove(currentChoice);
+    categoryBreakdownSection.classList.add(newClass);
+    currentChoice = newClass;
+    amountContainers.forEach((container) => container.classList.remove('active'));
+    clickedEl.classList.add('active');
+  }
 </script>
 {% endblock %}

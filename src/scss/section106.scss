@@ -170,6 +170,13 @@ $hover-border-width: 5px;
   &:hover {
     background: govuk-colour("grey-4");
   }
+  &.active {
+    border-color: govuk-colour("grey-2");
+    &:hover {
+      border-color: $govuk-text-colour;
+      color: $govuk-text-colour;
+    }
+  }
 }
 
 .contribution-box-with-inline {
@@ -189,14 +196,26 @@ $hover-border-width: 5px;
 
 .contribution-box--received {
   background: govuk-colour("blue");
+  &.active {
+    border-color: govuk-colour("blue");
+    color: govuk-colour("blue");
+  }
 }
 
 .contribution-box--spent {
   background: govuk-colour("green");
+  &.active {
+    border-color: govuk-colour("green");
+    color: govuk-colour("green");
+  }
 }
 
 .contribution-box--not-received {
  background: govuk-colour("grey-1");
+ &.active {
+   border-color: govuk-colour("grey-1");
+   color: govuk-colour("grey-1");
+ }
 }
 
 .contribution-box-container {
@@ -255,33 +274,62 @@ $hover-border-width: 5px;
   }
 }
 
+.categories-container {
+  .contribution-box:hover {
+    background: govuk-colour("grey-4");
+  }
+}
+
+.categories--all {
+  .categories-set--received,
+  .categories-set--spent,
+  .categories-set--not-received {
+    display: none;
+  }
+}
+
 .categories--received {
-  .contribution-box {
-    background: govuk-colour("blue");
-    &:hover {
-      background: govuk-colour("grey-4");
-    }
+  .categories-set--all,
+  .categories-set--spent,
+  .categories-set--not-received {
+    display: none;
   }
 }
 
 .categories--spent {
+  .categories-set--received,
+  .categories-set--all,
+  .categories-set--not-received {
+    display: none;
+  }
+}
+
+.categories--not-received {
+  .categories-set--received,
+  .categories-set--spent,
+  .categories-set--all {
+    display: none;
+  }
+}
+
+.categories-set--received {
+  .contribution-box {
+    background: govuk-colour("blue");
+  }
+}
+
+.categories-set--spent {
   .contribution-box {
     background: govuk-colour("green");
-    &:hover {
-      background: govuk-colour("grey-4");
-    }
   }
   .cil-explanation {
     display: none;
   }
 }
 
-.categories--not-received {
+.categories-set--not-received {
   .contribution-box {
    background: govuk-colour("grey-1");
-  }
-  &:hover {
-    background: govuk-colour("grey-4");
   }
 }
 
@@ -298,6 +346,7 @@ $hover-border-width: 5px;
   padding: 30px 0;
   position: relative;
   a, .elb-end {
+    cursor: pointer;
     background: #fff;
     padding: 0 15px;
     position: absolute;
@@ -307,6 +356,9 @@ $hover-border-width: 5px;
   }
   .elb-end {
     border: 1px solid $govuk-border-colour;
+    &:hover {
+      border-color: govuk-colour('blue');
+    }
   }
 }
 
@@ -317,5 +369,52 @@ $hover-border-width: 5px;
     .govuk-heading-s {
       margin-bottom: 5px;
     }
+  }
+}
+
+.categories-container {
+  //transition: height 2s;
+}
+
+.categories-container.collapsed + .expanding-line-break {
+  .categories-control-close {
+    display: none;
+  }
+}
+
+.categories-container.collapsed {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  &:after {
+    content: "";
+    position: absolute;
+    background: #fff;
+    opacity: 0.5;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &.opening {
+    animation-iteration-count: 1;
+    animation: opening-panel 0.3s alternate;
+  }
+}
+.categories-container.closing {
+  height: 650px;
+  overflow: hidden;
+  animation-iteration-count: 1;
+  animation: closing-panel 0.3s alternate;
+}
+
+@keyframes opening-panel {
+  to {
+    height: 650px;
+  }
+}
+
+@keyframes closing-panel {
+  to {
+    height: 200px;
   }
 }
