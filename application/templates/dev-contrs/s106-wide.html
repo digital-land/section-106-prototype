@@ -164,6 +164,10 @@
         <div class="govuk-grid-column-full">
           <h2 class="govuk-heading-l">All contributions</h2>
 
+          <div class="download-as-container">
+            <p class="govuk-body">Download as: <a class="govuk-link" href="#">json</a>, <a class="govuk-link" href="#">yaml</a>, <a class="govuk-link" href="#">csv</a> and <a class="govuk-link" href="#">tsv</a>.</p>
+          </div>
+
           {% macro contributionRow(contribution) %}
           <tr class="govuk-table__row">
             <th class="govuk-table__cell" scope="row">{{ contribution.plaid }}</th>
