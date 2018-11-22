@@ -112,12 +112,7 @@ th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
   left: 20px;
 }
 
-.govuk-select-m {
-  width: 100%;
-  @include govuk-media-query($from: desktop) {
-    width: 50%
-  }
-}
+@import "project-components/forms";
 
 // ==================================
 // Added for section106 report layout
@@ -137,6 +132,12 @@ th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
   .af-item {
     font-size: 16px !important;
   }
+  .af-close {
+    font-size: 14px !important;
+    position: absolute;
+    top: 10px;
+    right: $govuk-gutter-half;
+  }
 }
 
 .af-heading {
@@ -150,6 +151,7 @@ th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
   }
 }
 
+$hover-border-width: 5px;
 // contribution boxes
 .contribution-box {
   background: govuk-colour("grey-2");
@@ -159,19 +161,41 @@ th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
   &.active,
   &:hover {
     background: #fff;
-    border: 5px solid $govuk-text-colour;
+    border: $hover-border-width solid $govuk-text-colour;
     color: $govuk-text-colour;
     cursor: pointer;
-    padding: $govuk-gutter-half - 5;
+    padding: $govuk-gutter-half - $hover-border-width;
   }
+  &:hover {
+    background: govuk-colour("grey-4");
+  }
+}
+
+.contribution-box-with-inline {
+  padding-bottom: 10px;
+  &.active,
+  &:hover {
+    padding-bottom: (10px - $hover-border-width);
+  }
+  .data-item {
+    display: inline-block;
+  }
+}
+
+.contribution-box--total {
+  margin-bottom: 5px;
 }
 
 .contribution-box--received {
   background: govuk-colour("blue");
 }
 
-.contribution-box--total {
- 
+.contribution-box--spent {
+  background: govuk-colour("green");
+}
+
+.contribution-box--not-received {
+ background: govuk-colour("grey-1");
 }
 
 .contribution-box-container {
@@ -185,20 +209,34 @@ th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
 .contribution-box-container-received {
   @include govuk-media-query($from: desktop) {
     width: 69%;
-    padding: 0 2.5px 0 15px;
-  }
-  .contribution-box {
-    background: govuk-colour("blue");
-    &:hover {
-      background: #fff;
+    padding: 0 ($hover-border-width/2) 0 15px;
+    @include govuk-clearfix;
+    position: relative;
+
+    .contribution-box--spent {
+      position: absolute;
+      top: 0;
+      right: ($hover-border-width/2);
+      width: 50%;
     }
+
+    &:hover {
+      .contribution-box--spent:not(:hover) {
+        top: $hover-border-width;
+        right: $hover-border-width + ($hover-border-width/2);
+        padding: ($govuk-gutter-half - $hover-border-width) 0px ($govuk-gutter-half - $hover-border-width) $govuk-gutter-half;
+        width: calc(50% - 5px);
+
+      }
+    }
+    
   }
 }
 
 .contribution-box-container-not-received {
   @include govuk-media-query($from: desktop) {
     width: 31%;
-    padding: 0 15px 0 2.5px;
+    padding: 0 15px 0 ($hover-border-width/2);
   }
 }
 
@@ -215,6 +253,37 @@ th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
     }
   }
 }
+
+.categories--received {
+  .contribution-box {
+    background: govuk-colour("blue");
+    &:hover {
+      background: govuk-colour("grey-4");
+    }
+  }
+}
+
+.categories--spent {
+  .contribution-box {
+    background: govuk-colour("green");
+    &:hover {
+      background: govuk-colour("grey-4");
+    }
+  }
+  .cil-explanation {
+    display: none;
+  }
+}
+
+.categories--not-received {
+  .contribution-box {
+   background: govuk-colour("grey-1");
+  }
+  &:hover {
+    background: govuk-colour("grey-4");
+  }
+}
+
 
 .contribution-category-heading {
   line-height: 42px;
@@ -237,5 +306,15 @@ th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
   }
   .elb-end {
     border: 1px solid $govuk-border-colour;
+  }
+}
+
+.category-breakdown-section {
+  .govuk-inset-text {
+    margin-top: 0;
+    padding: 10px 15px;
+    .govuk-heading-s {
+      margin-bottom: 5px;
+    }
   }
 }

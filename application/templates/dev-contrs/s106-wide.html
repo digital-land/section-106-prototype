@@ -68,11 +68,11 @@
         <div class="govuk-grid-column-full">
 
           <form action="" class="form">
-            <div class="govuk-form-group">
+            <div class="govuk-form-group govuk-form-group-inline">
               <label class="govuk-label" for="sort">
                 Time period
               </label>
-              <select class="govuk-select govuk-select-m" id="sort" name="sort">
+              <select class="govuk-select govuk-select-s" id="sort" name="sort">
                 <option value="published" selected>Last year</option>
                 <option value="updated">Last 6 months</option>
                 <option value="views">Last 3 months</option>
@@ -82,9 +82,11 @@
             </div>
           </form>
 
-          <div class="contribution-box">
+          <div class="contribution-box contribution-box--total contribution-box-with-inline active">
             <div class="data">
-              <span class="data-item govuk-!-font-size-80 govuk-!-font-weight-bold">£36,559,359</span>
+              <span class="data-item govuk-!-font-size-80 govuk-!-font-weight-bold">
+                £36,559,359
+              </span>
               <span class="data-item bold-xsmall govuk-!-font-size-16 govuk-!-font-weight-bold">
               In commitments</span>
             </div>
@@ -93,17 +95,24 @@
         </div>
 
         <div class="govuk-grid-column-two-thirds contribution-box-container contribution-box-container-received">
-          <div class="contribution-box">
+          <div class="contribution-box contribution-box--received">
             <div class="data">
               <span class="data-item govuk-!-font-size-36 govuk-!-font-weight-bold">£25,225,958</span>
               <span class="data-item bold-xsmall govuk-!-font-size-16 govuk-!-font-weight-bold">
               Received</span>
             </div>
           </div>
+          <div class="contribution-box contribution-box--spent contribution-box--inner">
+            <div class="data">
+              <span class="data-item govuk-!-font-size-36 govuk-!-font-weight-bold">£13,225,958</span>
+              <span class="data-item bold-xsmall govuk-!-font-size-16 govuk-!-font-weight-bold">
+              Spent</span>
+            </div>
+          </div>
         </div>
 
         <div class="govuk-grid-column-two-thirds contribution-box-container contribution-box-container-not-received">
-          <div class="contribution-box">
+          <div class="contribution-box contribution-box--not-received">
             <div class="data">
               <span class="data-item govuk-!-font-size-36 govuk-!-font-weight-bold">£11,333,401</span>
               <span class="data-item bold-xsmall govuk-!-font-size-16 govuk-!-font-weight-bold">
@@ -114,12 +123,21 @@
 
       </div>
 
-      <div class="govuk-grid-row">
+      <div class="govuk-grid-row category-breakdown-section categories--received">
         <div class="govuk-grid-column-full">
 
           <div class="expanding-line-break">
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
             <a href="#" class="govuk-link">See category breakdown</a>
+          </div>
+
+          <div class="govuk-grid-row cil-explanation">
+            <div class="govuk-grid-column-two-thirds">
+              <div class="govuk-inset-text">
+                <h4 class="govuk-heading-s">CIL Contributions</h4>
+                <p class="govuk-body">CIL contributions are only categorised when the money has been spend by the Local Authority on a project.</p>
+              </div>
+            </div>
           </div>
 
           {% for category in categories %}
@@ -128,7 +146,7 @@
               <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
             </div>
             <div class="govuk-grid-column-two-thirds">
-              <div class="contribution-box contribution-box--received" style="width: {{ category.width }};">
+              <div class="contribution-box" style="width: {{ category.width }};">
                 <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount }}</span>
               </div>
             </div>
