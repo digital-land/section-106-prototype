@@ -144,7 +144,6 @@
 
             {% set largest = categories | map(attribute='amount')| sort | last %}
             {% set smallest = categories | map(attribute='amount')| sort | first %}
-
             <div class="categories-set--all">
               {% for category in categories %}
               <div class="govuk-grid-row contribution-category-row">
@@ -160,6 +159,8 @@
               {% endfor %}
             </div>
 
+            {% set largest = categories | map(attribute='received')| sort | last %}
+            {% set smallest = categories | map(attribute='received')| sort | first %}
             <div class="categories-set--received">
               {% for category in categories %}
               <div class="govuk-grid-row contribution-category-row">
@@ -167,14 +168,16 @@
                   <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
                 </div>
                 <div class="govuk-grid-column-two-thirds">
-                  <div class="contribution-box" style="width: {{ determine_width(category.amount, largest, smallest) }}%;">
-                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount | readable_number }}</span>
+                  <div class="contribution-box" style="width: {{ determine_width(category.received, largest, smallest) }}%;">
+                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.received | readable_number }}</span>
                   </div>
                 </div>
               </div>
               {% endfor %}
             </div>
 
+            {% set largest = categories | map(attribute='spent')| sort | last %}
+            {% set smallest = categories | map(attribute='spent')| sort | first %}
             <div class="categories-set--spent">
               {% for category in categories %}
               <div class="govuk-grid-row contribution-category-row">
@@ -182,14 +185,16 @@
                   <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
                 </div>
                 <div class="govuk-grid-column-two-thirds">
-                  <div class="contribution-box" style="width: {{ determine_width(category.amount, largest, smallest) }}%;">
-                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount | readable_number }}</span>
+                  <div class="contribution-box" style="width: {{ determine_width(category.spent, largest, smallest) }}%;">
+                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.spent | readable_number }}</span>
                   </div>
                 </div>
               </div>
               {% endfor %}
             </div>
 
+            {% set largest = categories | map(attribute='outstanding')| sort | last %}
+            {% set smallest = categories | map(attribute='outstanding')| sort | first %}
             <div class="categories-set--not-received">
               {% for category in categories %}
               <div class="govuk-grid-row contribution-category-row">
@@ -197,8 +202,8 @@
                   <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
                 </div>
                 <div class="govuk-grid-column-two-thirds">
-                  <div class="contribution-box" style="width: {{ determine_width(category.amount, largest, smallest) }}%;">
-                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount | readable_number }}</span>
+                  <div class="contribution-box" style="width: {{ determine_width(category.outstanding, largest, smallest) }}%;">
+                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.outstanding | readable_number }}</span>
                   </div>
                 </div>
               </div>
