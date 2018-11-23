@@ -142,6 +142,8 @@
               </div>
             </div>
 
+            {% set largest = categories | map(attribute='amount')| sort | last %}
+            {% set smallest = categories | map(attribute='amount')| sort | first %}
             <div class="categories-set--all">
               {% for category in categories %}
               <div class="govuk-grid-row contribution-category-row">
@@ -149,14 +151,16 @@
                   <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
                 </div>
                 <div class="govuk-grid-column-two-thirds">
-                  <div class="contribution-box" style="width: {{ category.width }};">
-                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount }}</span>
+                  <div class="contribution-box" style="width: {{ determine_width(category.amount, largest, smallest) }}%;">
+                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount | readable_number }}</span>
                   </div>
                 </div>
               </div>
               {% endfor %}
             </div>
 
+            {% set largest = categories | map(attribute='received')| sort | last %}
+            {% set smallest = categories | map(attribute='received')| sort | first %}
             <div class="categories-set--received">
               {% for category in categories %}
               <div class="govuk-grid-row contribution-category-row">
@@ -164,14 +168,16 @@
                   <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
                 </div>
                 <div class="govuk-grid-column-two-thirds">
-                  <div class="contribution-box" style="width: {{ category.width }};">
-                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount }}</span>
+                  <div class="contribution-box" style="width: {{ determine_width(category.received, largest, smallest) }}%;">
+                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.received | readable_number }}</span>
                   </div>
                 </div>
               </div>
               {% endfor %}
             </div>
 
+            {% set largest = categories | map(attribute='spent')| sort | last %}
+            {% set smallest = categories | map(attribute='spent')| sort | first %}
             <div class="categories-set--spent">
               {% for category in categories %}
               <div class="govuk-grid-row contribution-category-row">
@@ -179,14 +185,16 @@
                   <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
                 </div>
                 <div class="govuk-grid-column-two-thirds">
-                  <div class="contribution-box" style="width: {{ category.width }};">
-                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount }}</span>
+                  <div class="contribution-box" style="width: {{ determine_width(category.spent, largest, smallest) }}%;">
+                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.spent | readable_number }}</span>
                   </div>
                 </div>
               </div>
               {% endfor %}
             </div>
 
+            {% set largest = categories | map(attribute='outstanding')| sort | last %}
+            {% set smallest = categories | map(attribute='outstanding')| sort | first %}
             <div class="categories-set--not-received">
               {% for category in categories %}
               <div class="govuk-grid-row contribution-category-row">
@@ -194,8 +202,8 @@
                   <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
                 </div>
                 <div class="govuk-grid-column-two-thirds">
-                  <div class="contribution-box" style="width: {{ category.width }};">
-                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount }}</span>
+                  <div class="contribution-box" style="width: {{ determine_width(category.outstanding, largest, smallest) }}%;">
+                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.outstanding | readable_number }}</span>
                   </div>
                 </div>
               </div>
@@ -249,6 +257,7 @@
                 </tr>
               </thead>
               <tbody class="govuk-table__body">
+                <!-- Original unfiltered contributions
                 <tr class="govuk-table__row">
                   <th class="govuk-table__cell" scope="row">YGOX0902</th>
                   <td class="govuk-table__cell">Ashford Borough Council</td>
@@ -318,11 +327,82 @@
                   <td class="govuk-table__cell">Health</td>
                   <td class="govuk-table__cell"><a href="">See agreement</a></td>
                   <td class="govuk-table__cell govuk-table__cell--numeric">£488,472</td>
+                </tr>-->
+                <!-- Dacorum contirbutions for demo -->
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">YGOX0902</th>
+                  <td class="govuk-table__cell">Dacorum Borough Council</td>
+                  <td class="govuk-table__cell">Transport</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£119,458</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">KOMA9489</th>
+                  <td class="govuk-table__cell">Dacorum Borough Council</td>
+                  <td class="govuk-table__cell">Transport</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£449,956</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">RFFM2899</th>
+                  <td class="govuk-table__cell">Dacorum Borough Council</td>
+                  <td class="govuk-table__cell">Open space</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£550,958</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">EOTL6247</th>
+                  <td class="govuk-table__cell">Dacorum Borough Council</td>
+                  <td class="govuk-table__cell">Health</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£502,145</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">GTZD3480</th>
+                  <td class="govuk-table__cell">Dacorum Borough Council</td>
+                  <td class="govuk-table__cell">Health</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£488,472</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">YGOX1902</th>
+                  <td class="govuk-table__cell">Dacorum Borough Council</td>
+                  <td class="govuk-table__cell">Transport</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£119,458</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">KOMA9589</th>
+                  <td class="govuk-table__cell">Dacorum Borough Council</td>
+                  <td class="govuk-table__cell">Transport</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£419,956</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">RAFM2897</th>
+                  <td class="govuk-table__cell">Dacorum Borough Council</td>
+                  <td class="govuk-table__cell">Open space</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£250,958</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">HOTL6244</th>
+                  <td class="govuk-table__cell">Dacorum Borough Council</td>
+                  <td class="govuk-table__cell">Health</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£402,145</td>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th class="govuk-table__cell" scope="row">HTZD7490</th>
+                  <td class="govuk-table__cell">Dacorum Borough Council</td>
+                  <td class="govuk-table__cell">Health</td>
+                  <td class="govuk-table__cell"><a href="">See agreement</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric">£533,472</td>
                 </tr>
               </tbody>
             </table>
           </div>
-
+          <a href="#" class="govuk-button">Load more contributions</a>
         </div>
       </div>
 
