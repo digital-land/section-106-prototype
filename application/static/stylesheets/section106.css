@@ -6098,7 +6098,8 @@ th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
 
 .categories--spent .categories-set--received,
 .categories--spent .categories-set--all,
-.categories--spent .categories-set--not-received {
+.categories--spent .categories-set--not-received,
+.categories--spent .cil-explanation {
   display: none;
 }
 
@@ -6114,10 +6115,6 @@ th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
 
 .categories-set--spent .contribution-box {
   background: #006435;
-}
-
-.categories-set--spent .cil-explanation {
-  display: none;
 }
 
 .categories-set--not-received .contribution-box {

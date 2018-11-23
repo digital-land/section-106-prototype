@@ -299,7 +299,8 @@ $hover-border-width: 5px;
 .categories--spent {
   .categories-set--received,
   .categories-set--all,
-  .categories-set--not-received {
+  .categories-set--not-received,
+  .cil-explanation {
     display: none;
   }
 }
@@ -321,9 +322,6 @@ $hover-border-width: 5px;
 .categories-set--spent {
   .contribution-box {
     background: govuk-colour("green");
-  }
-  .cil-explanation {
-    display: none;
   }
 }
 
