@@ -25,7 +25,8 @@
             "type": "string",
             "constraints": {
                 "required": true,
-                "pattern": "(affordable-housing|education|health|highways|transport|open-space|community-facilities|green-infrastructure|community-infrastructure-levy|other)"            }
+                "pattern": "(affordable-housing|education|health|highways|transport|open-space|community-facilities|green-infrastructure|community-infrastructure-levy|other)"
+            }
         },
         {
             "name": "amount",
