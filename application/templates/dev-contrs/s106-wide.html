@@ -142,81 +142,31 @@
               </div>
             </div>
 
-            {% set largest = categories | map(attribute='amount')| sort | last %}
-            {% set smallest = categories | map(attribute='amount')| sort | first %}
-            <div class="categories-set--all">
-              {% for category in categories %}
-              <div class="govuk-grid-row contribution-category-row">
-                <div class="govuk-grid-column-one-third">
-                  <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
-                </div>
-                <div class="govuk-grid-column-two-thirds">
-                  {% set width = determine_width(category.amount, largest) %}
-                  <div class="contribution-box{%- if width < 25 %} small-number{%- endif -%}" style="width: {{ width }}%;">
-                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount | readable_number }}</span>
-                  </div>
-                  <div class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item floating-figure">£{{ category.amount | readable_number }}</div>
-                </div>
-              </div>
-              {% endfor %}
-            </div>
+            {% macro render_category_breakdown(categories, cont_type) %}
+            {% set largest = categories | map(attribute=cont_type)| sort | last %}
+            <div class="categories-set--{%- if cont_type == 'amount' -%}all{%- elif cont_type == 'outstanding' -%}not-received{%- else -%}{{ cont_type }}{% endif %}">
 
-            {% set largest = categories | map(attribute='received')| sort | last %}
-            {% set smallest = categories | map(attribute='received')| sort | first %}
-            <div class="categories-set--received">
               {% for category in categories %}
               <div class="govuk-grid-row contribution-category-row">
                 <div class="govuk-grid-column-one-third">
                   <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
                 </div>
                 <div class="govuk-grid-column-two-thirds">
-                  {% set width = determine_width(category.received, largest) %}
+                  {% set width = determine_width(category[cont_type], largest) %}
                   <div class="contribution-box{%- if width < 25 %} small-number{%- endif -%}" style="width: {{ width }}%;">
-                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.received | readable_number }}</span>
+                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category[cont_type] | readable_number }}</span>
                   </div>
-                  <div class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item floating-figure">£{{ category.received | readable_number }}</div>
+                  <div class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item floating-figure">£{{ category[cont_type] | readable_number }}</div>
                 </div>
               </div>
               {% endfor %}
             </div>
+            {% endmacro %}
 
-            {% set largest = categories | map(attribute='spent')| sort | last %}
-            {% set smallest = categories | map(attribute='spent')| sort | first %}
-            <div class="categories-set--spent">
-              {% for category in categories %}
-              <div class="govuk-grid-row contribution-category-row">
-                <div class="govuk-grid-column-one-third">
-                  <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
-                </div>
-                <div class="govuk-grid-column-two-thirds">
-                  {% set width = determine_width(category.spent, largest) %}
-                  <div class="contribution-box{%- if width < 25 %} small-number{%- endif -%}" style="width: {{ width }}%;">
-                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.spent | readable_number }}</span>
-                  </div>
-                  <div class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item floating-figure">£{{ category.spent | readable_number }}</div>
-                </div>
-              </div>
-              {% endfor %}
-            </div>
-
-            {% set largest = categories | map(attribute='outstanding')| sort | last %}
-            {% set smallest = categories | map(attribute='outstanding')| sort | first %}
-            <div class="categories-set--not-received">
-              {% for category in categories %}
-              <div class="govuk-grid-row contribution-category-row">
-                <div class="govuk-grid-column-one-third">
-                  <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
-                </div>
-                <div class="govuk-grid-column-two-thirds">
-                  {% set width = determine_width(category.outstanding, largest) %}
-                  <div class="contribution-box{%- if width < 25 %} small-number{%- endif -%}" style="width: {{ width }}%;">
-                    <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.outstanding | readable_number }}</span>
-                  </div>
-                  <div class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item floating-figure">£{{ category.outstanding | readable_number }}</div>
-                </div>
-              </div>
-              {% endfor %}
-            </div>
+            {{ render_category_breakdown(categories, 'amount') }}
+            {{ render_category_breakdown(categories, 'received') }}
+            {{ render_category_breakdown(categories, 'spent') }}
+            {{ render_category_breakdown(categories, 'outstanding') }}
 
           </div>
 
