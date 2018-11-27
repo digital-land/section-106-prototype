@@ -270,18 +270,32 @@ $hover-border-width: 5px;
     float: left;
     overflow: hidden;
 
-    &:hover {
-      border: 2px solid $govuk-text-colour;
-      padding: 9px 8px 5px ;
-    }
     .data-item {
       line-height: 1 !important;
     }
   }
+
+  .category-bar:hover .small-bar,
+  .contribution-box:hover {
+    border: 2px solid $govuk-text-colour;
+    padding: 9px 8px 5px;
+    background: govuk-colour("grey-4");
+  }
+
+  .category-bar:hover {
+    cursor: pointer;
+    .floating-figure {
+      color: $govuk-text-colour;
+      &:after {
+        background: $govuk-text-colour;
+      }
+    }
+  }
+
   .floating-figure {
     display: none;
   }
-  .small-number {
+  .small-bar {
     position: relative;
     & > .data-item {
       visibility: hidden;
@@ -296,7 +310,7 @@ $hover-border-width: 5px;
   }
 }
 
-$line-thickness: 5px;
+$line-thickness: 2px;
 .floating-figure {
   color: govuk-colour("grey-2");
   &:after {

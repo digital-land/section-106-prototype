@@ -6076,28 +6076,42 @@ th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
   overflow: hidden;
 }
 
+.contribution-category-row .contribution-box .data-item {
+  line-height: 1 !important;
+}
+
+.contribution-category-row .category-bar:hover .small-bar,
 .contribution-category-row .contribution-box:hover {
   border: 2px solid #0b0c0c;
   padding: 9px 8px 5px;
+  background: #f8f8f8;
 }
 
-.contribution-category-row .contribution-box .data-item {
-  line-height: 1 !important;
+.contribution-category-row .category-bar:hover {
+  cursor: pointer;
+}
+
+.contribution-category-row .category-bar:hover .floating-figure {
+  color: #0b0c0c;
+}
+
+.contribution-category-row .category-bar:hover .floating-figure:after {
+  background: #0b0c0c;
 }
 
 .contribution-category-row .floating-figure {
   display: none;
 }
 
-.contribution-category-row .small-number {
+.contribution-category-row .small-bar {
   position: relative;
 }
 
-.contribution-category-row .small-number > .data-item {
+.contribution-category-row .small-bar > .data-item {
   visibility: hidden;
 }
 
-.contribution-category-row .small-number + .floating-figure {
+.contribution-category-row .small-bar + .floating-figure {
   display: inline-block;
   position: relative;
   float: left;
@@ -6112,12 +6126,12 @@ th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
 .floating-figure:after {
   content: '';
   position: absolute;
-  height: 5px;
+  height: 2px;
   width: 15px;
   background: #bfc1c3;
   left: 0;
   top: 50%;
-  top: calc(50% - 2.5px);
+  top: calc(50% - 1px);
 }
 
 .categories-container .contribution-box:hover {

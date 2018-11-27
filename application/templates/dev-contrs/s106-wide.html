@@ -151,12 +151,12 @@
                 <div class="govuk-grid-column-one-third">
                   <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
                 </div>
-                <div class="govuk-grid-column-two-thirds">
+                <div class="govuk-grid-column-two-thirds category-bar">
                   {% set width = determine_width(category[cont_type], largest) %}
-                  <div class="contribution-box{%- if width < 25 %} small-number{%- endif -%}" style="width: {{ width }}%;">
+                  <div class="contribution-box{%- if width < 20 %} small-bar{%- endif -%}" style="width: {{ width }}%;">
                     <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category[cont_type] | readable_number }}</span>
                   </div>
-                  <div class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item floating-figure">£{{ category[cont_type] | readable_number }}</div>
+                  <div class="govuk-!-font-size-24 data-item floating-figure">£{{ category[cont_type] | readable_number }}</div>
                 </div>
               </div>
               {% endfor %}
