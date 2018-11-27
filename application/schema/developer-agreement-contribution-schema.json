@@ -25,7 +25,7 @@
             "type": "string",
             "constraints": {
                 "required": true,
-                "pattern": "(section-106\\.affordable-housing|section-106\\.education|section-106\\.health|section-106\\.highways|section-106\\.transport|section-106\\.open-space|section-106\\.community-facilities|section-106\\.green-infrastructure|section-106\\.other|community-infrastructure-levy\\.community-infrastructure-levy|community-infrastucture\\.affordable-housing|community-infrastucture\\.education|community-infrastucture\\.health|community-infrastucture\\.transport|community-infrastucture\\.open-space|community-infrastucture\\.community-facilities|community-infrastucture\\.green-infrastructure|community-infrastucture\\.other)"
+                "pattern": "(affordable-housing|education|health|highways|transport|open-space|community-facilities|green-infrastructure|other|community-infrastructure-levy\\.community-infrastructure-levy|community-infrastucture\\.affordable-housing|community-infrastucture\\.education|community-infrastucture\\.health|community-infrastucture\\.transport|community-infrastucture\\.open-space|community-infrastucture\\.community-facilities|community-infrastucture\\.green-infrastructure|community-infrastucture\\.other)"
             }
         },
         {
