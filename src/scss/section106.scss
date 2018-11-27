@@ -248,6 +248,9 @@ $hover-border-width: 5px;
         width: calc(50% - 5px);
 
       }
+      .contribution-box--spent.active:not(:hover) {
+        padding: ($govuk-gutter-half - $hover-border-width*2) 0px ($govuk-gutter-half - $hover-border-width*2) ($govuk-gutter-half - $hover-border-width);
+      }
     }
     
   }

@@ -6054,6 +6054,9 @@ th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
     padding: 10px 0px 10px 15px;
     width: calc(50% - 5px);
   }
+  .contribution-box-container-received:hover .contribution-box--spent.active:not(:hover) {
+    padding: 5px 0px 5px 10px;
+  }
 }
 
 @media (min-width: 48.0625em) {
