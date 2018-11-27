@@ -206,11 +206,9 @@ def asset_path_context_processor():
 
 @frontend.context_processor
 def determine_width():
-    def _determine_width(number, largest, smallest):
-        default = 33
-        remainder = number - smallest
-        if remainder == 0:
-            return default
-        additional = 67 / ((largest - smallest) / (number - smallest))
-        return math.ceil(default + additional)
+    def _determine_width(number, largest):
+        width = 100 * (number / largest)
+        if width < 5:
+            return 5
+        return math.ceil(width)
     return dict(determine_width=_determine_width)

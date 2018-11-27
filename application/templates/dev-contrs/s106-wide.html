@@ -151,9 +151,11 @@
                   <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
                 </div>
                 <div class="govuk-grid-column-two-thirds">
-                  <div class="contribution-box" style="width: {{ determine_width(category.amount, largest, smallest) }}%;">
+                  {% set width = determine_width(category.amount, largest) %}
+                  <div class="contribution-box{%- if width < 25 %} small-number{%- endif -%}" style="width: {{ width }}%;">
                     <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.amount | readable_number }}</span>
                   </div>
+                  <div class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item floating-figure">£{{ category.amount | readable_number }}</div>
                 </div>
               </div>
               {% endfor %}
@@ -168,9 +170,11 @@
                   <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
                 </div>
                 <div class="govuk-grid-column-two-thirds">
-                  <div class="contribution-box" style="width: {{ determine_width(category.received, largest, smallest) }}%;">
+                  {% set width = determine_width(category.received, largest) %}
+                  <div class="contribution-box{%- if width < 25 %} small-number{%- endif -%}" style="width: {{ width }}%;">
                     <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.received | readable_number }}</span>
                   </div>
+                  <div class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item floating-figure">£{{ category.received | readable_number }}</div>
                 </div>
               </div>
               {% endfor %}
@@ -185,9 +189,11 @@
                   <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
                 </div>
                 <div class="govuk-grid-column-two-thirds">
-                  <div class="contribution-box" style="width: {{ determine_width(category.spent, largest, smallest) }}%;">
+                  {% set width = determine_width(category.spent, largest) %}
+                  <div class="contribution-box{%- if width < 25 %} small-number{%- endif -%}" style="width: {{ width }}%;">
                     <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.spent | readable_number }}</span>
                   </div>
+                  <div class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item floating-figure">£{{ category.spent | readable_number }}</div>
                 </div>
               </div>
               {% endfor %}
@@ -202,9 +208,11 @@
                   <h4 class="govuk-heading-s contribution-category-heading">{{ category.name }}</h4>
                 </div>
                 <div class="govuk-grid-column-two-thirds">
-                  <div class="contribution-box" style="width: {{ determine_width(category.outstanding, largest, smallest) }}%;">
+                  {% set width = determine_width(category.outstanding, largest) %}
+                  <div class="contribution-box{%- if width < 25 %} small-number{%- endif -%}" style="width: {{ width }}%;">
                     <span class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item">£{{ category.outstanding | readable_number }}</span>
                   </div>
+                  <div class="govuk-!-font-size-24 govuk-!-font-weight-bold data-item floating-figure">£{{ category.outstanding | readable_number }}</div>
                 </div>
               </div>
               {% endfor %}

@@ -267,6 +267,9 @@ $hover-border-width: 5px;
   margin-bottom: 15px;
   .contribution-box {
     padding: 11px 10px 7px;
+    float: left;
+    overflow: hidden;
+
     &:hover {
       border: 2px solid $govuk-text-colour;
       padding: 9px 8px 5px ;
@@ -274,6 +277,37 @@ $hover-border-width: 5px;
     .data-item {
       line-height: 1 !important;
     }
+  }
+  .floating-figure {
+    display: none;
+  }
+  .small-number {
+    position: relative;
+    & > .data-item {
+      visibility: hidden;
+    }
+    & + .floating-figure {
+      display: inline-block;
+      position: relative;
+      float: left;
+      padding: 11px 10px 7px 25px;
+      line-height: 1 !important;
+    }
+  }
+}
+
+$line-thickness: 5px;
+.floating-figure {
+  color: govuk-colour("grey-2");
+  &:after {
+    content: '';
+    position: absolute;
+    height: $line-thickness;
+    width: 15px;
+    background: govuk-colour("grey-2");
+    left: 0;
+    top: 50%;
+    top: calc(50% - #{$line-thickness/2});
   }
 }
 
@@ -320,17 +354,35 @@ $hover-border-width: 5px;
   .contribution-box {
     background: govuk-colour("blue");
   }
+  .floating-figure {
+    color: govuk-colour("blue");
+    &:after {
+      background: govuk-colour("blue");
+    }
+  }
 }
 
 .categories-set--spent {
   .contribution-box {
     background: govuk-colour("green");
   }
+  .floating-figure {
+    color: govuk-colour("green");
+    &:after {
+      background: govuk-colour("green");
+    }
+  }
 }
 
 .categories-set--not-received {
   .contribution-box {
    background: govuk-colour("grey-1");
+  }
+  .floating-figure {
+    color: govuk-colour("grey-1");
+    &:after {
+      background: govuk-colour("grey-1");
+    }
   }
 }
 
