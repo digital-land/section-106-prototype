@@ -262,68 +262,9 @@ $hover-border-width: 5px;
     padding: 0 15px 0 ($hover-border-width/2);
   }
 }
+// =========
 
-.contribution-category-row {
-  margin-bottom: 15px;
-  .contribution-box {
-    padding: 11px 10px 7px;
-    float: left;
-    overflow: hidden;
-
-    .data-item {
-      line-height: 1 !important;
-    }
-  }
-
-  .category-bar:hover .small-bar,
-  .contribution-box:hover {
-    border: 2px solid $govuk-text-colour;
-    padding: 9px 8px 5px;
-    background: govuk-colour("grey-4");
-  }
-
-  .category-bar:hover {
-    cursor: pointer;
-    .floating-figure {
-      color: $govuk-text-colour;
-      &:after {
-        background: $govuk-text-colour;
-      }
-    }
-  }
-
-  .floating-figure {
-    display: none;
-  }
-  .small-bar {
-    position: relative;
-    & > .data-item {
-      visibility: hidden;
-    }
-    & + .floating-figure {
-      display: inline-block;
-      position: relative;
-      float: left;
-      padding: 11px 10px 7px 25px;
-      line-height: 1 !important;
-    }
-  }
-}
-
-$line-thickness: 2px;
-.floating-figure {
-  color: govuk-colour("grey-2");
-  &:after {
-    content: '';
-    position: absolute;
-    height: $line-thickness;
-    width: 15px;
-    background: govuk-colour("grey-2");
-    left: 0;
-    top: 50%;
-    top: calc(50% - #{$line-thickness/2});
-  }
-}
+@import "project-components/contribution-bar";
 
 .categories-container {
   .contribution-box:hover {
@@ -363,49 +304,6 @@ $line-thickness: 2px;
     display: none;
   }
 }
-
-.categories-set--received {
-  .contribution-box {
-    background: govuk-colour("blue");
-  }
-  .floating-figure {
-    color: govuk-colour("blue");
-    &:after {
-      background: govuk-colour("blue");
-    }
-  }
-}
-
-.categories-set--spent {
-  .contribution-box {
-    background: govuk-colour("green");
-  }
-  .floating-figure {
-    color: govuk-colour("green");
-    &:after {
-      background: govuk-colour("green");
-    }
-  }
-}
-
-.categories-set--not-received {
-  .contribution-box {
-   background: govuk-colour("grey-1");
-  }
-  .floating-figure {
-    color: govuk-colour("grey-1");
-    &:after {
-      background: govuk-colour("grey-1");
-    }
-  }
-}
-
-
-.contribution-category-heading {
-  line-height: 42px;
-  margin-bottom: 0;
-}
-
 
 // expanding line break
 // maybe should be a details and summary elememt
