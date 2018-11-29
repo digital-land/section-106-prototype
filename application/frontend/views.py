@@ -13,6 +13,7 @@ from flask import (
 import json
 import os.path
 import uuid
+import math
 
 from application.utils import section_106_contribution_categories
 from application.extensions import db
@@ -195,6 +196,20 @@ def all_developer_contributions():
 def section_106_register():
     return render_template('dev-contrs/s106.html', localauthorities=LocalAuthority.query.all(), categories=section_106_contribution_categories)
 
+@frontend.route('/developer-contributions/section106-wide')
+def section_106_register_wide():
+    return render_template('dev-contrs/s106-wide.html', localauthorities=LocalAuthority.query.all(), categories=section_106_contribution_categories)
+
+
 @frontend.context_processor
 def asset_path_context_processor():
     return {'assetPath': '/static/govuk-frontend/assets'}
+
+@frontend.context_processor
+def determine_width():
+    def _determine_width(number, largest):
+        width = 100 * (number / largest)
+        if width < 5:
+            return 5
+        return math.ceil(width)
+    return dict(determine_width=_determine_width)

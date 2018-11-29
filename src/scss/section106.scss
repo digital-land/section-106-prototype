@@ -112,9 +112,274 @@ th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
   left: 20px;
 }
 
-.govuk-select-m {
+@import "project-components/forms";
+@import "project-components/search-box";
+
+// ==================================
+// Added for section106 report layout
+// ==================================
+
+@import "project-components/mhclg-branding";
+@import "project-components/site-full-width-container";
+
+// applied filters box
+.applied-filters-container {
+  background: #d5e8f3;
+  border: 1px solid $govuk-link-colour;
+  padding: $govuk-gutter-half;
+  position: relative;
+
+  .af-heading,
+  .af-item {
+    font-size: 16px !important;
+  }
+  .af-close {
+    font-size: 14px !important;
+    position: absolute;
+    top: 10px;
+    right: $govuk-gutter-half;
+  }
+}
+
+.af-heading {
+  margin-bottom: 10px;
+}
+
+.af-item {
+  margin: 0;
+  strong {
+    padding-right: $govuk-gutter-half;
+  }
+}
+
+$hover-border-width: 5px;
+// contribution boxes
+.contribution-box {
+  background: govuk-colour("grey-2");
+  box-sizing: border-box;
+  padding: $govuk-gutter-half;
+  color: #fff;
+  &.active,
+  &:hover {
+    background: #fff;
+    border: $hover-border-width solid $govuk-text-colour;
+    color: $govuk-text-colour;
+    cursor: pointer;
+    padding: $govuk-gutter-half - $hover-border-width;
+  }
+  &:hover {
+    background: govuk-colour("grey-4");
+  }
+  &.active {
+    border-color: govuk-colour("grey-2");
+    &:hover {
+      border-color: $govuk-text-colour;
+      color: $govuk-text-colour;
+    }
+  }
+}
+
+.contribution-box-with-inline {
+  padding-bottom: 10px;
+  &.active,
+  &:hover {
+    padding-bottom: (10px - $hover-border-width);
+  }
+  .data-item {
+    display: inline-block;
+  }
+}
+
+.contribution-box--total {
+  margin-bottom: 5px;
+}
+
+.contribution-box--received {
+  background: govuk-colour("blue");
+  &.active {
+    border-color: govuk-colour("blue");
+    color: govuk-colour("blue");
+  }
+}
+
+.contribution-box--spent {
+  background: govuk-colour("green");
+  &.active {
+    border-color: govuk-colour("green");
+    color: govuk-colour("green");
+  }
+}
+
+.contribution-box--not-received {
+ background: govuk-colour("grey-1");
+ &.active {
+   border-color: govuk-colour("grey-1");
+   color: govuk-colour("grey-1");
+ }
+}
+
+.contribution-box-container {
+  box-sizing: border-box;
   width: 100%;
+  padding: 0 15px;
   @include govuk-media-query($from: desktop) {
-    width: 50%
+    float: left;
+  }
+} 
+.contribution-box-container-received {
+  @include govuk-media-query($from: desktop) {
+    width: 69%;
+    padding: 0 ($hover-border-width/2) 0 15px;
+    @include govuk-clearfix;
+    position: relative;
+
+    .contribution-box--spent {
+      position: absolute;
+      top: 0;
+      right: ($hover-border-width/2);
+      width: 50%;
+    }
+
+    &:hover {
+      .contribution-box--spent:not(:hover) {
+        top: $hover-border-width;
+        right: $hover-border-width + ($hover-border-width/2);
+        padding: ($govuk-gutter-half - $hover-border-width) 0px ($govuk-gutter-half - $hover-border-width) $govuk-gutter-half;
+        width: calc(50% - 5px);
+
+      }
+      .contribution-box--spent.active:not(:hover) {
+        padding: ($govuk-gutter-half - $hover-border-width*2) 0px ($govuk-gutter-half - $hover-border-width*2) ($govuk-gutter-half - $hover-border-width);
+      }
+    }
+    
+  }
+}
+
+.contribution-box-container-not-received {
+  @include govuk-media-query($from: desktop) {
+    width: 31%;
+    padding: 0 15px 0 ($hover-border-width/2);
+  }
+}
+// =========
+
+@import "project-components/contribution-bar";
+
+.categories-container {
+  .contribution-box:hover {
+    background: govuk-colour("grey-4");
+  }
+}
+
+.categories--all {
+  .categories-set--received,
+  .categories-set--spent,
+  .categories-set--not-received {
+    display: none;
+  }
+}
+
+.categories--received {
+  .categories-set--all,
+  .categories-set--spent,
+  .categories-set--not-received {
+    display: none;
+  }
+}
+
+.categories--spent {
+  .categories-set--received,
+  .categories-set--all,
+  .categories-set--not-received,
+  .cil-explanation {
+    display: none;
+  }
+}
+
+.categories--not-received {
+  .categories-set--received,
+  .categories-set--spent,
+  .categories-set--all {
+    display: none;
+  }
+}
+
+// expanding line break
+// maybe should be a details and summary elememt
+.expanding-line-break {
+  padding: 30px 0;
+  position: relative;
+  a, .elb-end {
+    cursor: pointer;
+    background: #fff;
+    padding: 0 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
+  .elb-end {
+    border: 1px solid $govuk-border-colour;
+    &:hover {
+      border-color: govuk-colour('blue');
+    }
+  }
+}
+
+.category-breakdown-section {
+  .govuk-inset-text {
+    margin-top: 0;
+    padding: 10px 15px;
+    .govuk-heading-s {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.categories-container {
+  //transition: height 2s;
+}
+
+.categories-container.collapsed + .expanding-line-break {
+  .categories-control-close {
+    display: none;
+  }
+}
+
+.categories-container.collapsed {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  &:after {
+    content: "";
+    position: absolute;
+    background: #fff;
+    opacity: 0.5;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &.opening {
+    animation-iteration-count: 1;
+    animation: opening-panel 0.3s alternate;
+  }
+}
+.categories-container.closing {
+  height: 650px;
+  overflow: hidden;
+  animation-iteration-count: 1;
+  animation: closing-panel 0.3s alternate;
+}
+
+@keyframes opening-panel {
+  to {
+    height: 650px;
+  }
+}
+
+@keyframes closing-panel {
+  to {
+    height: 200px;
   }
 }
