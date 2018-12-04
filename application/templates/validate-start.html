@@ -1,0 +1,59 @@
+{% extends "default.html" %}
+
+{% block beforeContent %}
+ {{ super() }}
+
+ {{ govukBreadcrumbs({
+   "items": [
+     {
+       "text": "Developer contributions",
+       "href": url_for("frontend.index")
+     },
+     {
+       "text": "Validator"
+     }
+   ]
+ }) }}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-xl">Check your developer contribution data</h1>
+
+        <p class="govuk-body">Use this service to:</p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>check your developer contribution date complies with the standard</li>
+          <li>easily correct errors and omissions</li>
+        </ul>
+
+        <p style="margin-top: 10px">
+            <a href="{{ url_for('validators.validation_selection') }}" role="button" class="govuk-button govuk-button--start">
+            Start now
+            </a>
+        </p>
+
+      </div>
+
+      <div class="govuk-grid-column-one-third">
+
+        <!-- The Related items component is not part of GOV.UK Frontend but will be styled if used in the Prototype Kit -->
+
+        <aside class="app-related-items" role="complementary">
+          <h2 class="govuk-heading-m" id="subsection-title">
+            Related content
+          </h2>
+          <nav role="navigation" aria-labelledby="subsection-title">
+            <ul class="govuk-list govuk-!-font-size-16">
+            </ul>
+          </nav>
+        </aside>
+
+        </div>
+    </div>
+
+{% endblock %}
