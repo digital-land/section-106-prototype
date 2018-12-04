@@ -1,6 +1,7 @@
 {% extends "default.html" %}
 
 {% from "project-components/status-panel.html" import statusPanel %}
+{% from "jinja-components/data-element/macro.html" import govukDataItem %}
 
 {% block content %}
     
@@ -11,6 +12,7 @@
     &check;
     {% endcall -%}
     </div>
+
     <div class="govuk-grid-column-two-thirds">
       <h3 class="govuk-heading-m">What happens next</h3>
       <p class="govuk-body">
@@ -24,12 +26,30 @@
 
   {% else %}
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-      
-        <pre>
-          {{ report | pretty_json | safe }}
-        </pre>
+      <div class="govuk-grid-column-full">
+      {%- call statusPanel("govuk-panel--error", "errors") %}
+      {% endcall -%}
       </div>
+
+      <div class="govuk-grid-column-two-thirds">
+        {{ govukDataItem(report["error-count"], "Errors found") }}
+
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <!-- temporary whilst working on report page -->
+        <details class="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+              See full validation report
+            </span>
+          </summary>
+          <div class="govuk-!-font-size-14">
+            <pre>
+              {{ report | pretty_json | safe }}
+            </pre>
+          </div>
+        </details>
+      </div>
+
     </div>
   {% endif %}
     
