@@ -1,11 +1,18 @@
 {% extends "default.html" %}
 
+{% block beforeContent %}
+{{ super() }}
+
+<a href="{{ url_for('validators.validate_start') }}" class="govuk-back-link">Back</a>
+{% endblock %}
+
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
+    <span class="govuk-caption-l">Developer contributions</span>
     <h1 class="govuk-heading-l">
-      What type of section 106 csv file do you want to validate?
+      What type of csv file do you want to validate?
     </h1>
 
   </div>
@@ -22,7 +29,7 @@
               {{ form.validation_type(class='govuk-select') }}
           </div>
 
-          <button class="govuk-button" type="submit">Start</button>
+          <button class="govuk-button" type="submit">Continue</button>
           {{ form.csrf_token }}
       </form>
     </div>
