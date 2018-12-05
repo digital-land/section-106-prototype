@@ -19,8 +19,8 @@
             }
         },
         {
-            "name": "contribution-purpose",
-            "title": "Contribution purpose",
+            "name": "developer-contribution-purpose",
+            "title": "Developer contribution purpose",
             "description": "A unique ID for the contribution category, from list maintained by MHCLG",
             "type": "string",
             "constraints": {
