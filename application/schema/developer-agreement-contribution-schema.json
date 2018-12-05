@@ -1,0 +1,68 @@
+{
+    "fields": [
+         {
+            "name": "developer-agreement-contribution",
+            "title": "Developer agreement contribution",
+            "description": "A unique identifier for the developer agreement contribution",
+            "type": "string",
+            "constraints": {
+                "required": true
+            }
+        },
+       {
+            "name": "developer-agreement",
+            "title": "Developer agreement",
+            "description": "A unique identifier for the developer agreement",
+            "type": "string",
+            "constraints": {
+                "required": true
+            }
+        },
+        {
+            "name": "developer-contribution-purpose",
+            "title": "Developer contribution purpose",
+            "description": "A unique ID for the contribution category, from list maintained by MHCLG",
+            "type": "string",
+            "constraints": {
+                "required": true,
+                "pattern": "(affordable-housing|education|health|highways|transport|open-space|community-facilities|green-infrastructure|community-infrastructure-levy|other)"
+            }
+        },
+        {
+            "name": "amount",
+            "title": "Amount",
+            "description": "The agreed contribution amount",
+            "type": "number",
+            "constraints": {
+                "required": true
+            }
+        },
+        {
+            "name": "entry-date",
+            "title": "Entry date",
+            "description": "The date that the record was created",
+            "type": "date",
+            "constraints": {
+                "required": true
+            }
+        },
+        {
+            "name": "start-date",
+            "title": "Start date",
+            "description": "The date on which the entry comes into effect",
+            "type": "date",
+            "constraints": {
+                "required": false
+            }
+        },
+         {
+            "name": "end-date",
+            "title": "End date",
+            "description": "The date on which the entry is not longer in effect",
+            "type": "date",
+            "constraints": {
+                "required": false
+            }
+        }
+    ]
+}

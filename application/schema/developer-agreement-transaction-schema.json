@@ -1,0 +1,58 @@
+{
+    "fields": [
+                 {
+            "name": "developer-agreement-transaction",
+            "title": "Developer agreement transaction",
+            "description": "A unique identifier for the developer agreement transaction",
+            "type": "string",
+            "constraints": {
+                "required": true
+            }
+        },
+       {
+            "name": "developer-agreement-contribution",
+            "title": "Developer agreement contribution",
+            "description": "A unique identifier for the developer agreement contribution",
+            "type": "string",
+            "constraints": {
+                "required": true
+            }
+        },
+        {
+            "name": "amount",
+            "title": "Amount",
+            "description": "The amount received from a developer for part/full payment of a contribution. Or the amount spent by a planning authority.A +ve value is money coming in; and a -ve value is money spent",
+            "type": "number",
+            "constraints": {
+                "required": true
+            }
+        },
+        {
+            "name": "entry-date",
+            "title": "Entry date",
+            "description": "The date that the record was created",
+            "type": "date",
+            "constraints": {
+                "required": true
+            }
+        },
+        {
+            "name": "start-date",
+            "title": "Start date",
+            "description": "The date on which the entry comes into effect",
+            "type": "date",
+            "constraints": {
+                "required": false
+            }
+        },
+         {
+            "name": "end-date",
+            "title": "End date",
+            "description": "The date on which the entry is not longer in effect",
+            "type": "date",
+            "constraints": {
+                "required": false
+            }
+        }
+    ]
+}

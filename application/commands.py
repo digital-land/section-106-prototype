@@ -1,4 +1,5 @@
 import csv
+import json
 import os
 from contextlib import closing
 
@@ -66,6 +67,7 @@ def load_viability():
             else:
                 print('Viability assessment', row['id'], 'already loaded')
 
+
 @click.command()
 @with_appcontext
 def load_contributions():
@@ -88,6 +90,7 @@ def load_contributions():
             db.session.commit()
             print('Loaded contribution', ctrb.id, 'for', ctrb.local_authority_id, ctrb.planning_application)
 
+
 @click.command()
 @with_appcontext
 def clear_viability():
@@ -99,3 +102,22 @@ def clear_viability():
         if not pa.section106_contributions:
             db.session.delete(pa)
     db.session.commit()
+
+
+@click.command()
+@click.option('--csv')
+@click.option('--schema')
+@with_appcontext
+def validate_developer_agreement(csv, schema):
+
+    from goodtables import validate
+
+    path = os.path.dirname(os.path.realpath(__file__))
+    developer_agreement_csv = os.path.join(path, 'data', csv)
+    developer_agreement_schema = os.path.join(path, 'data', schema)
+
+    report = validate(developer_agreement_csv, schema=developer_agreement_schema)
+
+    pretty_report = json.dumps(report, indent=4)
+    print(pretty_report)
+
