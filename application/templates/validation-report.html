@@ -1,6 +1,7 @@
 {% extends "default.html" %}
 
 {% from "project-components/status-panel.html" import statusPanel %}
+{% from "project-components/status-panel.html" import statusPanelBefore %}
 {% from "jinja-components/data-element/macro.html" import govukDataItem %}
 
 {% block content %}
@@ -27,14 +28,15 @@
   {% else %}
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-full">
-      {%- call statusPanel("govuk-panel--error", "errors") %}
+      {%- call statusPanelBefore("govuk-panel--error", "errors") %}
+      <span class="data-item govuk-!-font-size-80 govuk-!-font-weight-bold">{{ report["error-count"] }}</span>
       {% endcall -%}
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
       </div>
 
       <div class="govuk-grid-column-two-thirds">
-        {{ govukDataItem(report["error-count"], "Errors found") }}
   
-        <h2 class="govuk-heading-l">Validation errors</h2>
+        <h2 class="govuk-heading-l">Review validation errors</h2>
 
         {% from "project-components/validation-error-output.html" import renderValidationError %}
 
