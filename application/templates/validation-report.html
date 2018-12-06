@@ -33,6 +33,66 @@
 
       <div class="govuk-grid-column-two-thirds">
         {{ govukDataItem(report["error-count"], "Errors found") }}
+  
+        <h2 class="govuk-heading-l">Validation errors</h2>
+
+{% macro renderValidationError(error, headersLst) %}
+<div class="validation-error-container">
+  <h4 class="validation-error-heading">
+    <span class="validation-error-row govuk-tag govuk-tag__error">Row {{ error["row-number"] }}</span>
+        Error with <span class="validation-error-column">{{ headersLst[error["column-number"]-1] }}</span>
+    </span>
+  </h4>
+  <table class="govuk-table">
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">You put</td>
+        <td class="govuk-table__cell">
+          {{ error["message-data"].value }}
+        </td>
+      </tr>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Should be</td>
+        <td class="govuk-table__cell">
+          {% if error.code == "pattern-constraint" %}
+            {% if error["message-data"].constraint == "\\S+:\\S+" %}
+              format <b>local-authority:aaa</b> where aaa is the Local Authority acronym e.g. local-authority:nfk
+            {% else %}
+            {{ error["message-data"].constraint }}
+            {% endif %}
+          {% else %}
+            {% if error["message-data"].field_type == "date" %}
+            default date format <b>yyyy-mm-dd</b> e.g. 2017-03-19
+            {% elif error["message-data"].field_format == "uri" %}
+            a valid uri e.g. http://gov.uk
+            {% endif %}
+          {% endif %}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endmacro %}
+
+        {% if report.tables %}
+
+          {# get column headings and first row number #}
+          {% set column_headers = report.tables[0].headers %}
+          {% set row = namespace(number=report.tables[0].errors[0]["row-number"]) %}
+          <p class="govuk-body">There are the following errors with <span class="validation-error-row govuk-tag govuk-tag__error">Row {{ row.number }}</span>:
+
+          {% for error in report.tables[0].errors %}
+
+            {% if error["row-number"] != row.number %}
+              {% set row.number = error["row-number"] %}
+              <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+              <p class="govuk-body">There are the following errors with <span class="validation-error-row govuk-tag govuk-tag__error">Row {{ row.number }}</span>:</p>
+            {% endif %}
+            {{ renderValidationError(error, column_headers) }}
+
+          {% endfor %}
+
+        {% endif %}
 
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
         <!-- temporary whilst working on report page -->

@@ -383,3 +383,36 @@ $hover-border-width: 5px;
     height: 200px;
   }
 }
+
+// ==================
+// Validation report
+// ==================
+
+.validation-error-row {
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.govuk-tag__error {
+  background: govuk-colour('grey-3');
+  color: govuk-colour('red');
+  @include govuk-font($size: 19);
+}
+
+.validation-error-heading {
+  @include govuk-font($size: 24);
+  margin: $govuk-gutter*2 0 5px;
+}
+.validation-error-column {
+  font-weight: bold;
+}
+
+.validation-error-container {
+  .govuk-table .govuk-table__row:last-child td {
+    border-bottom: none;
+  }
+}
+
+.govuk-table__row td:first-child {
+  width: 120px; // use em function
+}
