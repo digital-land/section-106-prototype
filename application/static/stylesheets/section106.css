@@ -6515,3 +6515,8 @@ th[role=columnheader].govuk-table__header--numeric:not(.no-sort):after {
 .govuk-table__row td:first-child {
   width: 120px;
 }
+
+.error-report-heading {
+  margin-top: 15px;
+  margin-bottom: 45px;
+}

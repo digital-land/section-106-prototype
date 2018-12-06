@@ -416,3 +416,8 @@ $hover-border-width: 5px;
 .govuk-table__row td:first-child {
   width: 120px; // use em function
 }
+
+.error-report-heading {
+  margin-top: $govuk-gutter-half;
+  margin-bottom: $govuk-gutter * 1.5;
+}
