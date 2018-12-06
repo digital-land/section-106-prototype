@@ -36,50 +36,14 @@
   
         <h2 class="govuk-heading-l">Validation errors</h2>
 
-{% macro renderValidationError(error, headersLst) %}
-<div class="validation-error-container">
-  <h4 class="validation-error-heading">
-    <span class="validation-error-row govuk-tag govuk-tag__error">Row {{ error["row-number"] }}</span>
-        Error with <span class="validation-error-column">{{ headersLst[error["column-number"]-1] }}</span>
-    </span>
-  </h4>
-  <table class="govuk-table">
-    <tbody class="govuk-table__body">
-      <tr class="govuk-table__row">
-        <td class="govuk-table__cell">You put</td>
-        <td class="govuk-table__cell">
-          {{ error["message-data"].value }}
-        </td>
-      </tr>
-      <tr class="govuk-table__row">
-        <td class="govuk-table__cell">Should be</td>
-        <td class="govuk-table__cell">
-          {% if error.code == "pattern-constraint" %}
-            {% if error["message-data"].constraint == "\\S+:\\S+" %}
-              format <b>local-authority:aaa</b> where aaa is the Local Authority acronym e.g. local-authority:nfk
-            {% else %}
-            {{ error["message-data"].constraint }}
-            {% endif %}
-          {% else %}
-            {% if error["message-data"].field_type == "date" %}
-            default date format <b>yyyy-mm-dd</b> e.g. 2017-03-19
-            {% elif error["message-data"].field_format == "uri" %}
-            a valid uri e.g. http://gov.uk
-            {% endif %}
-          {% endif %}
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-{% endmacro %}
+        {% from "project-components/validation-error-output.html" import renderValidationError %}
 
         {% if report.tables %}
 
           {# get column headings and first row number #}
           {% set column_headers = report.tables[0].headers %}
           {% set row = namespace(number=report.tables[0].errors[0]["row-number"]) %}
-          <p class="govuk-body">There are the following errors with <span class="validation-error-row govuk-tag govuk-tag__error">Row {{ row.number }}</span>:
+          <p class="govuk-body">There are the following errors with <span class="validation-error-row govuk-tag govuk-tag__error">Row {{ row.number }}</span>:</p>
 
           {% for error in report.tables[0].errors %}
 
@@ -94,22 +58,24 @@
 
         {% endif %}
 
-        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-        <!-- temporary whilst working on report page -->
-        <details class="govuk-details">
-          <summary class="govuk-details__summary">
-            <span class="govuk-details__summary-text">
-              See full validation report
-            </span>
-          </summary>
-          <div class="govuk-!-font-size-14">
-            <pre>
-              {{ report | pretty_json | safe }}
-            </pre>
-          </div>
-        </details>
+      </div>
+    </div>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+        <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
       </div>
 
+      <div class="govuk-grid-column-two-thirds">
+        <h3 class="govuk-heading-l">What happens next</h3>
+        <p class="govuk-body">
+          You should fix the errors with the csv data file before it is published.
+        </p>
+        <p class="govuk-body">You can refer to the <a href="https://digital-land.github.io/guidance/developer-contributions/" class="govuk-link">developer contribution data format and publishing guidance</a> for an explanation of the expected data and format.</p>
+        <p class="govuk-body">
+          Once fixed use the <a href="{{ url_for('validators.validate_start')}}" class="govuk-link">validator</a> to check for any other developer potential issues. 
+        </p>
+      </div>
     </div>
   {% endif %}
     
