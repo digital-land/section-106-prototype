@@ -20,15 +20,37 @@
             {% if error["message-data"].constraint == "\\S+:\\S+" %}
               format <b>local-authority:aaa</b> where aaa is the Local Authority acronym e.g. local-authority:nfk
             {% else %}
-            {{ error["message-data"].constraint }}
+            one of {{ error["message-data"].constraint|replace("(", "")|replace(")", "")|replace("|", ", ") }}
             {% endif %}
           {% else %}
             {% if error["message-data"].field_type == "date" %}
             default date format <b>yyyy-mm-dd</b> e.g. 2017-03-19
             {% elif error["message-data"].field_format == "uri" %}
             a valid uri e.g. http://gov.uk
+            {% elif error["message-data"].field_type == "number" %}
+            a number, with no currency symbols or commas
             {% endif %}
           {% endif %}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endmacro %}
+
+{% macro renderColumnError(error, headerLst) %}
+<div class="validation-error-container">
+  <h4 class="validation-error-heading">
+    <span class="validation-error-row govuk-tag govuk-tag__error">Column {{ error["column-number"] }}</span>
+        <span class="validation-error-column">{{ error["message-data"].field_name }}</span> is not an expected header
+    </span>
+  </h4>
+  <table class="govuk-table">
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Should be</td>
+        <td class="govuk-table__cell">
+          one of {{ headerLst|join(", ") }}
         </td>
       </tr>
     </tbody>

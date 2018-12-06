@@ -39,27 +39,36 @@
         <h2 class="govuk-heading-l error-report-heading">Review validation errors</h2>
 
         {% from "project-components/validation-error-output.html" import renderValidationError %}
+        {% from "project-components/validation-error-output.html" import renderColumnError %}
 
         {% if report.tables %}
 
           {# get column headings and first row number #}
           {% set column_headers = report.tables[0].headers %}
+
           {% set row = namespace(number=report.tables[0].errors[0]["row-number"]) %}
+          {% if report.tables[0].errors[0].code == "non-matching-header" %}
+          <p class="govuk-body">There are the following <span class="validation-error-row govuk-tag govuk-tag__error">Column</span>errors:</p>
+          {% else %}
           <p class="govuk-body">There are the following errors with <span class="validation-error-row govuk-tag govuk-tag__error">Row {{ row.number }}</span>:</p>
+          {% endif %}
 
           {% for error in report.tables[0].errors %}
-
-            {% if error["row-number"] != row.number %}
-              {% set row.number = error["row-number"] %}
-              <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
-              <p class="govuk-body">There are the following errors with <span class="validation-error-row govuk-tag govuk-tag__error">Row {{ row.number }}</span>:</p>
+          
+            {% if error.code == "non-matching-header" %}
+              {{ renderColumnError(error, column_headers) }}
+            {% else %}
+              {% if error["row-number"] != row.number %}
+                {% set row.number = error["row-number"] %}
+                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                <p class="govuk-body">There are the following errors with <span class="validation-error-row govuk-tag govuk-tag__error">Row {{ row.number }}</span>:</p>
+              {% endif %}
+              {{ renderValidationError(error, column_headers) }}
             {% endif %}
-            {{ renderValidationError(error, column_headers) }}
 
           {% endfor %}
 
         {% endif %}
-
       </div>
     </div>
 
@@ -77,6 +86,7 @@
         <p class="govuk-body">
           Once fixed use the <a href="{{ url_for('validators.validate_start')}}" class="govuk-link">validator</a> to check for any other developer potential issues. 
         </p>
+        
       </div>
     </div>
   {% endif %}
