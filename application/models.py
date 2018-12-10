@@ -81,6 +81,7 @@ class ViabilityAssessment(db.Model):
 
     gross_development_value = db.Column(db.Integer)
     benchmark_land_value = db.Column(db.Integer)
+    total_cost = db.Column(db.Integer)
     total_contribution = db.Column(db.Integer)
 
     def to_dict(self):
@@ -92,5 +93,6 @@ class ViabilityAssessment(db.Model):
                 'site': self.planning_application.address,
                 'gross_development_value': self.gross_development_value,
                 'benchmark_land_value': self.benchmark_land_value,
+                'total_cost': self.total_cost,
                 'total_contribution': self.total_contribution
         }

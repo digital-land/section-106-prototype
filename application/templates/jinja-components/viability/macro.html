@@ -20,7 +20,7 @@
             <dd class="address"><p translate="no">{{ va.planning_application.address }}</p></dd>
             
           </dl>
-          <dl class="definition-inline definition-inline-close">
+          <dl class="definition-inline definition-inline-close definition-with-final-total">
             <dt>Gross development value</dt>
             <dd>
                 {%- if va.gross_development_value or va.gross_development_value == 0 -%}
@@ -37,7 +37,16 @@
                     <span class="missing-data">-- unavailable --</span>
                 {%- endif -%}
             </dd>
-            <dt>Total contribution</dt>
+            <dt>Total cost</dt>
+            <dd>
+                {%- if va.total_cost or va.total_cost == 0 -%}
+                    {{ va.total_cost|monetary }}
+                {%- else -%}
+                    <span class="missing-data">-- unavailable --</span>
+                {%- endif -%}
+            </dd>
+
+            <dt class="dl-final-term">Total contribution</dt>
             <dd>
                 {%- if va.total_contribution or va.total_contribution == 0 -%}
                     {{ va.total_contribution|monetary }}
