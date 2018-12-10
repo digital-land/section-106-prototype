@@ -5325,6 +5325,11 @@
   }
 }
 
+.definition-with-final-total dd:last-of-type,
+.definition-with-final-total dt:last-of-type {
+  margin-top: 15px;
+}
+
 .attachment {
   position: relative;
   margin: 30px 0;

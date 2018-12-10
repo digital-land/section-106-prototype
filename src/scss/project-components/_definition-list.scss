@@ -32,3 +32,10 @@
     @include govuk-responsive-margin(1, "left");
   }
 }
+
+.definition-with-final-total {
+  dd:last-of-type,
+  dt:last-of-type {
+    margin-top: $govuk-gutter-half;
+  }
+}
