@@ -7,14 +7,4 @@ script: pytest
 env:
   global:
   - FLASK_CONFIG=config.TestConfig
-  - CF_API=https://api.cloud.service.gov.uk
-  - CF_ORGANIZATION=mhclg-digital-land
-  - CF_USERNAME=adam.shimali@gmail.com
-  - CF_SPACE=digital-land
-  - secure: TPXFbIUpq2P4AbwqsSCYIrbq28MwIyLCwANd80ROJMJPQMvuXLAPAtnkgPw7q4RWkqbLAlDsxz917rAzAtvcHjWMMVFomecgOJee+Ac9LOGHaawDsOu7Mal9GJxEwv68bZvYsC7B5XY2f8fMJU3Tc/z+OHCRog6WfeDh9Sj/M+PsiBAeOCatLnn6wWVpQ0g+CLPWciTgb0PCIazEtLTptHJY8K0MdrpSlCW7EJINX+b3R/LxPor222jeJ0xAxWUe6UFnnakCRZJOqaUe6grq0S3nta4OBff53CJPwe6jIWGCnZxd39LpSET6NjxkBz1/cqQL1+3J2jX6SeDF3rRooUUbMG5xqa/6Ck5bOPbdyFYFoQ6LLoqtBv6kFl3OL5LaqIMz41HvcfctbWMMhrsGVjrJRkuZETifP0r6HZ615YsuqOTk0SmFkMx4aROSCiUsebtKEAR12NGATFqvrzEMCtwt71/lsryiCh8v5lwyGCNamQL7JifA8VXVuZRtW3J9qSXgGN2kSPLy8/rijS/403JojUSFRBvhEZkFv1RGkuF6YiE2s7Dzg+Z88VlZnCJlDTFUNF4tqY2GS/l8sRnJq76U9x/cIjFbUk2RrxCvOJ8YoaCdC1mTdResTJGhz0L+AWKSg4mjZAT3LoRv/HWaD6R+DIyswOGNba2+oiqcp1Y=
-deploy:
-  provider: script
-  script: bash scripts/deploy.sh
-  skip_cleanup: true
-  on:
-    repo: communitiesuk/section-106-prototype
+
