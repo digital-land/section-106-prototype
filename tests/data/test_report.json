@@ -1,0 +1,75 @@
+{
+  "time": 0.072,
+  "valid": false,
+  "error-count": 4,
+  "table-count": 1,
+  "tables": [
+    {
+      "time": 0.039,
+      "valid": false,
+      "error-count": 4,
+      "row-count": 2,
+      "source": "/var/folders/ly/cfmh0_x57q5fy4fzmvswvzc80000gn/T/tmpm5btt3zu/developer-agreement-invalid.csv",
+      "headers": [
+        "developer-agreement",
+        "developer-agreement-type",
+        "organisation",
+        "entry-date",
+        "start-date",
+        "end-date",
+        "planning-application",
+        "document-url"
+      ],
+      "scheme": "file",
+      "format": "csv",
+      "encoding": "utf-8",
+      "schema": "table-schema",
+      "errors": [
+        {
+          "code": "pattern-constraint",
+          "row-number": 2,
+          "column-number": 2,
+          "message": "The value \"section-106-unknown\" in row 2 and column 2 does not conform to the pattern constraint of \"(section-106|community-infrastructure-levy)\"",
+          "message-data": {
+            "value": "section-106-unknown",
+            "constraint": "(section-106|community-infrastructure-levy)"
+          }
+        },
+        {
+          "code": "pattern-constraint",
+          "row-number": 2,
+          "column-number": 3,
+          "message": "The value \"local-authority-DAC\" in row 2 and column 3 does not conform to the pattern constraint of \"\\S+:\\S+\"",
+          "message-data": {
+            "value": "local-authority-DAC",
+            "constraint": "\\S+:\\S+"
+          }
+        },
+        {
+          "code": "type-or-format-error",
+          "row-number": 2,
+          "column-number": 4,
+          "message": "The value \"2018/12/12\" in row 2 and column 4 is not type \"date\" and format \"default\"",
+          "message-data": {
+            "value": "2018/12/12",
+            "field_type": "date",
+            "field_format": "default"
+          }
+        },
+        {
+          "code": "type-or-format-error",
+          "row-number": 2,
+          "column-number": 8,
+          "message": "The value \"the-id-of-agreement\" in row 2 and column 8 is not type \"string\" and format \"uri\"",
+          "message-data": {
+            "value": "the-id-of-agreement",
+            "field_type": "string",
+            "field_format": "uri"
+          }
+        }
+      ]
+    }
+  ],
+  "warnings": [],
+  "preset": "table"
+}

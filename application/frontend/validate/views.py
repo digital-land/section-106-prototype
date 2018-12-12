@@ -9,9 +9,11 @@ from application.frontend.validate.forms import UploadForm, ValidationSelectionF
 
 validators = Blueprint('validators', __name__, template_folder='templates')
 
+
 @validators.route('/validate-start')
 def validate_start():
     return render_template('validate-start.html')
+
 
 @validators.route('/validate', methods=['GET', 'POST'])
 def validation_selection():
