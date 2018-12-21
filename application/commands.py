@@ -122,6 +122,9 @@ def validate_developer_agreement(csv, schema):
     print(pretty_report)
 
 
+# while sample data is in github use this.
+# eventually I'm guessing we'll have some process that
+# fetches la files and dumps them into s3 for a report builder process
 def _handle_github_fetch(row):
     path = row['register-url'].split('master')[-1]
     github_api_base_url = 'https://api.github.com'
@@ -133,6 +136,8 @@ def _handle_github_fetch(row):
     print('Done')
 
 
+# contribution_register will probably be a gov.uk register in the end but for
+# now we'll keep it in github
 @click.command()
 @with_appcontext
 def generate_contribution_report():
