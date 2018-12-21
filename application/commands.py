@@ -121,3 +121,26 @@ def validate_developer_agreement(csv, schema):
     pretty_report = json.dumps(report, indent=4)
     print(pretty_report)
 
+
+def _handle_github_fetch(row):
+    path = row['register-url'].split('master')[-1]
+    github_api_base_url = 'https://api.github.com'
+    repo_contents_url = '%s/repos/communitiesuk/digital-land-collector/contents/%s' % (github_api_base_url, path)
+    print('Fetch contents', repo_contents_url)
+    resp = requests.get(repo_contents_url)
+    for content in resp.json():
+        print(content['download_url'])
+    print('Done')
+
+
+@click.command()
+@with_appcontext
+def generate_contribution_report():
+    contribution_register = 'https://raw.githubusercontent.com/communitiesuk/digital-land-collector/master/etc/developer-contributions/developer-contribution-register.csv'
+    print('Loading', contribution_register)
+    if 'github' in contribution_register:
+        handler = _handle_github_fetch
+    with closing(requests.get(contribution_register, stream=True)) as r:
+        reader = csv.DictReader(r.iter_lines(decode_unicode=True), delimiter=',')
+        for row in reader:
+            handler(row)

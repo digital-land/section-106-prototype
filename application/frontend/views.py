@@ -41,7 +41,7 @@ def local_authority():
     return render_template('local-authority.html', localauthorities=LocalAuthority.query.all())
 
 
-def getDateFromForm(form):
+def get_date_from_form(form):
     return '{}-{}-{}'.format(form['section106-signed-day'], form['section106-signed-month'],
                              form['section106-signed-year'])
 
@@ -75,7 +75,7 @@ def s106_details(local_authority, planning_reference):
 
     if request.method == 'POST':
         url = request.form['section106-url']
-        signed_date = getDateFromForm(request.form)
+        signed_date = get_date_from_form(request.form)
         planning_application = PlanningApplication.query.filter_by(local_authority_id=local_authority, reference=planning_reference).one()
         planning_application.section106_signed_date = datetime.strptime(signed_date, '%d-%m-%Y').date()
         planning_application.section106_url = url
@@ -92,7 +92,7 @@ def s106_details(local_authority, planning_reference):
                            other_agreements=[])
 
 
-def getContribution(form, n):
+def get_contribution(form, n):
     contribution = {
         'id': n,
         'type': form['contribution-type-selector--{}'.format(n)],
@@ -103,12 +103,12 @@ def getContribution(form, n):
     return contribution
 
 
-def extractAllContributions(form):
+def extract_all_contributions(form):
     contributions = []
     ids = [key for key, value in form.items() if 'contribution-type' in key.lower()]
     numbers = [item.split('--')[1] for item in ids]
     for n in numbers:
-        contributions.append(getContribution(form, n))
+        contributions.append(get_contribution(form, n))
     return contributions
 
 
@@ -119,7 +119,7 @@ def developer_contributions(local_authority, planning_reference):
                                                     local_authority_id=local_authority).one()
 
     if request.method == 'POST':
-        contributions = extractAllContributions(request.form)
+        contributions = extract_all_contributions(request.form)
 
         for contribution in contributions:
             try:
@@ -188,13 +188,16 @@ def remove_contribution(contribution_id):
 def section_106_contributions():
     return render_template('section-106-contributions.html', local_authorities=LocalAuthority.query.all())
 
+
 @frontend.route('/developer-contributions')
 def all_developer_contributions():
     return render_template('dev-contrs/all.html')
 
+
 @frontend.route('/developer-contributions/section106')
 def section_106_register():
     return render_template('dev-contrs/s106.html', localauthorities=LocalAuthority.query.all(), categories=section_106_contribution_categories)
+
 
 @frontend.route('/developer-contributions/section106-wide')
 def section_106_register_wide():
@@ -204,6 +207,7 @@ def section_106_register_wide():
 @frontend.context_processor
 def asset_path_context_processor():
     return {'assetPath': '/static/govuk-frontend/assets'}
+
 
 @frontend.context_processor
 def determine_width():

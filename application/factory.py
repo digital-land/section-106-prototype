@@ -53,12 +53,15 @@ def register_extensions(app):
 
 
 def register_commands(app):
-    from application.commands import load, load_viability, clear_viability, load_contributions, validate_developer_agreement
+    from application.commands import load, load_viability, clear_viability, load_contributions, \
+        validate_developer_agreement, generate_contribution_report
+
     app.cli.add_command(load, name='load')
     app.cli.add_command(load_viability, name='load-viability')
     app.cli.add_command(clear_viability, name='clear-viability')
     app.cli.add_command(load_contributions, name='load-contribution')
     app.cli.add_command(validate_developer_agreement, name='validate-developer-agreement')
+    app.cli.add_command(generate_contribution_report, name='report')
 
 
 def register_filters(app):
