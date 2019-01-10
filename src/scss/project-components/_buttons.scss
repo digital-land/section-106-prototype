@@ -14,7 +14,7 @@
   $button-shadow-colour: darken($button-colour, 15%),
   $button-shadow-size: $govuk-border-width-form-element
 ) {
-   
+ 
   color: $button-text-colour;
   background-color: $button-colour;
   box-shadow: 0 $button-shadow-size 0 $button-shadow-colour;

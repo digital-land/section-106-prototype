@@ -1,12 +1,14 @@
-/*
-* Collection of styles used on guidance pages
-*
-*/
+//
+// Collection of styles used on guidance pages
+//
+
 .guidance-content {
   @include govuk-responsive-margin(9, "top");
+
   .govuk-heading-l {
     @include govuk-responsive-margin(3, "top");
   }
+
   .govuk-heading-m {
     @include govuk-responsive-margin(2, "top");
   }
@@ -14,6 +16,7 @@
 
 .contents-list {
   @include govuk-responsive-margin(8, "bottom");
+
   a {
     text-decoration: none;
   }
@@ -22,6 +25,7 @@
 .list-item--dashed {
   margin-left: 25px;
   padding-right: 25px;
+
   &:before {
     content: "— ";
     margin-left: -25px;
@@ -35,26 +39,26 @@
 }
 
 .back-to-top__icon {
-  float: left;
-  margin-right: .3em;
   width: .8em;
   height: .968em;
+  margin-right: .3em;
+  float: left;
 }
 
 .sticky-element--enabled {
-  background-color: #dee0e2;
+  position: fixed;
+  z-index: 1;
   bottom: -1px;
   left: 0;
+  width: 100%;
   margin: 0;
   padding: 0;
   padding-left: 0;
-  position: fixed;
-  width: 100%;
-  z-index: 1;
+  background-color: govuk-colour("grey-3");
 
   .contents-link {
     @include govuk-responsive-margin(0);
-    @include govuk-responsive-padding(3, 'top');
-    @include govuk-responsive-padding(3, 'bottom');
+    @include govuk-responsive-padding(3, "top");
+    @include govuk-responsive-padding(3, "bottom");
   }
 }
