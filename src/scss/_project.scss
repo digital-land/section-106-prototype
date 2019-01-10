@@ -1,5 +1,5 @@
 .top-content-row {
-  @include govuk-responsive-margin(9, 'top');
+  @include govuk-responsive-margin(9, "top");
 }
 
 .missing-data {
@@ -12,6 +12,7 @@
 
   ul:last-child {
     margin-bottom: 0;
+
     li:last-child {
       margin-bottom: 0;
     }
@@ -23,19 +24,20 @@
 }
 
 .related-content-section {
-  border-top: 2px solid govuk-colour(blue);
+  border-top: 2px solid govuk-colour("blue");
   @include govuk-responsive-padding(3, "top");
 }
 
 // blue buttons used on filters
 .button-filter-table {
-  @include govuk-style-button($button-colour:  govuk-colour(blue));
+  @include govuk-style-button($button-colour:  govuk-colour("blue"));
 }
 
 .js-enabled {
   .button-autocomplete-action {
     display: none;
   }
+
   .autocomplete-used {
     .button-autocomplete-action {
       display: inline-block;
@@ -59,7 +61,7 @@
 // --------------------------------------
 .autocomplete__menu {
   font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
 }

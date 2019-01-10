@@ -5,14 +5,14 @@
 .govuk-select-m {
   width: 100%;
   @include govuk-media-query($from: desktop) {
-    width: 50%
+    width: 50%;
   }
 }
 
 .govuk-select-s {
   width: 100%;
   @include govuk-media-query($from: desktop) {
-    width: 33%
+    width: 33%;
   }
 }
 

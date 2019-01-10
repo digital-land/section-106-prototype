@@ -2,6 +2,7 @@
 
 const gulp = require("gulp"),
     sass = require("gulp-sass"),
+    sassLint = require('gulp-sass-lint'),
     clean = require('gulp-clean');
 
 // set paths ...
@@ -28,6 +29,17 @@ const compileStylesheets = () =>
 		  includePaths: [ 'src/scss', 'src/govuk-frontend']}))
       .on('error', sass.logError)
     .pipe(gulp.dest(config.destPath));
+
+// check .scss files against .sass-lint.yml config
+const lintSCSS = () => 
+  gulp
+    .src('src/scss/**/*.s+(a|c)ss')
+    .pipe(sassLint({
+      files: {},
+      configFile: '.sass-lint.yml'
+    }))
+    .pipe(sassLint.format())
+    .pipe(sassLint.failOnError());
 
 // Tasks for copying assets to application
 // ======================================
@@ -60,3 +72,4 @@ watch.description = `Watch all project .scss for changes, then rebuild styleshee
 // Set watch as default task
 exports.default = watch;
 exports.stylesheets = latestStylesheets;
+exports.lintSCSS = lintSCSS;

@@ -1,15 +1,15 @@
-/*
-* Styles for data typography element
-*
-*/
+//
+// Styles for data typography element
+//
+//
 .data-item {
   display: block;
-  line-height: 1;
   font-family: "nta", Arial, sans-serif;
+  line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .data-item a {
-  color: govuk-colour(black);
+  color: govuk-colour("black");
 }
