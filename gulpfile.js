@@ -57,6 +57,7 @@ const copyGovukAssets = () =>
 // ======================
 const latestStylesheets = gulp.series(
   cleanCSS,
+  lintSCSS,
   compileStylesheets,
   gulp.parallel(
     copyGovukStylesheets,
