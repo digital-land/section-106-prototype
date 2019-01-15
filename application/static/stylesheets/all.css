@@ -5267,16 +5267,44 @@
   }
 }
 
-/*
-* Mixin for creating different coloured buttons in the style of the 
-* GOVUK ones
-*
-* Simple usage:
-*   .button-filter-table {
-*     @include govuk-style-button($button-colour:  govuk-colour(blue));
-*   }
-*/
-/* dl */
+.dlf-load-button,
+.dlf-filter-button {
+  color: #ffffff;
+  background-color: #005ea5;
+  box-shadow: 0 2px 0 #003259;
+  margin-top: 5px;
+}
+
+.dlf-load-button:link, .dlf-load-button:visited, .dlf-load-button:active, .dlf-load-button:hover,
+.dlf-filter-button:link,
+.dlf-filter-button:visited,
+.dlf-filter-button:active,
+.dlf-filter-button:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.dlf-load-button:hover, .dlf-load-button:focus,
+.dlf-filter-button:hover,
+.dlf-filter-button:focus {
+  background-color: #004f8c;
+}
+
+.govuk-button-add {
+  color: #0b0c0c;
+  background-color: #dee0e2;
+  box-shadow: 0 2px 0 #b5babe;
+}
+
+.govuk-button-add:link, .govuk-button-add:visited, .govuk-button-add:active, .govuk-button-add:hover {
+  color: #0b0c0c;
+  text-decoration: none;
+}
+
+.govuk-button-add:hover, .govuk-button-add:focus {
+  background-color: #d0d3d6;
+}
+
 .definition-inline:after {
   content: "";
   display: block;
@@ -5284,14 +5312,14 @@
 }
 
 .definition-inline dt {
-  float: left;
   margin-right: 5px;
+  float: left;
   clear: left;
   font-weight: bold;
 }
 
 .definition-inline dt:after {
-  content: ':';
+  content: ":";
 }
 
 .definition-inline dd {
@@ -5344,18 +5372,18 @@
 
 .attachment .attachment-thumb {
   position: relative;
-  float: left;
   margin-top: 5px;
   margin-left: -124px;
   padding-bottom: 15px;
+  float: left;
 }
 
 .attachment .attachment-thumb img {
   display: block;
   width: 99px;
   height: 140px;
-  background: #fff;
   outline: 5px solid rgba(11, 12, 12, 0.1);
+  background: #ffffff;
   -webkit-box-shadow: 0 2px 2px rgba(11, 12, 12, 0.4);
   -moz-box-shadow: 0 2px 2px rgba(11, 12, 12, 0.4);
   box-shadow: 0 2px 2px rgba(11, 12, 12, 0.4);
@@ -5374,8 +5402,8 @@
 }
 
 .attachment abbr {
-  cursor: help;
   text-decoration: none;
+  cursor: help;
 }
 
 .attachment .address {
@@ -5386,14 +5414,10 @@
   margin: 0;
 }
 
-/*
-* Styles for data typography element
-*
-*/
 .data-item {
   display: block;
-  line-height: 1;
   font-family: "nta", Arial, sans-serif;
+  line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -5402,10 +5426,6 @@
   color: #0b0c0c;
 }
 
-/*
-* Collection of styles used on guidance pages
-*
-*/
 .guidance-content {
   margin-top: 40px;
 }
@@ -5479,22 +5499,22 @@
 }
 
 .back-to-top__icon {
-  float: left;
-  margin-right: .3em;
   width: .8em;
   height: .968em;
+  margin-right: .3em;
+  float: left;
 }
 
 .sticky-element--enabled {
-  background-color: #dee0e2;
+  position: fixed;
+  z-index: 1;
   bottom: -1px;
   left: 0;
+  width: 100%;
   margin: 0;
   padding: 0;
   padding-left: 0;
-  position: fixed;
-  width: 100%;
-  z-index: 1;
+  background-color: #dee0e2;
 }
 
 .sticky-element--enabled .contents-link {
@@ -5593,7 +5613,7 @@
 
 .govuk-panel--confirmation {
   color: #ffffff;
-  background: govuk-color(turquoise);
+  background: govuk-color("turquoise");
 }
 
 .govuk-panel__title {
@@ -5700,8 +5720,8 @@ a.govuk-panel__link:visited {
 }
 
 .govuk-panel--error {
-  background: #b10e1e;
   color: #ffffff;
+  background: #b10e1e;
 }
 
 .top-content-row {
@@ -5753,13 +5773,13 @@ a.govuk-panel__link:visited {
 }
 
 .button-filter-table {
-  color: #fff;
+  color: #ffffff;
   background-color: #005ea5;
   box-shadow: 0 2px 0 #003259;
 }
 
 .button-filter-table:link, .button-filter-table:visited, .button-filter-table:active, .button-filter-table:hover {
-  color: #fff;
+  color: #ffffff;
   text-decoration: none;
 }
 
@@ -5783,7 +5803,7 @@ a.govuk-panel__link:visited {
 
 .autocomplete__menu {
   font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
 }

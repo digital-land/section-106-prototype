@@ -4,17 +4,22 @@
 // - name:value pairs
 //
 // ===================
-/* dl */.definition-inline {
+
+// dl.
+.definition-inline {
   @include govuk-clearfix;
+
   dt {
-    float: left;
     margin-right: 5px;
+    float: left;
+    clear: left;
+    font-weight: bold;
+
     &:after {
-      content: ':';
+      content: ":";
     }
-		clear: left;
-		font-weight: bold;
   }
+
   dd {
     float: left;
     @include govuk-responsive-margin(3, "left");

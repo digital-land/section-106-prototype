@@ -2,6 +2,7 @@
 // =================
 
 $icon-size: 40px;
+
 .search-box-container {
   max-width: 100%;
   @include govuk-media-query($from: desktop) {
@@ -19,19 +20,19 @@ $icon-size: 40px;
 
 .search-box-input {
   @include govuk-font($size: 19);
+  box-sizing: border-box;
   position: relative;
   width: calc(100% - #{$icon-size});
   height: $icon-size;
   margin-right: $icon-size;
   padding: 9px 10px 5px;
-  background-color: #fff;
   border: 2px solid govuk-colour("grey-2");
-  box-sizing: border-box;
+  background-color: $govuk-body-background-colour;
 
   &:focus {
     width: 100%;
     margin-right: 0;
-    border: none;
+    border: 0;
     outline: 3px solid govuk-colour("yellow");
     outline-offset: none;
   }
