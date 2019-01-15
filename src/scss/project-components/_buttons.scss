@@ -42,6 +42,10 @@
   margin-top: 5px;
 }
 
-.dlf-secondary-button {
+%dlf-secondary-button {
   @include govuk-style-button($button-text-colour: $govuk-text-colour, $button-colour:  govuk-colour("grey-3"));
+}
+
+.govuk-button-add {
+  @extend %dlf-secondary-button;
 }
