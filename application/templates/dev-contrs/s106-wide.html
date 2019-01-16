@@ -396,6 +396,7 @@
   let containerIsClosed = true;
   categoriesControls.forEach((control) => {
     control.addEventListener('click', function(e) {
+      e.preventDefault();
       if(containerIsClosed) {
         categoriesContainer.classList.add("opening");
       } else {
