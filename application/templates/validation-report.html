@@ -6,95 +6,112 @@
 
 {% block content %}
     
-  {% if report.valid %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
-    {%- call statusPanel("govuk-panel--confirmation", "complete") %}
-    &check;
-    {% endcall -%}
-    </div>
+  {% if valid %}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+        {%- call statusPanel("govuk-panel--confirmation", "complete") %}
+        &check;
+        {% endcall -%}
+        </div>
 
-    <div class="govuk-grid-column-two-thirds">
-      <h3 class="govuk-heading-m">What happens next</h3>
-      <p class="govuk-body">
-        The csv file was validated with no errors. You are now able to publish the data in this format.
-      </p>
-      <p class="govuk-body">
-        You can <a href="{{ url_for('validators.validate_start')}}" class="govuk-link">validate</a> any other developer contribution csv files and check they are ready to publish. 
-      </p>
-    </div>
-  </div>
+        <div class="govuk-grid-column-two-thirds">
+          <h3 class="govuk-heading-m">What happens next</h3>
+          <p class="govuk-body">
+            The csv file was validated with no errors. You are now able to publish the data in this format.
+          </p>
+          <p class="govuk-body">
+            You can <a href="{{ url_for('validators.validate_start')}}" class="govuk-link">validate</a> any other developer contribution csv files and check they are ready to publish.
+          </p>
+        </div>
+      </div>
 
   {% else %}
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-full">
-      {% if report["error-count"] > 1 %}
-        {% set errorStr = "errors" %}
-      {% else %}
-        {% set errorStr = "error" %}
-      {% endif %}
-      {%- call statusPanelBefore("govuk-panel--error", errorStr) %}
-      <span class="data-item govuk-!-font-size-80 govuk-!-font-weight-bold">{{ report["error-count"] }}</span>
-      {% endcall -%}
-      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-      </div>
 
-      <div class="govuk-grid-column-two-thirds">
-  
-        <h2 class="govuk-heading-l error-report-heading">Review validation errors</h2>
+      {% for report in reports %}
 
-        {% from "project-components/validation-error-output.html" import renderValidationError %}
-        {% from "project-components/validation-error-output.html" import renderColumnError %}
+          {% if report['report']['tables']%}
 
-        {% if report.tables %}
+              <div class="govuk-grid-row">
+                  <div class="govuk-grid-column-full">
+                      {% if report['report']["error-count"] > 1 %}
+                          {% set errorStr = "errors" %}
+                      {% else %}
+                          {% set errorStr = "error" %}
+                      {% endif %}
+                      {%- call statusPanelBefore("govuk-panel--error", errorStr) %}
+                          <span class="data-item govuk-!-font-size-80 govuk-!-font-weight-bold">{{ report['report']["error-count"] }}</span>
+                      {% endcall -%}
+                      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+                  </div>
 
-          {# get column headings and first row number #}
-          {% set column_headers = report.tables[0].headers %}
+                  <div class="govuk-grid-column-full">
 
-          {% set row = namespace(number=report.tables[0].errors[0]["row-number"]) %}
-          {% if report.tables[0].errors[0].code == "non-matching-header" %}
-          <p class="govuk-body">There are the following <span class="validation-error-row govuk-tag govuk-tag__error">Column</span>errors:</p>
-          {% else %}
-          <p class="govuk-body">There are the following errors with <span class="validation-error-row govuk-tag govuk-tag__error">Row {{ row.number }}</span>:</p>
+                      <h2 class="govuk-heading-m error-report-heading">Review validation errors with {{ report['file'] }}</h2>
+
+                      {% from "project-components/validation-error-output.html" import renderValidationError %}
+                      {% from "project-components/validation-error-output.html" import renderColumnError %}
+
+
+                      {# get column headings and first row number #}
+                      {% set column_headers = report['report'].tables[0].headers %}
+
+                      {% set row = namespace(number=report['report']['tables'][0].errors[0]["row-number"]) %}
+                      {% if report['report']['tables'][0].errors[0].code == "non-matching-header" %}
+                          <p class="govuk-body">There are the following <span
+                                  class="validation-error-row govuk-tag govuk-tag__error">Column</span>errors:</p>
+                      {% else %}
+                          <p class="govuk-body">There are the following errors with <span
+                                  class="validation-error-row govuk-tag govuk-tag__error">Row {{ row.number }}</span>:
+                          </p>
+                      {% endif %}
+
+                      {% for error in report['report']['tables'][0].errors %}
+
+                          {% if error.code == "non-matching-header" %}
+                              {{ renderColumnError(error, column_headers) }}
+                          {% else %}
+                              {% if error["row-number"] != row.number %}
+                                  {% set row.number = error["row-number"] %}
+                                  <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                                  <p class="govuk-body">There are the following errors with <span
+                                          class="validation-error-row govuk-tag govuk-tag__error">Row {{ row.number }}</span>:
+                                  </p>
+                              {% endif %}
+                              {{ renderValidationError(error, column_headers) }}
+                          {% endif %}
+
+                      {% endfor %}
+
+                  </div>
+              </div>
+
           {% endif %}
 
-          {% for error in report.tables[0].errors %}
-          
-            {% if error.code == "non-matching-header" %}
-              {{ renderColumnError(error, column_headers) }}
-            {% else %}
-              {% if error["row-number"] != row.number %}
-                {% set row.number = error["row-number"] %}
-                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
-                <p class="govuk-body">There are the following errors with <span class="validation-error-row govuk-tag govuk-tag__error">Row {{ row.number }}</span>:</p>
-              {% endif %}
-              {{ renderValidationError(error, column_headers) }}
-            {% endif %}
+      {% endfor %}
 
-          {% endfor %}
+      <div class="govuk-grid-row">
+          <div class="govuk-grid-column-full">
+              <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+          </div>
 
-        {% endif %}
+          <div class="govuk-grid-column-two-thirds">
+              <h3 class="govuk-heading-l">What happens next</h3>
+              <p class="govuk-body">
+                  You should fix the errors with the csv data file before it is published.
+              </p>
+              <p class="govuk-body">You can refer to the <a
+                      href="https://digital-land.github.io/guidance/developer-contributions/" class="govuk-link">developer
+                  contribution data format and publishing guidance</a> for an explanation of the expected data and
+                  format.</p>
+              <p class="govuk-body">
+                  Once fixed use the <a href="{{ url_for('validators.validate_start') }}"
+                                        class="govuk-link">validator</a> to check for any other developer potential
+                  issues.
+              </p>
 
+          </div>
       </div>
-    </div>
 
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-full">
-        <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
-      </div>
-
-      <div class="govuk-grid-column-two-thirds">
-        <h3 class="govuk-heading-l">What happens next</h3>
-        <p class="govuk-body">
-          You should fix the errors with the csv data file before it is published.
-        </p>
-        <p class="govuk-body">You can refer to the <a href="https://digital-land.github.io/guidance/developer-contributions/" class="govuk-link">developer contribution data format and publishing guidance</a> for an explanation of the expected data and format.</p>
-        <p class="govuk-body">
-          Once fixed use the <a href="{{ url_for('validators.validate_start')}}" class="govuk-link">validator</a> to check for any other developer potential issues. 
-        </p>
-        
-      </div>
-    </div>
   {% endif %}
-    
+
 {% endblock %}

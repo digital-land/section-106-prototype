@@ -3,7 +3,7 @@
 {% block beforeContent %}
 {{ super() }}
 
-<a href="{{ url_for('validators.validation_selection') }}" class="govuk-back-link">Back</a>
+<a href="{{ url_for('validators.validate_start') }}" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
@@ -12,7 +12,7 @@
 
     <span class="govuk-caption-l">Developer contributions</span>
     <h1 class="govuk-heading-l">
-      Upload a CSV file for validation
+      Upload your developer contributions file or files
     </h1>
 
   </div>
@@ -20,16 +20,16 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form class="govuk-form" method="POST" action="{{ url_for('validators.validate_by_type', validation_type=validation_type) }}"  enctype="multipart/form-data">
+      <form class="govuk-form" method="POST" action="{{ url_for('validators.validate') }}" enctype="multipart/form-data">
 
           <div class="govuk-form-group">
-              <label class="govuk-label govuk-label--s" for="upload">
-                Upload a file
+              <label class="govuk-label govuk-label--s" for="validation_type">
+                {{ form.upload.label }}
               </label>
-              {{ form.upload(class='govuk-file-upload') }}
+              {{ form.upload(class='govuk-file-upload'  ) }}
           </div>
 
-          <button class="govuk-button button-validate" type="submit">Upload and validate</button>
+          <button class="govuk-button" type="submit">Continue</button>
           {{ form.csrf_token }}
       </form>
     </div>
