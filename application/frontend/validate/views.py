@@ -3,8 +3,8 @@ import tempfile
 import goodtables
 import requests
 
-from flask import Blueprint, render_template, current_app, url_for, request
-from werkzeug.utils import secure_filename, redirect
+from flask import Blueprint, render_template, current_app
+from werkzeug.utils import secure_filename
 
 from application.frontend.validate.forms import UploadForm
 

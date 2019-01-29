@@ -24,8 +24,12 @@
 
           <div class="govuk-form-group">
               <label class="govuk-label govuk-label--s" for="validation_type">
-                {{ form.upload.label }}
               </label>
+
+              {% for error in form.upload.errors  %}
+                  <span  class="govuk-error-message">{{ error }}</span>
+              {% endfor %}
+
               {{ form.upload(class='govuk-file-upload'  ) }}
           </div>
 
