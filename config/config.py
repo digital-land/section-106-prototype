@@ -17,6 +17,7 @@ class Config:
     JSON_SORT_KEYS = True
     UPLOAD_FOLDER = '/tmp'
     MAX_CONTENT_LENGTH = 10 * 1024 * 1024
+    BASE_SCHEMA_URL = 'https://raw.githubusercontent.com/digital-land/alpha-data/master/schema'
 
 
 class DevelopmentConfig(Config):
