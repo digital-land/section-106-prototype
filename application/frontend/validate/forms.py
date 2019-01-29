@@ -15,6 +15,6 @@ class UploadForm(FlaskForm):
         files = field.data[data.name]
         if len(files) > 3:
             raise ValidationError('Upload a maximum of 3 files')
-        files = set(item.filename for item in field.data[data.name])
+        files = set(item.filename for item in files)
         if not files <= allowed_files:
             raise ValidationError(f"Only the following files can be uploaded {','.join(allowed_files)}")
