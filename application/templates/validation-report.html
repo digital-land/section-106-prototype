@@ -55,14 +55,18 @@
                       {# get column headings and first row number #}
                       {% set column_headers = report['report'].tables[0].headers %}
 
-                      {% set row = namespace(number=report['report']['tables'][0].errors[0]["row-number"]) %}
-                      {% if report['report']['tables'][0].errors[0].code == "non-matching-header" %}
-                          <p class="govuk-body">There are the following <span
-                                  class="validation-error-row govuk-tag govuk-tag__error">Column</span>errors:</p>
-                      {% else %}
-                          <p class="govuk-body">There are the following errors with <span
-                                  class="validation-error-row govuk-tag govuk-tag__error">Row {{ row.number }}</span>:
-                          </p>
+                      {% if report['report']['tables'][0].errors[0] %}
+                        {% set row = namespace(number=report['report']['tables'][0].errors[0]["row-number"]) %}
+                      
+
+                        {% if report['report']['tables'][0].errors[0].code == "non-matching-header" %}
+                            <p class="govuk-body">There are the following <span
+                                    class="validation-error-row govuk-tag govuk-tag__error">Column</span>errors:</p>
+                        {% else %}
+                            <p class="govuk-body">There are the following errors with <span
+                                    class="validation-error-row govuk-tag govuk-tag__error">Row {{ row.number }}</span>:
+                            </p>
+                        {% endif %}
                       {% endif %}
 
                       {% for error in report['report']['tables'][0].errors %}
