@@ -26,13 +26,15 @@
       </div>
 
   {% else %}
-
+      <h1 class="govuk-heading-xl">Validation summary</h1>
       {% for report in reports %}
 
           {% if report['report']['tables']%}
 
               <div class="govuk-grid-row">
                   <div class="govuk-grid-column-full">
+                    <h2 class="govuk-heading-m">{{ report['file']|capitalize }}</h2>
+                    {% if not report['report']['valid'] %}
                       {% if report['report']["error-count"] > 1 %}
                           {% set errorStr = "errors" %}
                       {% else %}
@@ -41,9 +43,15 @@
                       {%- call statusPanelBefore("govuk-panel--error", errorStr) %}
                           <span class="data-item govuk-!-font-size-80 govuk-!-font-weight-bold">{{ report['report']["error-count"] }}</span>
                       {% endcall -%}
-                      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+                    {% else %}
+                      {%- call statusPanel("govuk-panel--confirmation", "complete") %}
+                      &check;
+                      {% endcall -%}
+                    {% endif %}
+                    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
                   </div>
 
+                  {% if not report['report']['valid'] %}
                   <div class="govuk-grid-column-full">
 
                       <h2 class="govuk-heading-m error-report-heading">Review validation errors with {{ report['file'] }}</h2>
@@ -57,7 +65,6 @@
 
                       {% if report['report']['tables'][0].errors[0] %}
                         {% set row = namespace(number=report['report']['tables'][0].errors[0]["row-number"]) %}
-                      
 
                         {% if report['report']['tables'][0].errors[0].code == "non-matching-header" %}
                             <p class="govuk-body">There are the following <span
@@ -87,6 +94,7 @@
                       {% endfor %}
 
                   </div>
+                  {% endif %}
               </div>
 
           {% endif %}
