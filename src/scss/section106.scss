@@ -444,3 +444,7 @@ $white-colour: #ffffff;
   margin-top: $govuk-gutter-half;
   margin-bottom: $govuk-gutter * 1.5;
 }
+
+.file-list--hidden {
+  display: none;
+}

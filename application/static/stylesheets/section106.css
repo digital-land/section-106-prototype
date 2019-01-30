@@ -6554,3 +6554,7 @@ th[role="columnheader"].govuk-table__header--numeric:not(.no-sort):after {
   margin-top: 15px;
   margin-bottom: 45px;
 }
+
+.file-list--hidden {
+  display: none;
+}
