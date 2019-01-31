@@ -14,6 +14,7 @@
     
   {% if valid %}
       <div class="govuk-grid-row">
+
         <div class="govuk-grid-column-full">
         {%- call statusPanel("govuk-panel--confirmation", "complete") %}
         &check;
@@ -23,8 +24,15 @@
         <div class="govuk-grid-column-two-thirds">
           <h3 class="govuk-heading-m">What happens next</h3>
           <p class="govuk-body">
-            The csv file was validated with no errors. You are now able to publish the data in this format.
+            The validator found no errors with the csv file{% if reports|length > 1 %}s{% endif %} you uploaded.
           </p>
+
+          {% if reports|length > 1 %}
+          <p class="govuk-body">
+            A <a class="govuk-link" href="https://frictionlessdata.io/specs/data-package">datapackage</a> has been created for you. You can download this datapackage and publish it on your site.</p> 
+          <p class="govuk-body"><span class="govuk-!-font-weight-bold">Download:</span> <a class="govuk-link" href="#">developer contributions datapackage</a>.</p>
+          {% endif %}
+
           <p class="govuk-body">
             You can <a href="{{ url_for('validators.validate_start')}}" class="govuk-link">validate</a> any other developer contribution csv files and check they are ready to publish.
           </p>
