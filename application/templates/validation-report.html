@@ -4,6 +4,12 @@
 {% from "project-components/status-panel.html" import statusPanelBefore %}
 {% from "jinja-components/data-element/macro.html" import govukDataItem %}
 
+{% block beforeContent %}
+{{ super() }}
+
+<a href="{{ url_for('validators.validate') }}" class="govuk-back-link">Re-select files</a>
+{% endblock %}
+
 {% block content %}
     
   {% if valid %}
@@ -26,6 +32,7 @@
       </div>
 
   {% else %}
+      <span class="govuk-caption-xl">Developer contributions</span>
       <h1 class="govuk-heading-xl">Validation summary</h1>
       {% for report in reports %}
 
