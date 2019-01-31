@@ -30,9 +30,8 @@
           {% if reports|length > 1 %}
           <p class="govuk-body">
             A <a class="govuk-link" href="https://frictionlessdata.io/specs/data-package">datapackage</a> has been created for you. You can download this datapackage and publish it on your site.</p> 
-          <p class="govuk-body"><span class="govuk-!-font-weight-bold">Download:</span> <a class="govuk-link" href="#">developer contributions datapackage</a>.</p>
+          <p class="govuk-body"><span class="govuk-!-font-weight-bold">Download:</span> <a class="govuk-link" href="{{ datapackage_url }}">developer contributions datapackage</a>.</p>
           {% endif %}
-
           <p class="govuk-body">
             You can <a href="{{ url_for('validators.validate_start')}}" class="govuk-link">validate</a> any other developer contribution csv files and check they are ready to publish.
           </p>

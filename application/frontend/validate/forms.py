@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import MultipleFileField
+from wtforms import MultipleFileField, SelectField
 from wtforms.validators import DataRequired, ValidationError
-
 
 allowed_files = {'developer-agreement.csv','developer-agreement-contribution.csv','developer-agreement-transaction.csv'}
 
@@ -9,6 +8,7 @@ allowed_files = {'developer-agreement.csv','developer-agreement-contribution.csv
 class UploadForm(FlaskForm):
 
     upload = MultipleFileField('Files', validators=[DataRequired()])
+    local_authorities = SelectField('Local Authorities')
 
     @staticmethod
     def validate_upload(field, data):

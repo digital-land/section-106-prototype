@@ -23,6 +23,8 @@ flask-migrate = "*"
 gunicorn = "*"
 goodtables = "*"
 pytest = "*"
+datapackage = "*"
+boto3 = "*"
 
 [dev-packages]
 pytest = "*"

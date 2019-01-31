@@ -17,9 +17,9 @@
 
     <p class="govuk-body">You can upload any of the following files to check it against the validator:</p>
     <ul class="govuk-list govuk-list--bullet">
-      <li>developer-agreement_YYYYMMDD.csv</li>
-      <li>developer-agreement-contribution_YYYYMMDD.csv</li>
-      <li>developer-agreement-transaction_YYYYMMDD.csv</li>
+      <li>developer-agreement.csv</li>
+      <li>developer-agreement-contribution.csv</li>
+      <li>developer-agreement-transaction.csv</li>
     </ul>
     <p class="govuk-body">Or, you can upload a combination of the files. The validator will then also be able to check the files match up.</p>
 
@@ -30,13 +30,19 @@
     <div class="govuk-grid-column-two-thirds">
       <form class="govuk-form govuk-!-margin-top-6" method="POST" action="{{ url_for('validators.validate') }}" enctype="multipart/form-data">
 
+
+          <div class="govuk-form-group">
+            {{ form.local_authorities.label(class="govuk-label govuk-!-font-weight-bold") }}
+            <span class="govuk-hint">Select your local authority</span>
+            {{ form.local_authorities(class="govuk-select") }}
+          </div>
+
           <div class="govuk-form-group file-selection file-list--hidden">
               <label class="govuk-label govuk-label--s" for="validation_type">
                 Upload file(s)
               </label>
-
               {% for error in form.upload.errors  %}
-                  <span  class="govuk-error-message">{{ error }}</span>
+                <span  class="govuk-error-message">{{ error }}</span>
               {% endfor %}
 
               {{ form.upload(class='govuk-file-upload'  ) }}

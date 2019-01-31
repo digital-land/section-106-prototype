@@ -3,11 +3,6 @@ import os
 import json
 
 
-if os.environ.get('VCAP_SERVICES') is not None:
-    vcap_services = json.loads(os.environ.get('VCAP_SERVICES'))
-    os.environ['DATABASE_URL'] = vcap_services['postgres'][0]['credentials']['uri']
-    os.environ['SECRET_KEY'] = vcap_services['user-provided'][0]['credentials']['SECRET_KEY']
-
 class Config:
     CONFIG_ROOT = os.path.abspath(os.path.dirname(__file__))
     PROJECT_ROOT = os.path.abspath(os.path.join(CONFIG_ROOT, os.pardir))
@@ -18,6 +13,8 @@ class Config:
     UPLOAD_FOLDER = '/tmp'
     MAX_CONTENT_LENGTH = 10 * 1024 * 1024
     BASE_SCHEMA_URL = 'https://raw.githubusercontent.com/digital-land/alpha-data/master/schema'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
 
 class DevelopmentConfig(Config):
