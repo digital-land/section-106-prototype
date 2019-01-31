@@ -4,10 +4,17 @@
 {% from "project-components/status-panel.html" import statusPanelBefore %}
 {% from "jinja-components/data-element/macro.html" import govukDataItem %}
 
+{% block beforeContent %}
+{{ super() }}
+
+<a href="{{ url_for('validators.validate') }}" class="govuk-back-link">Re-select files</a>
+{% endblock %}
+
 {% block content %}
     
   {% if valid %}
       <div class="govuk-grid-row">
+
         <div class="govuk-grid-column-full">
         {%- call statusPanel("govuk-panel--confirmation", "complete") %}
         &check;
@@ -17,8 +24,15 @@
         <div class="govuk-grid-column-two-thirds">
           <h3 class="govuk-heading-m">What happens next</h3>
           <p class="govuk-body">
-            The csv file was validated with no errors. You are now able to publish the data in this format.
+            The validator found no errors with the csv file{% if reports|length > 1 %}s{% endif %} you uploaded.
           </p>
+
+          {% if reports|length > 1 %}
+          <p class="govuk-body">
+            A <a class="govuk-link" href="https://frictionlessdata.io/specs/data-package">datapackage</a> has been created for you. You can download this datapackage and publish it on your site.</p> 
+          <p class="govuk-body"><span class="govuk-!-font-weight-bold">Download:</span> <a class="govuk-link" href="#">developer contributions datapackage</a>.</p>
+          {% endif %}
+
           <p class="govuk-body">
             You can <a href="{{ url_for('validators.validate_start')}}" class="govuk-link">validate</a> any other developer contribution csv files and check they are ready to publish.
           </p>
@@ -26,13 +40,20 @@
       </div>
 
   {% else %}
-
+      <span class="govuk-caption-xl">Developer contributions</span>
+      <h1 class="govuk-heading-xl">Validation summary</h1>
       {% for report in reports %}
 
           {% if report['report']['tables']%}
 
               <div class="govuk-grid-row">
                   <div class="govuk-grid-column-full">
+
+                    {% if reports|length > 1 %}
+                    <h2 class="govuk-heading-m">{{ report['file']|capitalize }}</h2>
+                    {% endif %}
+
+                    {% if not report['report']['valid'] %}
                       {% if report['report']["error-count"] > 1 %}
                           {% set errorStr = "errors" %}
                       {% else %}
@@ -41,12 +62,18 @@
                       {%- call statusPanelBefore("govuk-panel--error", errorStr) %}
                           <span class="data-item govuk-!-font-size-80 govuk-!-font-weight-bold">{{ report['report']["error-count"] }}</span>
                       {% endcall -%}
-                      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+                    {% else %}
+                      {%- call statusPanel("govuk-panel--confirmation", "complete") %}
+                      &check;
+                      {% endcall -%}
+                    {% endif %}
+                    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
                   </div>
 
+                  {% if not report['report']['valid'] %}
                   <div class="govuk-grid-column-full">
 
-                      <h2 class="govuk-heading-m error-report-heading">Review validation errors with {{ report['file'] }}</h2>
+                      <h2 class="govuk-heading-m error-report-heading">Review validation errors with <span class="error-report-file">{{ report['file'] }}</span></h2>
 
                       {% from "project-components/validation-error-output.html" import renderValidationError %}
                       {% from "project-components/validation-error-output.html" import renderColumnError %}
@@ -55,14 +82,17 @@
                       {# get column headings and first row number #}
                       {% set column_headers = report['report'].tables[0].headers %}
 
-                      {% set row = namespace(number=report['report']['tables'][0].errors[0]["row-number"]) %}
-                      {% if report['report']['tables'][0].errors[0].code == "non-matching-header" %}
-                          <p class="govuk-body">There are the following <span
-                                  class="validation-error-row govuk-tag govuk-tag__error">Column</span>errors:</p>
-                      {% else %}
-                          <p class="govuk-body">There are the following errors with <span
-                                  class="validation-error-row govuk-tag govuk-tag__error">Row {{ row.number }}</span>:
-                          </p>
+                      {% if report['report']['tables'][0].errors[0] %}
+                        {% set row = namespace(number=report['report']['tables'][0].errors[0]["row-number"]) %}
+
+                        {% if report['report']['tables'][0].errors[0].code == "non-matching-header" %}
+                            <p class="govuk-body">There are the following <span
+                                    class="validation-error-row govuk-tag govuk-tag__error">Column</span>errors:</p>
+                        {% else %}
+                            <p class="govuk-body">There are the following errors with <span
+                                    class="validation-error-row govuk-tag govuk-tag__error">Row {{ row.number }}</span>:
+                            </p>
+                        {% endif %}
                       {% endif %}
 
                       {% for error in report['report']['tables'][0].errors %}
@@ -83,6 +113,7 @@
                       {% endfor %}
 
                   </div>
+                  {% endif %}
               </div>
 
           {% endif %}

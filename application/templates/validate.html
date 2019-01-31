@@ -15,15 +15,24 @@
       Upload your developer contributions file or files
     </h1>
 
+    <p class="govuk-body">You can upload any of the following files to check it against the validator:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>developer-agreement_YYYYMMDD.csv</li>
+      <li>developer-agreement-contribution_YYYYMMDD.csv</li>
+      <li>developer-agreement-transaction_YYYYMMDD.csv</li>
+    </ul>
+    <p class="govuk-body">Or, you can upload a combination of the files. The validator will then also be able to check the files match up.</p>
+
   </div>
 </div>
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form class="govuk-form" method="POST" action="{{ url_for('validators.validate') }}" enctype="multipart/form-data">
+      <form class="govuk-form govuk-!-margin-top-6" method="POST" action="{{ url_for('validators.validate') }}" enctype="multipart/form-data">
 
-          <div class="govuk-form-group">
+          <div class="govuk-form-group file-selection file-list--hidden">
               <label class="govuk-label govuk-label--s" for="validation_type">
+                Upload file(s)
               </label>
 
               {% for error in form.upload.errors  %}
@@ -31,12 +40,72 @@
               {% endfor %}
 
               {{ form.upload(class='govuk-file-upload'  ) }}
+
+              <div class="file-list">
+                <p class="govuk-body">You have selected these files:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                  
+                </ul>
+              </div>
+          </div>
+          <div class="govuk-form-group">
+            <details class="govuk-details">
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                  What will the validator test for?
+                </span>
+              </summary>
+              <div class="govuk-details__text">
+                <p class="govuk-body">If you have uploaded a single file the validator will test for:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                  <li>this</li>
+                  <li>&hellip;</li>
+                </ul>
+                <p class="govuk-body">If you have uploaded a multiple files the validator will test for:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                  <li>that</li>
+                  <li>&hellip;</li>
+                </ul>
+              </div>
+            </details>
           </div>
 
-          <button class="govuk-button" type="submit">Continue</button>
+          <button class="govuk-button" type="submit">Upload and continue</button>
           {{ form.csrf_token }}
       </form>
     </div>
 </div>
 
+{% endblock %}
+
+{% block bodyEnd %}
+<script>
+  const uploadInput = document.querySelector("#upload");
+  const fileListContainer = document.querySelector(".file-selection");
+  const fileListElem = fileListContainer.querySelector(".govuk-list");
+
+  function displayCurrentFiles() {
+    fileListElem.innerHTML = '';
+
+    Array.from(uploadInput.files).forEach((file) => {
+      const listEl = document.createElement('li');
+      const listElContent = document.createTextNode(file.name);
+      listEl.appendChild(listElContent);
+      fileListElem.appendChild(listEl);
+    });
+  }
+
+  uploadInput.addEventListener('change', (e) => {
+    if (uploadInput.files.length === 0) {
+      fileListContainer.classList.remove('file-list--active');
+      fileListContainer.classList.add('file-list--hidden');
+    } else if (uploadInput.files.length > 1) {
+      displayCurrentFiles();
+      fileListContainer.classList.remove('file-list--hidden');
+      fileListContainer.classList.add('file-list--active');
+    } else {
+      fileListContainer.classList.add('file-list--hidden');
+    }
+  });
+</script>
 {% endblock %}
