@@ -6568,6 +6568,10 @@ th[role="columnheader"].govuk-table__header--numeric:not(.no-sort):after {
   margin-bottom: 45px;
 }
 
+.error-report-file {
+  text-decoration: underline;
+}
+
 .file-list--hidden {
   display: none;
 }

@@ -445,6 +445,10 @@ $white-colour: #ffffff;
   margin-bottom: $govuk-gutter * 1.5;
 }
 
+.error-report-file {
+  text-decoration: underline;
+}
+
 .file-list--hidden {
   display: none;
 }

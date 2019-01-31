@@ -33,7 +33,11 @@
 
               <div class="govuk-grid-row">
                   <div class="govuk-grid-column-full">
+
+                    {% if reports|length > 1 %}
                     <h2 class="govuk-heading-m">{{ report['file']|capitalize }}</h2>
+                    {% endif %}
+
                     {% if not report['report']['valid'] %}
                       {% if report['report']["error-count"] > 1 %}
                           {% set errorStr = "errors" %}
@@ -54,7 +58,7 @@
                   {% if not report['report']['valid'] %}
                   <div class="govuk-grid-column-full">
 
-                      <h2 class="govuk-heading-m error-report-heading">Review validation errors with {{ report['file'] }}</h2>
+                      <h2 class="govuk-heading-m error-report-heading">Review validation errors with <span class="error-report-file">{{ report['file'] }}</span></h2>
 
                       {% from "project-components/validation-error-output.html" import renderValidationError %}
                       {% from "project-components/validation-error-output.html" import renderColumnError %}
