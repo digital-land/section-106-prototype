@@ -6572,6 +6572,78 @@ th[role="columnheader"].govuk-table__header--numeric:not(.no-sort):after {
   text-decoration: underline;
 }
 
-.file-list--hidden {
+.file-list {
+  margin-top: 15px;
+}
+
+@media (min-width: 40.0625em) {
+  .file-list {
+    margin-top: 20px;
+  }
+}
+
+.file-list--hidden .file-list {
   display: none;
+}
+
+.file-list--active {
+  font-family: "nta", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
+  color: #0b0c0c;
+  padding: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  clear: both;
+  border-left: 10px solid #bfc1c3;
+}
+
+@media print {
+  .file-list--active {
+    font-family: sans-serif;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .file-list--active {
+    font-size: 19px;
+    line-height: 1.31579;
+  }
+}
+
+@media print {
+  .file-list--active {
+    font-size: 14pt;
+    line-height: 1.15;
+  }
+}
+
+@media print {
+  .file-list--active {
+    color: #000000;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .file-list--active {
+    margin-top: 30px;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .file-list--active {
+    margin-bottom: 30px;
+  }
+}
+
+.file-list--active :first-child {
+  margin-top: 0;
+}
+
+.file-list--active :only-child,
+.file-list--active :last-child {
+  margin-bottom: 0;
 }

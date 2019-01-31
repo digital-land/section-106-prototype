@@ -30,7 +30,7 @@
     <div class="govuk-grid-column-two-thirds">
       <form class="govuk-form govuk-!-margin-top-6" method="POST" action="{{ url_for('validators.validate') }}" enctype="multipart/form-data">
 
-          <div class="govuk-form-group">
+          <div class="govuk-form-group file-selection file-list--hidden">
               <label class="govuk-label govuk-label--s" for="validation_type">
                 Upload file(s)
               </label>
@@ -41,7 +41,7 @@
 
               {{ form.upload(class='govuk-file-upload'  ) }}
 
-              <div class="govuk-inset-text file-list file-list--hidden">
+              <div class="file-list">
                 <p class="govuk-body">You have selected these files:</p>
                 <ul class="govuk-list govuk-list--bullet">
                   
@@ -81,11 +81,10 @@
 {% block bodyEnd %}
 <script>
   const uploadInput = document.querySelector("#upload");
-  const fileListContainer = document.querySelector(".file-list");
+  const fileListContainer = document.querySelector(".file-selection");
   const fileListElem = fileListContainer.querySelector(".govuk-list");
 
   function displayCurrentFiles() {
-    fileListContainer.classList.remove('file-list--hidden');
     fileListElem.innerHTML = '';
 
     Array.from(uploadInput.files).forEach((file) => {
@@ -97,8 +96,13 @@
   }
 
   uploadInput.addEventListener('change', (e) => {
-    if(uploadInput.files.length > 1) {
+    if (uploadInput.files.length === 0) {
+      fileListContainer.classList.remove('file-list--active');
+      fileListContainer.classList.add('file-list--hidden');
+    } else if (uploadInput.files.length > 1) {
       displayCurrentFiles();
+      fileListContainer.classList.remove('file-list--hidden');
+      fileListContainer.classList.add('file-list--active');
     } else {
       fileListContainer.classList.add('file-list--hidden');
     }
