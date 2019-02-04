@@ -51,6 +51,8 @@ def validate():
             if valid:
                 print('create data package for', form.local_authorities.data)
                 datapackage_url = _make_package(temp_dir, form.local_authorities.data, current_app.config)
+            else:
+                datapackage_url = None
 
         return render_template('validation-report.html', reports=reports, valid=valid, datapackage_url=datapackage_url)
 
