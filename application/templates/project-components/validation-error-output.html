@@ -2,9 +2,15 @@
 <div class="validation-error-container">
   <h4 class="validation-error-heading">
     <span class="validation-error-row govuk-tag govuk-tag__error">Row {{ error["row-number"] }}</span>
-        Error with <span class="validation-error-column">{{ headersLst[error["column-number"]-1] }}</span>
+    {% if error['code'] == 'blank-row' %}
+    Cannot be blank
+    {% else %}
+    Error with <span class="validation-error-column">{{ headersLst[error["column-number"]-1] }}</span>
+    {% endif %}
     </span>
   </h4>
+
+  {% if error['code'] != 'blank-row' %}
   <table class="govuk-table">
     <tbody class="govuk-table__body">
       <tr class="govuk-table__row">
@@ -35,6 +41,8 @@
       </tr>
     </tbody>
   </table>
+  {% endif %}
+
 </div>
 {% endmacro %}
 
