@@ -8,7 +8,6 @@ allowed_files = {'developer-agreement.csv','developer-agreement-contribution.csv
 class UploadForm(FlaskForm):
 
     upload = MultipleFileField('Files', validators=[DataRequired()])
-    local_authorities = SelectField('Local Authorities')
 
     @staticmethod
     def validate_upload(field, data):
@@ -18,3 +17,7 @@ class UploadForm(FlaskForm):
         files = set(item.filename for item in files)
         if not files <= allowed_files:
             raise ValidationError(f"Only the following files can be uploaded {','.join(allowed_files)}")
+
+class SelectLAForm(FlaskForm):
+
+    local_authorities = SelectField('Local Authorities')

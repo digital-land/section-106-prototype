@@ -9,11 +9,11 @@ import requests
 from datapackage import Package, Resource
 from datapackage.exceptions import CastError, RelationError
 
-from flask import Blueprint, render_template, current_app
+from flask import Blueprint, render_template, current_app, redirect, url_for, request, session
 from werkzeug.utils import secure_filename
 
 from application.extensions import db
-from application.frontend.validate.forms import UploadForm
+from application.frontend.validate.forms import UploadForm, SelectLAForm
 from application.models import LocalAuthority
 
 validators = Blueprint('validators', __name__, template_folder='templates')
@@ -23,12 +23,26 @@ validators = Blueprint('validators', __name__, template_folder='templates')
 def validate_start():
     return render_template('validate-start.html')
 
+@validators.route('/validate-select-la', methods=['GET', 'POST'])
+def validate_select_la():
+
+    form = SelectLAForm()
+    form.local_authorities.choices = db.session.query(LocalAuthority.id, LocalAuthority.name).all()
+
+    if form.validate():
+        return redirect(url_for('validators.validate', la=form.local_authorities.data))
+
+    return render_template('validate-select-la.html',
+                            form=form)
 
 @validators.route('/validate', methods=['GET', 'POST'])
 def validate():
 
     form = UploadForm()
-    form.local_authorities.choices = db.session.query(LocalAuthority.id, LocalAuthority.name).all()
+
+    la = request.args.get('la')
+    if la:
+        session['selected_la'] = la
 
     if form.validate_on_submit():
         reports = []
@@ -49,16 +63,15 @@ def validate():
                 valid = report['valid']
                 reports.append({'file': filename, 'report': report})
             if valid:
-                print('create data package for', form.local_authorities.data)
-                datapackage_url = _make_package(temp_dir, form.local_authorities.data, current_app.config)
+                print('create data package for', session['selected_la'])
+                datapackage_url = _make_package(temp_dir, session['selected_la'], current_app.config)
             else:
                 datapackage_url = None
 
         return render_template('validation-report.html', reports=reports, valid=valid, datapackage_url=datapackage_url)
 
     return render_template('validate.html',
-                           form=form,
-                           local_authorities=LocalAuthority.query.all())
+                           form=form)
 
 
 def _make_package(source, publisher, config):

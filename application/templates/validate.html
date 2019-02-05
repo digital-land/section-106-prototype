@@ -3,7 +3,7 @@
 {% block beforeContent %}
 {{ super() }}
 
-<a href="{{ url_for('validators.validate_start') }}" class="govuk-back-link">Back</a>
+<a href="{{ url_for('validators.validate_select_la') }}" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
@@ -31,11 +31,7 @@
       <form class="govuk-form govuk-!-margin-top-6" method="POST" action="{{ url_for('validators.validate') }}" enctype="multipart/form-data">
 
 
-          <div class="govuk-form-group">
-            {{ form.local_authorities.label(class="govuk-label govuk-!-font-weight-bold") }}
-            <span class="govuk-hint">Select your local authority</span>
-            {{ form.local_authorities(class="govuk-select") }}
-          </div>
+          {{ local_authority }}
 
           <div class="govuk-form-group file-selection file-list--hidden">
               <label class="govuk-label govuk-label--s" for="validation_type">
