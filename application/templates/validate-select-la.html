@@ -1,5 +1,10 @@
 {% extends "default.html" %}
 
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/static/stylesheets/govuk/accessible-autocomplete.min.css" />
+{% endblock %}
+
 {% block beforeContent %}
 {{ super() }}
 
@@ -41,5 +46,12 @@
 {% endblock %}
 
 {% block bodyEnd %}
-
+<script src="/static/javascripts/accessible-autocomplete.min.js"></script>
+<script>
+  accessibleAutocomplete.enhanceSelectElement({
+    defaultValue: '',
+    confirmOnBlur: false,
+    selectElement: document.querySelector('#local_authorities')
+  });
+</script>
 {% endblock %}
