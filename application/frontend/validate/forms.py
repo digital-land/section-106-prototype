@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import MultipleFileField, SelectField
+from wtforms import MultipleFileField
 from wtforms.validators import DataRequired, ValidationError
 
 allowed_files = {'developer-agreement.csv','developer-agreement-contribution.csv','developer-agreement-transaction.csv'}
@@ -17,7 +17,3 @@ class UploadForm(FlaskForm):
         files = set(item.filename for item in files)
         if not files <= allowed_files:
             raise ValidationError(f"Only the following files can be uploaded {','.join(allowed_files)}")
-
-class SelectLAForm(FlaskForm):
-
-    local_authorities = SelectField('Local Authorities')
