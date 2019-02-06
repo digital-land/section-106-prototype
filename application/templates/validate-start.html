@@ -32,11 +32,16 @@
           <li>generate a <a href="https://frictionlessdata.io/specs/data-package" class="govuk-link">data package</a> to download</li>
         </ul>
 
-        <p style="margin-top: 10px">
-            <a href="{{ url_for('validators.validate_select_la') }}" role="button" class="govuk-button govuk-button--start">
-            Start now
-            </a>
-        </p>
+        <p class="govuk-body">You will need:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>the developer contribution files to validate</li>
+        </ul>
+
+        <div class="govuk-form-group">
+          <a href="{{ url_for('validators.validate_select_la') }}" role="button" class="govuk-button govuk-button--start">
+          Start now
+          </a>
+        </div>
 
       </div>
 
