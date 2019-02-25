@@ -45,6 +45,7 @@ def validate():
                 schema = resp.json()
                 report = goodtables.validate(csv_file, schema=schema)
                 valid = report['valid']
+                _set_column_names(report)
                 reports.append({'file': filename, 'report': report})
                 if file.filename == 'developer-agreement.csv':
                     local_authority = _get_local_authority(csv_file)
@@ -118,3 +119,11 @@ def _get_local_authority(csv_file):
             if local_authority is not None:
                 break
         return local_authority
+
+
+def _set_column_names(report):
+    if not report['valid']:
+        for t in report['tables']:
+            for e in t['errors']:
+                if e.get('column-number') is not None:
+                    e['column-name'] = t['headers'][e.get('column-number')-1]
