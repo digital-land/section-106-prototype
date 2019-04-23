@@ -1,4 +1,0 @@
--i https://pypi.org/simple
-py==1.7.0
-pytest==4.0.2
--r requirements.txt
