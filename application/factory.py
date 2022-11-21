@@ -4,9 +4,7 @@ from flask import Flask, render_template
 from flask.cli import load_dotenv
 
 
-if os.environ['FLASK_ENV'] == 'production':
-    dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
-    load_dotenv(dotenv_path)
+load_dotenv()
 
 
 def create_app(config_filename):
