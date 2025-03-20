@@ -1,5 +1,11 @@
 # section-106-prototype
 
+# ⚠️ Inactive
+
+This application is no longer deployed anywhere. The data collected during it's use in a development plan timetable workshop has
+been backed up and is available in [data/database_backup.dump](data/database_backup.dump)
+
+
 Requirements
 
 - [Python 3](https://www.python.org/)
